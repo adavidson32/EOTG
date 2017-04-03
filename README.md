@@ -3,7 +3,6 @@
 ## Github Contents:
 
 ### Python Programs: 
-##### Project Code
 - Read Sensor Values:
   - DS18B20
   - BMP280
@@ -24,13 +23,17 @@
     - Current Device Water Level (or Empty/Not Empty...)
     - Wi-Fi Status + ability to receive ssid+password from phone via APP
   - Code to auto start hostapd network after ##sec. if no known network is found
-
-##### Example Code
-- Sensor Examples:
-  - DS18B20
-  - BMP280
-  - MPU-6050
-  - RC522
-  - Averaging Functions for data
-  - Data storage protocol for saving data to file (csv, txt, sqlite, etc...)
+- Example Code:
+  - For all sensors
+  - MQTT use examples
+  - General file operations
+  - HTTP GET/PULL Requests + using JSON
+  - Hosting HTTP Page on Pi
+  - Running + Configuring hostapd network
+  - BLE Peripheral/Master examples
+  - RTC Use examples
+  - Neopixel examples to get light patterns from
+  - GUI + Inputs/Outputs Examples
+  - Button reading w/ debounce parameters
+  
   
