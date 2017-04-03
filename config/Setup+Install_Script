@@ -1,0 +1,15 @@
+sudo apt-get install update
+sudo apt-get install upgrade
+
+sudo mkdir git
+cd ./git
+
+#Install Adafruit Python GPIO Library -----------------------------------------
+sudo git clone https://github.com/adafruit/Adafruit_Python_GPIO
+cd Adafruit_Python_GPIO
+sudo python setup.py install
+
+#Install Adafruit IO MQTT Library -----------------------------------------
+sudo git clone https://github.com/adafruit/io-client-python
+cd io-client-python
+sudo python setup.py installcd 
