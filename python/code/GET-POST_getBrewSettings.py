@@ -2,9 +2,12 @@ import requests
 import urllib.parse
 import urllib.request
 import json
+import sys
 
-Device_ID = 1
-Device_ID = argv[2]
+if len(sys.argv)==1:
+  Device_ID = 1
+else:
+  Device_ID = sys.argv[2]
 
 url_path = "/devices/getBrewSettings/"
 url_base = "http://espressotg.info/eotg/api"
