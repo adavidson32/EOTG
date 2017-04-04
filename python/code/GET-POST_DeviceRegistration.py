@@ -33,6 +33,6 @@ header_json = json.dumps(header)
 rep_json = requests.post("http://espressotg.info/eotg/api/devices/registerDevice", data=header_json)
 rep = rep_json.json()
 rep_ID = rep['deviceId']
-print("Assigned ID Number: " + rep_ID)
+print("Assigned ID Number: " + str(rep_ID))
 
 
