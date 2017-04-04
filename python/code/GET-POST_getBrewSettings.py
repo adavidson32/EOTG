@@ -19,4 +19,4 @@ response = urllib.request.urlopen(url_getBrewSettings)
 body_json = response.read().decode()
 body = json.loads(body_json)
 contents = body['brewSettings']
-print("Data from Server: " + str(body))
+print("Data from Server: " + str(contents))
