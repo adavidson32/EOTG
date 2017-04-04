@@ -27,6 +27,6 @@ for i in contents:
   print("  Setting #", x, " listed below:")
   print("      Setting ID:    ", i['id'])
   print("      Setting Value: ", i['brew_setting_value'])
-  x++
+  x = x + 1
 print("")
 print("-------------------------------------------------------------------")
