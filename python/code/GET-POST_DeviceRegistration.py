@@ -38,7 +38,7 @@ response = urllib.request.urlopen(url_deviceRegistration, data)
 body_json = response.read().decode()
 body = json.loads(body_json)
 print("Response from Server (text): " + str(body))
-print("Response from Server (type): " str(type(body)))
+print("Response from Server (type): " + str(type(body)))
 Device_ID = body['deviceId']
 print("Assigned ID Number: " + str(rep_ID))
 
