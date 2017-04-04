@@ -12,7 +12,7 @@ print("Device_ID: ", Device_ID)
 
 url_path = "/devices/getBrewSettings/"
 url_base = "http://espressotg.info/eotg/api"
-url_getBrewSettings = "%s%s%s" (url_base, url_path, str(Device_ID))
+url_getBrewSettings = "%s%s%s" (url_base, url_path, Device_ID)
 print(url_getBrewSettings)
 
 response = urllib.request.urlopen(url_getBrewSettings)
