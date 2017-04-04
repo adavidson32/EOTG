@@ -19,6 +19,7 @@ response = urllib.request.urlopen(url_getBrewSettings)
 body_json = response.read().decode()
 print(type(body_json))
 body = json.loads(body_json)
+print("length of body: ", len(body))
 print("body type: ", type(body))
 for setting in body:
   print("Info for setting #", setting, " listed below:")
