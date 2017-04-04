@@ -34,6 +34,6 @@ rep = rep_json.json()
 rep_ID = rep['deviceId']
 print(rep)
 print(rep_ID)
-print(type(rep_ID)
+print(type(rep_ID))
 
 
