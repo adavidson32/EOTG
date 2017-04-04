@@ -18,5 +18,10 @@ print("Connecting to: ", url_getBrewSettings, ".....")
 response = urllib.request.urlopen(url_getBrewSettings)
 body_json = response.read().decode()
 body = json.loads(body_json)
+print("body type: ", type(body))
 contents = body['brewSettings']
-print("Data from Server: " + str(contents))
+print("contents type: ", type(contents))
+print("Data from Server: ", contents)
+content1 = contents{1}
+print("contents1 type: ", content1)
+print(content1)
