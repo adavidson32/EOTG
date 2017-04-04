@@ -30,7 +30,7 @@ print("Device MAC Addr: " + device_mac)
 print("device_serial file type: " + str(type(device_serial)))
 print("device_mac file type: " + str(type(device_mac)))
 
-header = {'deviceIdentifier': device_serial, 'macAddress': device_mac}
+header = {'@deviceIdentifier': device_serial, '@macAddress': device_mac}
 header_json = json.dumps(header)
 print(header)
 print("Header Type: " + str(type(header)))
