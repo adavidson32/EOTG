@@ -37,6 +37,8 @@ print("Header Type: " + str(type(header)))
 print(header_json)
 print("Header_json Type: " + str(type(header_json)))
 rep_json = requests.post("http://espressotg.info/eotg/api/devices/registerDevice", data=header_json)
+print(rep_json)
 rep = rep_json.json()
+print(rep)
 rep_ID = rep['deviceId']
 print("Assigned ID Number: " + str(rep_ID))
