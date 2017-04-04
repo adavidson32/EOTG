@@ -33,11 +33,11 @@ print("Device Serial Number: " + device_serial)
 print("Device MAC Addr: " + device_mac)
 
 header = {'deviceIdentifier': device_serial, 'macAddress': device_mac}
+print("Header sent to Server: " + str(header))
 data = urllib.parse.urlencode(header).encode()
 response = urllib.request.urlopen(url_deviceRegistration, data)
 body_json = response.read().decode()
 body = json.loads(body_json)
-print("Response from Server (text): " + str(body))
-print("Response from Server (type): " + str(type(body)))
+print("Response from Server: " + str(body))
 Device_ID = body['deviceId']
 print("Assigned ID Number: " + str(Device_ID))
