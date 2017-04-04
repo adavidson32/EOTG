@@ -19,8 +19,14 @@ response = urllib.request.urlopen(url_getBrewSettings)
 body_json = response.read().decode()
 body = json.loads(body_json)
 contents = body['brewSettings']
-print("length of contents: ", len(contents))
+print("Length of contents: ", len(contents))
+print("")
+print("Settings for Device #", Device_ID, "-------------------------------")
+x = 1
 for i in contents:
-  print("Info for setting #", i, " listed below:")
-  print("    Setting ID:    ", i['id'])
-  print("    Setting Value: ", i['brew_setting_value'])
+  print("  Setting #", x, " listed below:")
+  print("      Setting ID:    ", i['id'])
+  print("      Setting Value: ", i['brew_setting_value'])
+  x++
+print("")
+print("-------------------------------------------------------------------")
