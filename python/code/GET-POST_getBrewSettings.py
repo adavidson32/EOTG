@@ -22,6 +22,4 @@ print("body type: ", type(body))
 contents = body['brewSettings']
 print("contents type: ", type(contents))
 print("Data from Server: ", contents)
-content1 = contents{1}
-print("contents1 type: ", content1)
-print(content1)
+print("Length of contents: ", len(contents))
