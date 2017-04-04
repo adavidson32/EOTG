@@ -7,7 +7,7 @@ import sys
 if len(sys.argv)==1:
   Device_ID = 1
 else:
-  print(type(Device_ID))
+  print(type(sys.argv[1]))
   Device_ID = sys.argv[1]
 print("Device_ID: ", Device_ID)
 Device_ID = str(Device_ID)
