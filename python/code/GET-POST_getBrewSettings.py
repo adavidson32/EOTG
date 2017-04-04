@@ -21,7 +21,7 @@ print(type(body_json))
 body = json.loads(body_json)
 print("length of body: ", len(body))
 print("body type: ", type(body))
-for setting in body:
-  print("Info for setting #", setting, " listed below:")
-  print("    Setting ID:    ", setting['id'])
-  print("    Setting Value: ", setting['brew_setting_value'])
+for i in body:
+  print("Info for setting #", i, " listed below:")
+  print("    Setting ID:    ", i['id'])
+  print("    Setting Value: ", i['brew_setting_value'])
