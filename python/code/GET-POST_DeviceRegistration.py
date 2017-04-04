@@ -28,7 +28,7 @@ device_mac = getMAC('wlan0')
 print("Device Serial Number: " + device_serial)
 print("Device MAC Addr: " + device_mac)
 
-header = {'deviceIdentifier': device_serial, 'macAddress': device_mac}
+header = {'@deviceIdentifier': device_serial, '@macAddress': device_mac}
 header_json = json.dumps(header)
 rep_json = requests.post("http://espressotg.info/eotg/api/devices/registerDevice", data=header_json)
 rep = rep_json.json()
