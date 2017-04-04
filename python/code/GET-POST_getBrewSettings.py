@@ -21,7 +21,7 @@ body = json.loads(body_json)
 contents = body['brewSettings']
 print("Length of contents: ", len(contents))
 print("")
-print("Settings for Device #", Device_ID, "-------------------------------")
+print("Settings for Device #", Device_ID, "--------------------------------------")
 x = 1
 for i in contents:
   print("  Setting #", x, " listed below:")
