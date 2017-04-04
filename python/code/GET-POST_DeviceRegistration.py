@@ -1,6 +1,7 @@
 import requests
 import json
 
+#-----------------------------------------------------------------------------------
 def getMAC(interface):
   try:
     str = open('/sys/class/net/' + interface + '/address').read()
@@ -20,6 +21,7 @@ def getserial():
   except:
     cpuserial = "ERROR000000000"
   return cpuserial
+#-----------------------------------------------------------------------------------
 
 device_serial = getserial()
 device_mac = getMAC('wlan0')
@@ -28,12 +30,9 @@ print("Device MAC Addr: " + device_mac)
 
 header = {'deviceIdentifier': device_serial, 'macAddress': device_mac}
 header_json = json.dumps(header)
-
 rep_json = requests.post("http://espressotg.info/eotg/api/devices/registerDevice", data=header_json)
 rep = rep_json.json()
 rep_ID = rep['deviceId']
-print(rep)
-print(rep_ID)
-print(type(rep_ID))
+print("Assigned ID Number: " + rep_ID)
 
 
