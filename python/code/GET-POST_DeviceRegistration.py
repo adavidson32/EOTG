@@ -14,9 +14,10 @@ print(device_mac)
 
 header = {'deviceIdentifier': device_serial, 'macAddress': device_mac}
 print(header)
+header_json = json.dumps(header)
 
-reply = requests.post("http://espressotg.com/eotg/api/devices/registerDevice", json=header)
-print(reply.text)
-print(reply.json())
+rep_json = requests.post("http://espressotg.com/eotg/api/devices/registerDevice", data=header_json)
+rep = rep_json.json()
+print(rep)
 
 
