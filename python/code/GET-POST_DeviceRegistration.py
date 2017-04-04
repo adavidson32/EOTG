@@ -40,6 +40,4 @@ body = json.loads(body_json)
 print("Response from Server (text): " + str(body))
 print("Response from Server (type): " + str(type(body)))
 Device_ID = body['deviceId']
-print("Assigned ID Number: " + str(rep_ID))
-
-
+print("Assigned ID Number: " + str(Device_ID))
