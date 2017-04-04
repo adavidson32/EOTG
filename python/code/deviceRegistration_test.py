@@ -32,8 +32,10 @@ print("device_mac file type: " + str(type(device_mac)))
 
 header = {'deviceIdentifier': device_serial, 'macAddress': device_mac}
 header_json = json.dumps(header)
-print("Header Type: " + str(type(header)) + ". Header Text: " + header)
-print("Header_json Type: " + str(type(header_json)) + ". Header_json Text: " + header_json)
+print(header)
+print("Header Type: " + str(type(header)))
+print(header_json)
+print("Header_json Type: " + str(type(header_json)))
 rep_json = requests.post("http://espressotg.info/eotg/api/devices/registerDevice", data=header_json)
 rep = rep_json.json()
 rep_ID = rep['deviceId']
