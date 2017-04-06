@@ -1,13 +1,28 @@
+// Code from: /Examples/Communication/SerialEvent
+// Code listes to incoming serial commands then returns all data received
+
+String inputString = "";         // a string to hold incoming data
+boolean stringComplete = false;  // whether the string is complete
+
 void setup() {
   Serial.begin(9600);
+  inputString.reserve(200);  // reserve 200 bytes for the inputString:
 }
 
 void loop() {
-  if (Serial.available()) {
-    delay(100);     // wait a bit for the entire message to arrive
-    lcd.clear();    // clear the screen
-    while (Serial.available() > 0) {
-      lcd.write(Serial.read());      // Change to many IF statements
+  if (stringComplete) {
+    Serial.println(inputString);
+    inputString = "";
+    stringComplete = false;
+  }
+}
+
+void serialEvent() {
+  while (Serial.available()) {
+    char inChar = (char)Serial.read();    // get the new byte:
+    inputString += inChar;        // add it to the inputString
+    if (inChar == '\n') {         // if the incoming character is a newline, set a flag so the main loop can do something about it:
+      stringComplete = true;
     }
   }
 }
