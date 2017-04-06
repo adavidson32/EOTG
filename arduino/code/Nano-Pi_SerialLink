@@ -11,7 +11,14 @@ void setup() {
 
 void loop() {
   if (stringComplete) {
-    Serial.println(inputString);
+    if (inputString.substring(0, 7)=="request") {
+      String request_string = inputString.substring(7);
+      print("Request detected: ");
+      println(request_string);
+    }
+    else {
+      Serial.println(inputString);
+    }
     inputString = "";
     stringComplete = false;
   }
