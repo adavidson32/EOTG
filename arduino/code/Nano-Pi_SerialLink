@@ -5,19 +5,26 @@ String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   inputString.reserve(200);  // reserve 200 bytes for the inputString:
+  delay(500);
+  Serial.println("Serial Setup. Starting loop.....");
 }
 
 void loop() {
   if (stringComplete) {
     if (inputString.substring(0, 7)=="request") {
-      String request_string = inputString.substring(7);
-      print("Request detected: ");
-      println(request_string);
+      String request_string = inputString.substring(8);
+      Serial.println("");
+      Serial.print("Request detected: ");
+      Serial.println(request_string);
+      Serial.println("");
     }
     else {
+      Serial.println("");
+      Serial.print("Non-Request: ");
       Serial.println(inputString);
+      Serial.println("");
     }
     inputString = "";
     stringComplete = false;
