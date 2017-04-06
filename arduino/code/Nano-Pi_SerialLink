@@ -1,0 +1,13 @@
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available()) {
+    delay(100);     // wait a bit for the entire message to arrive
+    lcd.clear();    // clear the screen
+    while (Serial.available() > 0) {
+      lcd.write(Serial.read());      // Change to many IF statements
+    }
+  }
+}
