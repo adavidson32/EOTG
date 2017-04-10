@@ -1,0 +1,12 @@
+#Connect micro-USB 
+pair wifi
+enable VNC, SSH, I2C, 1-Wire, Serial interfaces
+change username to relevant
+change password
+sudo shutdown -r
+
+Disconnect
+sudo apt-get install update
+sudo apt-get install dist-upgrade -y
+
+sudo mkdir git
