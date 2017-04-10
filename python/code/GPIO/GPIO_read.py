@@ -32,7 +32,7 @@ elif (read_mode == "continuous"):
       print("GPIO#{0} is currently HIGH...")
     else:
       print("GPIO#{0} is currently LOW...")
-    delay(print_freq)
+    time.sleep(print_freq)
 
 elif (read_mode == "time"):
   run_time = input("How many seconds should script run? : ")
@@ -44,4 +44,4 @@ elif (read_mode == "time"):
       print("GPIO#{0} is currently HIGH...")
     else:
       print("GPIO#{0} is currently LOW...")
-    delay(print_freq)
+    time.sleep(print_freq)
