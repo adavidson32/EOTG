@@ -8,7 +8,7 @@ if len(sys.argv) == 4:
   read_mode = sys.argv[2]
   up_down = sys.argv[3]
 else:
-  print("len(argv)!=4... Please manually enter GPIO_pin, read_mode, and pullup mode:
+  print("len(argv)!=4... Please manually enter GPIO_pin, read_mode, and pullup mode:)
   GPIO_pin = int(input("Which pin to control? : "))
   read_mode = input("Read mode to use? (once, continuous, time): ")  
   up_down = input("Pull up mode to use? (Enter UP or DOWN) : ")  
