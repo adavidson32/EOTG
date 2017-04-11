@@ -3,7 +3,6 @@
 # Hardware -- Plug newly formatted uSD into desktop computer and navigate to drive in file explorer
 #------------------------------------------------------------------------
     # Enable SSH                      (by adding a blank SSH file to root folder)
-      
     # Enable OTG options              (if using Zero in OTG mode, add as necessary)
     # Enable dtoverlay options        (as necessary - rpi_rtc, i2c_bmp, rpi_lirc, etc.)
 #------------------------------------------------------------------------
@@ -21,6 +20,7 @@
             psk="andoverma"
         }    
       Test connection via 'ping google.com' press ctrl+x to exit ping function
+    
     # Via raspi-config enable and change the following:
       enable VNC, SSH                        (SSH/VNC in 100% of installs)
       enable I2C, 1-Wire, Serial interfaces  (depending on application - )
@@ -28,6 +28,7 @@
       change password
       change resolution                      (1920x1080 for Pi-3 or Pi-2, 1366x768 on Pi-0 or other portable Pi setups)
       change timezone, local, keyboard in raspi-config
+    
     # Via terminal window
       sudo shutdown -r                       (w/wo "now" to force immediate shutdown)
 #------------------------------------------------------------------------
@@ -42,13 +43,18 @@
       re-arange icons at top of screen:
         - add/remove items from "taskbar" (ex. raspi-config, python, leafpad, etc.)
         - add/remove items from notification/status area (cpu, temp, etc.)
+    
     # Update apt-get lists:
       sudo apt-get install update
       sudo apt-get install dist-upgrade -y
-
+    
     # Get relevant git repositories (mine, adafruit, etc.)
       sudo mkdir git
       git clone https://github.com/adavidson32/EOTG     (or /adavidson32/RPi-Files for non EOTG Pi's)
       git clone https://github.com/adafruit/......
+    
+    # Install relevant python modules for project
+      install new pip?
+      Install MQTT library from adafruit and paho-mqtt
 #------------------------------------------------------------------------
 
