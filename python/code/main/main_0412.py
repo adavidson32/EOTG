@@ -72,7 +72,7 @@ def states_brewing():
     print("Current coffee temmperature: {0:.1f} F".format(coffee_temp))
     if (GPIO.input(button_pin)):
       button_state = buttonread()
-      if button_state = 'HOLD':
+      if button_state == 'HOLD':
         GPIO.output(relay_pin1, GPIO.HIGH)
         GPIO.output(relay_pin2, GPIO.HIGH)
         return "brew_cancelled"
