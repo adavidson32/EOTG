@@ -121,7 +121,7 @@ def states_waiting():
     profile_num = advance_profile(profile_num)
   elif but_func == "2x Press":
     test_results = prebrew_test()
-    if (test_results == 'pass')
+    if (test_results == 'pass'):
       print("Brew Started"):
       result = states_brewing()
       if result == "brew_success":
