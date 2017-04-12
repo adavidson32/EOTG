@@ -122,7 +122,7 @@ def states_waiting():
   elif but_func == "2x Press":
     test_results = prebrew_test()
     if (test_results == 'pass'):
-      print("Brew Started"):
+      print("Brew Started")
       result = states_brewing()
       if result == "brew_success":
         print("Brew finished successfully and returned to waiting state")
