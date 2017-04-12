@@ -172,9 +172,6 @@ def states_waiting():
   if but_func == 'HOLD':
     print("Device turned off. Hold Button to turn back on....")
     states_background()
-  elif but_func == "1x Press":
-    profile_num = (profile_num + 1)%(number_profiles+1)
-    print("Profile Changed to #{}....".format(profile_num))
   elif but_func == "2x Press":
     test_results = prebrew_check()
     if (test_results == 'pass'):
@@ -186,6 +183,9 @@ def states_waiting():
         print("Brew cancelled with 2x Press")
       else:
         print("Brew finished with error, returned to waiting state")
+    elif but_func == "1x Press":
+      profile_num = (profile_num + 1)%(number_profiles+1)
+      print("Profile Changed to #{}....".format(profile_num))
     else:
       print("Error running brew. Check water level, device level, or AC connection...")
   states_waiting()
