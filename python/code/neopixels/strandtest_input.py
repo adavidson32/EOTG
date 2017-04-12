@@ -1,5 +1,5 @@
 import time
-from neopixels import *
+from neopixel import *
 
 LED_COUNT      = input("Number of Pixels = ")      # Number of LED pixels.
 LED_PIN        = input("Input pin (default is 18) = ")      # GPIO pin connected to the pixels (must support PWM!).
