@@ -35,7 +35,7 @@ GPIO.output(relay_pin1, GPIO.HIGH)
 GPIO.output(relay_pin2, GPIO.HIGH)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-def run_brew():
+def states_brewing():
   print("Brew Starting Now.....")
   time_start = time.time()
   GPIO.output(relay_pin1, GPIO.LOW)
