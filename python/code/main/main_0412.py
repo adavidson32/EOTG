@@ -133,7 +133,7 @@ def states_waiting():
   states_waiting()
          
 def states_background():
-  While True:
+  while 1:
     print("Device in Background State")
     but_func = buttonread()
     while not(but_func == 'HOLD'):
