@@ -34,7 +34,11 @@ def update_accel_gyro(return_type):
 print('Starting to run while loop: ')
 i = 1
 while True:
+    print('')
+    print('')
     print("Running while loop iteration #{0}".format(i))
     update_accel_gyro(return_type)
+    print('')
+    print('')
     time.sleep(10)
     i+=1
