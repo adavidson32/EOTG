@@ -23,8 +23,8 @@ for i in range(1, to_add):
   display_text += ' '
   
 if (line_num==1):
-  print('|', display_text, '|')
-  print('|                |')
+  print('|{}| str_len = {}'.format(display_text, len(display_text)))
+  print('|                |' str_len = {}.format((len('|                |')-2))
 else:
-  print('|                |')
-  print('|', display_text, '|')
+  print('|                |' str_len = {}.format((len('|                |')-2))
+  print('|{}| str_len = {}'.format(display_text, len(display_text)))
