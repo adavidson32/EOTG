@@ -41,7 +41,7 @@ mpu6050 = mpu6050(mpu6050_addr)
 #nano_addr = 0x00
 neopixel_pin = 18    #pin must support special clock functions required for neopixels. 
 neopixel_ring_size = 12     #change to 24 when larger ring arrives and is used
-device_state = background
+device_state = 'background'
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(relay_pin1, GPIO.OUT)
