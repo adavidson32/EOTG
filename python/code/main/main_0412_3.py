@@ -161,15 +161,11 @@ def buttonread():
       button_func = "1x Press"
   return button_func
 
-def advance_profile(current_profile, number_of_profiles):
-  new_profile = (current_profile+1)%(number_of_profiles+1)
-  print("Profile Changed to #{}....".format(new_profile))
-  return new_profile
-
 def states_waiting():
   device_state = 'Waiting'
   print("Device in waiting state")
-  print_state(device_state)
+  lcd.lcd_display_string("State: Waiting", 1)
+  lcd.lcd_display_string("Profile #{}".format(profile_num), 2)
   but_func = buttonread()
   while (not(but_func == '2x Press') and not(but_func == '1x Press') and not(but_func == 'HOLD')):
     but_func = buttonread()
@@ -177,8 +173,8 @@ def states_waiting():
     print("Device turned off. Hold Button to turn back on....")
     states_background()
   elif but_func == "1x Press":
-    temp_val = advance_profile(profile_num, number_profiles)
-    profile_num = temp_val
+    profile_num = (profile_num + 1)%(number_profiles+1)
+    print("Profile Changed to #{}....".format(profile_num))
   elif but_func == "2x Press":
     test_results = prebrew_check()
     if (test_results == 'pass'):
