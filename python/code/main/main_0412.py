@@ -118,7 +118,8 @@ def states_waiting():
     print("Device turned off. Hold Button to turn back on....")
     states_background()
   elif but_func == "1x Press":
-    profile_num = advance_profile(profile_num)
+    temp_profile_num = advance_profile(profile_num)
+    profile_num = temp_profile_num 
   elif but_func == "2x Press":
     test_results = prebrew_test()
     if (test_results == 'pass'):
