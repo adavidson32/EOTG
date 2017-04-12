@@ -1,7 +1,7 @@
 import logging
 
 # BMP280 default address.
-BMP280_I2CADDR = 0x77
+BMP280_I2CADDR = 0x76
 BMP280_CHIPID = 0xD0
 
 # BMP280 Registers
@@ -156,7 +156,7 @@ class BMP280(object):
 
 
 sensor = BMP280()
-print 'Temp = {0:0.2f} *C'.format(sensor.read_temperature())
-print 'Pressure = {0:0.2f} Pa'.format(sensor.read_pressure())
-print 'Altitude = {0:0.2f} m'.format(sensor.read_altitude())
-print 'Sealevel Pressure = {0:0.2f} Pa'.format(sensor.read_sealevel_pressure())
+print('Temp = {0:0.2f} *C'.format(sensor.read_temperature()))
+print('Pressure = {0:0.2f} Pa'.format(sensor.read_pressure()))
+print('Altitude = {0:0.2f} m'.format(sensor.read_altitude()))
+print('Sealevel Pressure = {0:0.2f} Pa'.format(sensor.read_sealevel_pressure()))
