@@ -6,7 +6,8 @@ button_pin = 21
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-while not(GPIO.input(button_pin)):
+now = time.time()
+while (not(GPIO.input(button_pin)) and ((time.time() - now) <= 2.2)):
   time.sleep(.001)
 now = time.time()
 while (GPIO.input(button_pin)):
@@ -21,7 +22,7 @@ elif (b1_time >= 2):
   button_func = "HOLD"
 elif ((b1_time <= 1) and (b1_time >= .2)):
   now = time.time()
-  while not(GPIO.input(button_pin)):
+  while (not(GPIO.input(button_pin)) and ((time.time() - now) <= 2.2)):
     time.sleep(.001)
   time_between = time.time() - now
   print("Time between presses : ", time_between, " seconds")
