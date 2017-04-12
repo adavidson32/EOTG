@@ -69,7 +69,7 @@ def states_brewing():
   GPIO.output(relay_pin2, GPIO.LOW)
   while (time.time() < (time_start + brew_time)):
     coffee_temp = read_temp()
-    print("Current coffee temmperature: {0:.1f}".format(coffee_temp))
+    print("Current coffee temmperature: {0:.1f} F".format(coffee_temp))
     time.sleep(1)
   GPIO.output(relay_pin1, GPIO.HIGH)
   GPIO.output(relay_pin2, GPIO.HIGH)
@@ -87,7 +87,7 @@ def check_orientation():
   yz_angle = math.atan(yz_fraction)
   xz_angle = math.degrees(xz_angle)
   yz_angle = math.degrees(yz_angle)
-  print("xz-angle: {0:.1f},  yz-angle: {1:.1f}".format(xz_angle, yz_angle))
+  print("xz-angle: {0:.1f} deg.,  yz-angle: {1:.1f} deg.".format(xz_angle, yz_angle))
   if ((xz_angle <= 5) and (yz_angle <= 5)):
     return "level"
   elif ((xz_angle > 5) or (yz_angle  > 5)):
