@@ -111,6 +111,7 @@ def advance_profile(current_profile):
 
 def states_waiting():
   print("Device in waiting state")
+  time.sleep(1)
   but_func = buttonread()
   while (not(but_func == '2x Press') and not(but_func == '1x Press') and not(but_func == 'HOLD')):
     but_func = buttonread()
