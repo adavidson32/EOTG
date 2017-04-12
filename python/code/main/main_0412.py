@@ -11,6 +11,12 @@ hold_time = 1.5
 single_max_time = 1
 hold_timeout = 1.7
 
+number_profiles = 5
+profile_num = 1
+brew_time = 30
+water_level = "full"
+battery_level = "full"
+ac = "connected"
 relay_pin1 = 6
 relay_pin2 = 5
 bmp280_addr = 0x76
@@ -25,12 +31,21 @@ neopixel_ring_size = 12     #change to 24 when larger ring arrives and is used
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(relay_pin1, GPIO.OUT)
 GPIO.setup(relay_pin2, GPIO.OUT)
+GPIO.output(relay_pin1, GPIO.HIGH)
+GPIO.output(relay_pin2, GPIO.HIGH)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def run_brew():
-  level_status = check_orientation()
-  print(level_status)
-  time.sleep(1000)
+  print("Brew Starting Now.....")
+  time_start = time.time()
+  GPIO.output(relay_pin1, GPIO.LOW)
+  GPIO.output(relay_pin2, GPIO.LOW)
+  while (time.time() < (time_start + brew_time)):
+    time.sleep(.1)
+  GPIO.output(relay_pin1, GPIO.HIGH)
+  GPIO.output(relay_pin2, GPIO.HIGH)
+  return "brew_success"
+    
 
 def check_orientation():
   accel_data = mpu6050.get_accel_data()
@@ -47,8 +62,19 @@ def check_orientation():
   if ((xz_angle <= 5) and (yz_angle <= 5)):
     return "level"
   elif ((xz_angle > 5) or (yz_angle  > 5)):
-    return "not-level"
-  
+    return "not-level" 
+ 
+def prebrew_check():
+  check_level = check_orientation()
+  if (ac == 'disconnected'):
+    return 'ac_disconnected'
+  elif (water_level == 'low'):
+    return 'water_low'
+  elif (check_level == 'not-level'):
+    return 'not-level'
+  else:
+    return 'pass'
+
 def buttonread():
   b1_time = 0.0001
   button_func = ''
@@ -77,25 +103,47 @@ def buttonread():
     else:
       button_func = "1x Press"
   return button_func
-      
-def initial_setup():
-  print("Starting program...")
-  print("Device in Background State")
-  
+
+def advance_profile(current_profile)
+  new_profile = (current_profile+1)%(number_profiles+1)
+  print("Profile Changed to #{}....".format(new_profile))
+  return new_profile
+
+def states_waiting():
+  print("Device in waiting state")
   but_func = buttonread()
-  if but_func == "1x Press":
-    print("Profile Changed")
-  elif but_func == "HOLD":
-    print("Device turned off")
-    while True:
-      time.sleep(10)
-      print('device turned off, sleeping....')
+  while (not(but_func == '2x Press') and not(but_func == '1x Press') and not(but_func == 'HOLD')):
+    but_func = buttonread()
+  if but_func == 'HOLD':
+    print("Device turned off. Hold Button to turn back on....")
+    states_background()
+  elif but_func == "1x Press":
+    profile_num = advance_profile(profile_num)
   elif but_func == "2x Press":
-    print("Brew Started")
-    result = run_brew()
+    test_results = prebrew_test()
+    if (test_results == 'pass')
+      print("Brew Started"):
+      result = states_brewing()
+      if result == "brew_success":
+        print("Brew finished successfully and returned to waiting state")
+      else:
+        print("Brew finished with error, returned to waiting state")
+    else:
+      print("Error running brew. Check water level, device level, or AC connection...")
+  states_waiting()
+         
+def states_background():
+  While True:
+    print("Device in Background State")
+    but_func = buttonread()
+    while not(but_func == 'HOLD'):
+      but_func = buttonread()
+    if (but_func == 'HOLD'):
+      states_waiting()
+  
   #connect to server
   #request updates made since last update request...
   
-initial_setup()
+states_background()
   
     
