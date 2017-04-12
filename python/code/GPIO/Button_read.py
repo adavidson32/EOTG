@@ -4,9 +4,9 @@ import RPi.GPIO as GPIO
 button_pin = 21
 sampling_delay = 0.001
 debounce_time = .1
-hold_time = 2
+hold_time = 1.5
 single_max_time = 1
-hold_timeout = 2.2
+hold_timeout = 1.7
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
