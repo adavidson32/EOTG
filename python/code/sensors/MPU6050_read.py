@@ -20,9 +20,9 @@ def update_accel_gyro(return_type):
     gy = float('{0:.3f}'.format(gyro['y']))
     gz = float('{0:.3f}'.format(gyro['z']))
     if (return_type=='accel' or return_type=='all'):
-       print('Accelerometer x({0}), y({1}), z({2))'.format(ax, ay, az))
+       print('Accelerometer x({0})  y({1})  z({2}))'.format(ax, ay, az))
     if (return_type=='gyro' or return_type=='all'):
-        print('Gyrometer (x:{0:.3f}, y:{1:.3f}, z:{2:.3f})'.format(gx, gy, gz))
+        print('Gyrometer x({0:.3f})  y({1:.3f})  z({2:.3f}))'.format(gx, gy, gz))
     if (return_type=='temp' or return_type=='accel' or return_type=='gyro' or return_type=='all'):
         if units=='c':
             print('Temp: {0} Celcius'.format(temp_c))
