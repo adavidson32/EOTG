@@ -8,7 +8,7 @@ if len_arg==2:
   line_num = int(sys.argv[2])
 else:
   display_text = input("Enter text to display : ")
-  line_num = input("Enter line to display text on (1 or 2) : ")
+  line_num = int(input("Enter line to display text on (1 or 2) : "))
 print("Input Text: '{0}' of type {1}, Input Line: {2}".format(display_text, type(display_text), line_num))
 
 if (len(display_text) > 16):
