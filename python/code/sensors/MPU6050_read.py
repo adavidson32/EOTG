@@ -25,9 +25,9 @@ def update_accel_gyro(return_type):
         print('Gyrometer (x:{0:.3f}, y:{1:.3f}, z:{2:.3f})'.format(gx, gy, gz))
     if (return_type=='temp' or return_type=='accel' or return_type=='gyro' or return_type=='all'):
         if units=='c':
-            print('Temp: {0} Celcius' % temp_c)
+            print('Temp: {0} Celcius'.format(temp_c))
         elif units=='f':
-            print('Temp: {0} Fahrenheit' % temp_f)
+            print('Temp: {0} Fahrenheit'.format(temp_f))
     else:
         print("Invalid input argument, use (all, accel, gyro, temp, temp_c, or temp_f")
 
