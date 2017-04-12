@@ -38,4 +38,3 @@ elif ((b1_time <= single_max_time) and (b1_time >= debounce_time)):
     button_func = "1x Press"
 
 print(button_func)
-return button_func
