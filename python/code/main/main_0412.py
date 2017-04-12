@@ -1,7 +1,7 @@
-include time
-include sys
-include math
-include RPi.GPIO as GPIO
+import time
+import sys
+import math
+import RPi.GPIO as GPIO
 from mpu6050 import mpu6050
 
 button_pin = 21
