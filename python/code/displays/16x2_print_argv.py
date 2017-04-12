@@ -3,7 +3,7 @@ import time
 
 len_arg = len(sys.argv)
 print("Number of arguments entered : {}".format(len_arg))
-if len_arg==2:
+if len_arg==3:
   display_text = sys.argv[1]
   line_num = int(sys.argv[2])
 else:
