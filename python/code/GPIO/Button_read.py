@@ -12,7 +12,7 @@ now = time.time()
 while (GPIO.input(button_pin)):
   time.sleep(.001)
 b1_time = time.time() - now
-print(b1_time)
+print("Button 1 Held for : ", b1_time, " seconds")
 if ((b1_time <= .2) and (b1_time >= .01)):
   print("button press not long enough to register")
   button_func = "Nothing"
@@ -24,11 +24,13 @@ elif ((b1_time <= 1) and (b1_time >= .2)):
   while not(GPIO.input(button_pin)):
     time.sleep(.001)
   time_between = time.time() - now
+  print("Time between presses : ", time_between, " seconds")
   if time_between <= 1:
     now = time.time()
-    while (GPIO.input(button_pin):
+    while (GPIO.input(button_pin)):
       time.sleep(0.01)
     b2_time = time.time() - now
+    print("Button 2 Held for : ", b2_time, " seconds")
     if ((b2_time >= 0.2) and (b2_time <= 1)):
       print("2x Press Detected")
       button_func = "2x Press"
