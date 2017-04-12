@@ -25,4 +25,4 @@ if __name__ == '__main__':
 
 	print ('Press Ctrl-C to quit.')
 	while True:
-    rainbow(srip, wait_ms)
+		rainbow(srip, wait_ms)
