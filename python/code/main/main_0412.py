@@ -104,7 +104,7 @@ def buttonread():
       button_func = "1x Press"
   return button_func
 
-def advance_profile(current_profile)
+def advance_profile(current_profile):
   new_profile = (current_profile+1)%(number_profiles+1)
   print("Profile Changed to #{}....".format(new_profile))
   return new_profile
