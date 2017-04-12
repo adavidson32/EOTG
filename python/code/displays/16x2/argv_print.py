@@ -24,3 +24,4 @@ if (line_num==1):
 elif (line_num==2):
   print('|                | str_len = {}'.format((len('|                |')-2)))
   print('|{}| str_len = {}'.format(display_text, len(display_text)))
+  
