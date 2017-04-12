@@ -1,5 +1,7 @@
 import logging
+import Adafruit_GPIO.I2C as I2C
 
+i2c = I2C
 # BMP280 default address.
 BMP280_I2CADDR = 0x76
 BMP280_CHIPID = 0xD0
@@ -28,11 +30,6 @@ BMP280_TEMPDATA = 0xFA
 class BMP280(object):
     def __init__(self, address=BMP280_I2CADDR, i2c=None, **kwargs):
         self._logger = logging.getLogger('Adafruit_BMP.BMP280')
-
-        # Create I2C device.
-        if i2c is None:
-            import Adafruit_GPIO.I2C as I2C
-            i2c = I2C
 
         self._device = i2c.get_i2c_device(address, **kwargs)
         chip_ip = self._device.readU8(BMP280_CHIPID)
