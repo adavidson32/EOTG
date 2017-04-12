@@ -35,8 +35,9 @@ class BMP280(object):
             i2c = I2C
 
         self._device = i2c.get_i2c_device(address, **kwargs)
-
-        if self._device.readU8(BMP280_CHIPID) != 0x58:
+        chip_ip = self._device.readU8(BMP280_CHIPID)
+        print("Chip ID = ", str(chip_id))
+        if chip_id != 0x58:
             raise Exception('Unsupported chip')
 
         # Load calibration values.
