@@ -70,6 +70,12 @@ def states_brewing():
   while (time.time() < (time_start + brew_time)):
     coffee_temp = read_temp()
     print("Current coffee temmperature: {0:.1f} F".format(coffee_temp))
+    if (GPIO.input(button_pin)):
+      button_state = buttonread()
+      if button_state = 'HOLD':
+        GPIO.output(relay_pin1, GPIO.HIGH)
+        GPIO.output(relay_pin2, GPIO.HIGH)
+        return "brew_cancelled"
     time.sleep(1)
   GPIO.output(relay_pin1, GPIO.HIGH)
   GPIO.output(relay_pin2, GPIO.HIGH)
@@ -157,6 +163,8 @@ def states_waiting():
       result = states_brewing()
       if result == "brew_success":
         print("Brew finished successfully and returned to waiting state")
+      elif result == "brew_cancelled":
+        print("Brew cancelled with 2x Press")
       else:
         print("Brew finished with error, returned to waiting state")
     else:
