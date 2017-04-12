@@ -19,20 +19,15 @@ def update_accel_gyro(return_type):
     gx = float('{0:.3f}'.format(gyro['x']))
     gy = float('{0:.3f}'.format(gyro['y']))
     gz = float('{0:.3f}'.format(gyro['z']))
-    if return_type=='all':
-        print('Accelerometer x({0}), y({1}), z({2))'.format(ax, ay, az))
-        print('Gyrometer (x({0}), y({1}), z({2}))'.format(gx, gy, gz))
-        print('Temp(C): {0} C,  Temp(F): {1} F'.format(temp_c, temp_f))
-    elif return_type=='accel':
-        print('Accelerometer (x:{0:.3f}, y:{1:.3f}, z:{2:.3f})'.format(ax, ay, az))
-    elif return_type=='gyro':
+    if (return_type=='accel' or return_type=='all'):
+       print('Accelerometer x({0}), y({1}), z({2))'.format(ax, ay, az))
+    if (return_type=='gyro' or return_type=='all'):
         print('Gyrometer (x:{0:.3f}, y:{1:.3f}, z:{2:.3f})'.format(gx, gy, gz))
-    elif return_type=='temp':
-        print('Temp(C): {0:.2f},  Temp(F): {1:.2f}'.format(temp_c, temp_f))
-    elif return_type=='temp_c':
-        print('Temp(C): {0:.2f}'.format(temp_c))
-    elif return_type=='temp_f':
-        print('Temp(F): {0:.2f}'.format(temp_f))
+    if (return_type=='temp' or return_type=='accel' or return_type=='gyro' or return_type=='all'):
+        if units=='c':
+            print('Temp: {0} Celcius' % temp_c)
+        elif units=='f':
+            print('Temp: {0} Fahrenheit' % temp_f)
     else:
         print("Invalid input argument, use (all, accel, gyro, temp, temp_c, or temp_f")
 
