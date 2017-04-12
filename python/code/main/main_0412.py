@@ -85,7 +85,12 @@ def initial_setup():
   but_func = buttonread()
   if but_func == "1x Press":
     print("Profile Changed")
-  elif but_func == "2x Press"
+  elif but_func == "HOLD":
+    print("Device turned off")
+    while True:
+      time.sleep(10)
+      print('device turned off, sleeping....')
+  elif but_func == "2x Press":
     print("Brew Started")
     result = run_brew()
   #connect to server
