@@ -1,9 +1,9 @@
 import time
 from neopixel import *
 
-LED_COUNT      = input("Number of Pixels = ")      # Number of LED pixels.
-LED_PIN        = input("Input pin (default is 18) = ")      # GPIO pin connected to the pixels (must support PWM!).
-wait_ms        = input("wait-ms (default is 20ms) = ")
+LED_COUNT      = int(input("Number of Pixels = "))      # Number of LED pixels.
+LED_PIN        = int(input("Input pin (default is 18) = "))      # GPIO pin connected to the pixels (must support PWM!).
+wait_ms        = int(input("wait-ms (default is 20ms) = "))
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
 LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
