@@ -12,6 +12,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 b1_time = 0.0001
+button_func = ''
 while b1_time <= debounce_time:
   now = time.time()
   while not(GPIO.input(button_pin)):
