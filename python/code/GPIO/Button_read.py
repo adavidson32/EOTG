@@ -21,7 +21,7 @@ while b1_time <= debounce_time:
     time.sleep(sampling_delay)
   b1_time = time.time() - now
 print("Button 1 Held for : ", b1_time, " seconds")
-elif (b1_time >= hold_time):
+if (b1_time >= hold_time):
   print("HOLD Detected")
   button_func = "HOLD"
 elif ((b1_time <= single_max_time) and (b1_time >= debounce_time)):
