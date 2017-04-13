@@ -27,7 +27,7 @@ def read_temp():
     return temp
 
 def connected(client):
-    print 'Connected to Adafruit IO!  Listening for {0} changes...'.format(SUB_FEED)
+    print()'Connected to Adafruit IO!  Listening for {0} changes...'.format(SUB_FEED))
     lcd.lcd_display_string("Conn:adafruit.io", 1)
     lcd.lcd_display_string("Receiving: IFTTT", 2)
     client.subscribe(SUB_FEED)
@@ -35,7 +35,7 @@ def disconnected(client):
     print 'Disconnected from Adafruit IO!'
     sys.exit(1)
 def message(client, feed_id, payload):
-    print 'Feed {0} received new value: {1}'.format(feed_id, payload)
+    print('Feed {0} received new value: {1}'.format(feed_id, payload))
     if len(payload > 16):
         payload = payload[0:16]
     lcd.lcd_display_string("  MSG on IFTTT  ", 1)
@@ -50,11 +50,11 @@ client.on_message    = message
 client.connect()
 
 last = 0
-print 'Publishing a new message every 30 seconds (press Ctrl-C to quit)...'
+print()'Publishing a new message every 30 seconds (press Ctrl-C to quit)...')
 while True:
    client.loop()
    if (time.time() - last) >= sample_rate:
        coffee_temp = read_temp()
-       print 'Publishing {0:.2f} to cofee_temp feed.'.format(coffee_temp)
+       print('Publishing {0:.2f} to cofee_temp feed.'.format(coffee_temp))
        client.publish(PUB_FEED, value)
        last = time.time()
