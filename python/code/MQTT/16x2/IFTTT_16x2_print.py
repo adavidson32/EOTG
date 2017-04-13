@@ -6,7 +6,7 @@ ADAFRUIT_IO_USERNAME = 'eotg'
 SUB_FEED = 'ifttt'
 PUB_FEED = 'coffee_temp'
 
-sample_rate = 30.0
+sample_rate = 10.0
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
