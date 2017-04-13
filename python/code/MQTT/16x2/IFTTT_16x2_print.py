@@ -3,7 +3,7 @@ from Adafruit_IO import MQTTClient
 
 ADAFRUIT_IO_KEY      = '7c61b801bf874426902ba2f78d5c2102'
 ADAFRUIT_IO_USERNAME = 'eotg'
-SUB_FEED = 'ifttt'
+SUB_FEED = 'IFTTT'
 PUB_FEED = 'coffee_temp'
 
 sample_rate = 10.0
@@ -27,7 +27,7 @@ def read_temp():
     temp = float(lines[1][equals_pos+2:])/1000
     return temp
 def clear_lcd():
-    lcd.lcd_display_string("             ", 1)
+    lcd.lcd_display_string("                ", 1)
     lcd.lcd_display_string("                ", 2)
 def connected(client):
     print("Connected to Adafruit IO!  Listening for {0} changes".format(SUB_FEED))
@@ -37,19 +37,20 @@ def connected(client):
     client.subscribe(SUB_FEED)
 def disconnected(client):
     print('Disconnected from Adafruit IO!')
+    clear_lcd()
     sys.exit(1)
 def message(client, feed_id, payload):
     print('Feed {0} received new value: {1}'.format(feed_id, payload))
-    if len(payload) > 13:
-        payload = payload[0:13]
+    if len(payload) > 14:
+        payload = payload[0:14]
     clear_lcd()
     len_feed_name = len(feed_id)
-    extra_needed = (16 - len_feed_name - 4)
+    extra_needed = (16 - len_feed_name - 3)
     spacer = ''
     for i in range(0,extra_needed):
         spacer += ' '
-    lcd.lcd_display_string("F: {0} {1}{2:.1f}".format(feed_id, spacer, coffee_temp), 1)
-    lcd.lcd_display_string("M: {}".format(payload), 2)
+    lcd.lcd_display_string("F:{0} {1}{2:.1f}".format(feed_id, spacer, coffee_temp), 1)
+    lcd.lcd_display_string("M:{}".format(payload), 2)
 
 lcd = lcddriver.lcd()
 clear_lcd()
