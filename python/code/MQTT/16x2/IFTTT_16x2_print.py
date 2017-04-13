@@ -27,7 +27,7 @@ def read_temp():
     temp = float(lines[1][equals_pos+2:])/1000
     return temp
 def clear_lcd():
-    lcd.lcd_display_string("                ", 1)
+    lcd.lcd_display_string("             ", 1)
     lcd.lcd_display_string("                ", 2)
 def connected(client):
     print("Connected to Adafruit IO!  Listening for {0} changes".format(SUB_FEED))
