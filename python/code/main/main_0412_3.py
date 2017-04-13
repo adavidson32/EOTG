@@ -1,15 +1,11 @@
-import time
-import sys
-import math
+import time, sys, math
 import RPi.GPIO as GPIO
 from mpu6050 import mpu6050
-import os
-import glob
-import lcddriver
+import os, glob, lcddriver
 
 lcd = lcddriver.lcd()
-lcd.lcd_display_string(" DEVICE STARTED ", 1)
-lcd.lcd_display_string("                ", 2)
+lcd.lcd_display_string("Welcome to EOTG ", 1)
+lcd.lcd_display_string(" DEVICE STARTED ", 2)
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -70,6 +66,8 @@ def read_temp():
     
 def print_state(new_state):
   lcd.lcd_display_string("New State:      ", 1)
+  a = len(new_state)
+  b = ((a 
   lcd.lcd_display_string(new_state, 2)
 
 def states_brewing():
