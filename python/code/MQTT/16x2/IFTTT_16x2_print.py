@@ -36,7 +36,7 @@ def disconnected(client):
     sys.exit(1)
 def message(client, feed_id, payload):
     print('Feed {0} received new value: {1}'.format(feed_id, payload))
-    if len(payload > 16):
+    if len(payload) > 16:
         payload = payload[0:16]
     lcd.lcd_display_string("  MSG on IFTTT  ", 1)
     lcd.lcd_display_string("{}".format(payload), 2)
