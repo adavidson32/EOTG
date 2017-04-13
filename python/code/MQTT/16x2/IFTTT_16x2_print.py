@@ -46,7 +46,7 @@ def message(client, feed_id, payload):
     len_feed_name = len(feed_id)
     extra_needed = (16 - len_feed_name - 4)
     spacer = ''
-    for i in range(0:extra_needed):
+    for i in range(0,extra_needed):
         spacer += ' '
     lcd.lcd_display_string("F: {0} {1}{2:.1f}".format(feed_id, spacer, coffee_temp), 1)
     lcd.lcd_display_string("{}".format(payload), 2)
