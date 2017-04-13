@@ -40,8 +40,8 @@ def disconnected(client):
     sys.exit(1)
 def message(client, feed_id, payload):
     print('Feed {0} received new value: {1}'.format(feed_id, payload))
-    if len(payload) > 16:
-        payload = payload[0:16]
+    if len(payload) > 13:
+        payload = payload[0:13]
     clear_lcd()
     len_feed_name = len(feed_id)
     extra_needed = (16 - len_feed_name - 4)
@@ -49,7 +49,7 @@ def message(client, feed_id, payload):
     for i in range(0,extra_needed):
         spacer += ' '
     lcd.lcd_display_string("F: {0} {1}{2:.1f}".format(feed_id, spacer, coffee_temp), 1)
-    lcd.lcd_display_string("{}".format(payload), 2)
+    lcd.lcd_display_string("M: {}".format(payload), 2)
 
 lcd = lcddriver.lcd()
 clear_lcd()
