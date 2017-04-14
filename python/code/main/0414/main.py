@@ -2,6 +2,7 @@ import time, sys, math
 import RPi.GPIO as GPIO
 from mpu6050 import mpu6050
 import os, glob, lcddriver
+import main_background, main_waiting
 
 lcd = lcddriver.lcd()
 lcd.lcd_display_string("Welcome to EOTG ", 1)
