@@ -1,8 +1,13 @@
 import time, sys, math
 import RPi.GPIO as GPIO
 from mpu6050 import mpu6050
+<<<<<<< HEAD
 import os, glob
 import main_background, main_waiting, 
+=======
+import os, glob, lcddriver
+import main_background, main_waiting
+>>>>>>> 0bde2bc2f2396079d6be44af3826eac19ab7473e
 
 settings_all = main_settings_read()
 
