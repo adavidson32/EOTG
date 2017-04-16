@@ -2,7 +2,7 @@ import lcddriver
 import time, os
 
 def getCPUuse():
-    return(str(os.popen("top -n1 | awk '/Cpu\(s\):/ {print $2}'").readline().strip(\
+    return(str(os.popen("top -n1 | awk '/Cpu\(s\):/ {print $3}'").readline().strip(\
 )))
 
 def getCPUtemp():
