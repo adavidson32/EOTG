@@ -2,8 +2,8 @@ import sqlite3, time
 
 conn = sqlite3.connect('temp.db')
 c = conn.cursor()
-c.execute('''CREATE TABLE temp_values
-             (sensor_id INTEGER, temp_c REAL, date_str TEXT, time_str TEXT)''')
+#c.execute('''CREATE TABLE temp_values
+#             (sensor_id INTEGER, temp_c REAL, date_str TEXT, time_str TEXT)''')
 date_s = time.strftime("%x")
 time_s = time.strftime("%X")
 c.execute("INSERT INTO temp_values VALUES (0, 1.00, date_s, time_s)")
