@@ -25,4 +25,4 @@ while True:
     str2 = temp_str
     lcd.lcd_display_string(str1, 1)
     lcd.lcd_display_string(str2, 2)
-    time.sleep(1)
+    time.sleep(2.5)
