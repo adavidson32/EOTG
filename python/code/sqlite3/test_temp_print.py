@@ -16,4 +16,4 @@ while True:
     c.execute("INSERT INTO temp_values VALUES (1, x.tempC(0), dt, tim)")
     conn.commit()
     conn.close()
-    print("Just added T={0:.1f}*C to temp.db".format(x.temp(0))
+    print("Just added T={0:.1f}*C to temp.db".format(x.temp(0)))
