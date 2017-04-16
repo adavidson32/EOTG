@@ -22,4 +22,4 @@ while True:
     conn.commit()
     conn.close()
     
-    print("Just added T={0:.1f}*C to temp.db".format(x.temp(0)))
+    print("Just added T={0:.1f}*C to temp.db".format(x.tempC(0)))
