@@ -21,6 +21,8 @@ while True:
     use_p = getCPUuse()
     print("CPU Use: ", use_p, " %") 
     print("CPU Temp: ", temp_str)
-    lcd.lcd_display_string('Use: %s % ' % use_p, 1)
-    lcd.lcd_display_string('Temp: %s *C ' % temp_str, 2)
+    str1 = 'CPU Use: ' + use_p + '%  '
+    str2 = 'CPU Temp: ' + temp_str + '*C '
+    lcd.lcd_display_string(str1, 1)
+    lcd.lcd_display_string(str2, 2)
     time.sleep(1)
