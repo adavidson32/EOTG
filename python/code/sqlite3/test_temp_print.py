@@ -5,7 +5,7 @@ x = DS18B20()
 
 upload_time = time.time()
 
-While True:
+while True:
     while (time.time() < (upload_time + 5)):
         time.sleep(.1)
     upload_time = time.time()
