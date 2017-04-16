@@ -1,5 +1,5 @@
 import sqlite3
-import time
+import time, math
 from ds18b20 import DS18B20
 
 x = DS18B20()
