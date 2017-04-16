@@ -22,7 +22,7 @@ while True:
     print("CPU Use: ", use_p, " %") 
     print("CPU Temp: ", temp_str)
     str1 = 'CPU Use: ' + use_p + '%  '
-    str2 = 'CPU Temp: ' + temp_str + '*C '
+    str2 = temp_str
     lcd.lcd_display_string(str1, 1)
     lcd.lcd_display_string(str2, 2)
     time.sleep(1)
