@@ -17,7 +17,7 @@ while True:
     
     conn = sqlite3.connect('temp.db')
     c = conn.cursor()
-    value_tuple = (1, float(x.tempC(0), 1), dt, tim)
+    value_tuple = (1, 0.1*(math.floor(10*x.tempC(0))), dt, tim)
     c.execute('INSERT INTO temp_values VALUES (?,?,?,?)', value_tuple)
     conn.commit()
     conn.close()
