@@ -1,5 +1,5 @@
 import sqlite3, time, os, glob, sys
-import ds18b20 as DS18B20
+from ds18b20 import DS18B20
 
 x = DS18B20()
 
@@ -13,7 +13,7 @@ while True:
     tim = time.strftime('%X')
     conn = sqlite3.connect('temp.db')
     c = conn.cursor()
-    c.execute("INSERT INTO temp_values VALUES (1, tempC(0), dt, tim)")
+    c.execute("INSERT INTO temp_values VALUES (1, x.tempC(0), dt, tim)")
     conn.commit()
     conn.close()
     print("Just added T={0:.1f}*C to temp.db".format(x.temp(0)))
