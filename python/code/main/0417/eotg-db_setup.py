@@ -39,7 +39,7 @@ ds18b20_settings = [
             ('ds2', 'empty', 'empty')
             ]
 mpu6050_settings = [
-            ('i2c_addr', 76)
+            ('i2c_addr', 76),
             ('level_deg', 5),
             ('sr_background', 10),
             ('sr_waiting', 1),
