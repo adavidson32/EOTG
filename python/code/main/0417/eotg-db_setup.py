@@ -75,8 +75,10 @@ def upd_button_settings():
         c.executemany('INSERT INTO button_settings VALUES (?, ?)', button_settings)
         conn.commit()
         print('button settings table restored to default:')
+    print('Device Settings:')
     for row in c.execute('SELECT * FROM button_settings'):
-        print(row)
+        print('Setting: {}, Value: {}'.format(row[0], row[1])
+    print('')
     conn.close()
 
 def upd_device_settings():
@@ -93,8 +95,10 @@ def upd_device_settings():
         c.executemany('INSERT INTO device_settings VALUES (?, ?)', device_settings)
         conn.commit()
         print('device settings table restored to default:')
+    print('Device Settings:')
     for row in c.execute('SELECT * FROM device_settings'):
-        print(row)
+        print('{}:  {}'.format(row[0], row[1])
+    print('')
     conn.close()
 
 def upd_wifi_settings():
@@ -112,8 +116,10 @@ def upd_wifi_settings():
         c.executemany('INSERT INTO wifi_settings VALUES (?, ?, ?, ?, ?, ?, ?)', wifi_list)
         conn.commit()
         print('wifi settings table restored to default:')
+    print('Configured Wi-Fi Networks: ')
     for row in c.execute('SELECT * FROM wifi_settings'):
-        print(row)
+        print('(#{}) SSID: {}, Password: {}, Sec. Type: {}, Last RSSI: {}'.format(row[0], row[1], row[2], row[3] row[5])
+    print('')
     conn.close()
 #---------------------------------------------------------------------
 
