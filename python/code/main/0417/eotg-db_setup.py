@@ -28,7 +28,7 @@ try:
     c.executemany('INSERT INTO setup_variables VALUES (?, ?, ?)', var_list)
     conn.commit()
     print('variables saved/updated sucessfully')
-except OperationalError:
+except sqlite3.OperationalError:
     print('Variable Table Already Exists')
 conn.close()
 #---------------------------------------------------------------------
@@ -51,7 +51,7 @@ try:
     c.executemany('INSERT INTO wifi_variables VALUES (?, ?, ?)', wifi_list)
     conn.commit()
     print('wifi data saved/updated sucessfully')
-except OperationalError:
+except sqlite3.OperationalError:
     print('Wifi Table Already Exists')
 conn.close()
 #---------------------------------------------------------------------
