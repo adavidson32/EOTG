@@ -49,9 +49,9 @@ conn = sqlite3.connect('eotg.db')
 c = conn.cursor()
 print('')
 print('Variable Setup printout: ')
-for row in c.execute('SELECT * FROM variable_setup'):
+for row in c.execute('SELECT * FROM setup_variables'):
     print('Cat: {}, Var: {}, Value: {}'.format(row[0], row[1], row[2]))
 print('')
 print('WiFi Setup printout: ')
-for row in c.execute('SELECT * FROM wifi_setup'):
+for row in c.execute('SELECT * FROM wifi_variables'):
     print('Priority: {}, Var: {}, Value: {}'.format(row[0], row[1], row[2]))
