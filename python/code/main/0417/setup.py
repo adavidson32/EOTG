@@ -17,7 +17,8 @@ def var_setup():
         var_tuple = (row[1], row[2])
         neopixel_var_list.append(var_tuple)
     for row in c.execute('SELECT * FROM wifi_variables'):
-        wifi_var_list.append(row)
+        network_dict = dict(('Network', row[0]), ('SSID', row[1]), ('Password', row[2]))
+        wifi_var_list.append(network_dict)
     button_var = dict(button_var_list)
     neopixel_var = dict(neopixel_var_list)
     wifi_var = dict(wifi_var_list)
