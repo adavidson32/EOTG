@@ -14,11 +14,11 @@ def var_setup():
         var_tuple = (row[1], row[2])
         button_var_list.append(var_tuple)
     for row in c.execute('SELECT * FROM setup_variables WHERE category=?', ('neopixel',)):
-        var_tuple = (row[1], row[2])
-        neopixel_var_list.append(var_tuple)
+        neopixel_tuple = (row[1], row[2])
+        neopixel_var_list.append(neopixel_tuple)
     for row in c.execute('SELECT * FROM wifi_variables'):
-        network_dict = dict([('Network', row[0]), ('SSID', row[1]), ('Password', row[2])])
-        wifi_var_list.append(network_dict)
+        var_list = [('priority', row[0]), ('ssid', row[1]), ('password', row[2])]
+        wifi_var_list.append(var_list)
     button_var = dict(button_var_list)
     neopixel_var = dict(neopixel_var_list)
     wifi_var = dict(wifi_var_list)
