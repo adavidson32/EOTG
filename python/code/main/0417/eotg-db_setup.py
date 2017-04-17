@@ -118,7 +118,7 @@ def upd_wifi_settings():
         print('wifi settings table restored to default:')
     print('Configured Wi-Fi Networks: ')
     for row in c.execute('SELECT * FROM wifi_settings'):
-        print('(#{}) SSID: {}, Password: {}, Sec. Type: {}, Last RSSI: {}'.format(row[0], row[1], row[2], row[3] row[5]))
+        print('(#{}) SSID: {}, Password: {}, Sec. Type: {}, Last RSSI: {}'.format(row[0], row[1], row[2], row[3], row[5]))
     print('')
     conn.close()
 #---------------------------------------------------------------------
