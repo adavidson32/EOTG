@@ -1,10 +1,9 @@
 import os, glob, time, math
 import sqlite3
-#from ds18b20 import DS18B20
-#from mpu6050 import mpu6050
+from ds18b20 import DS18B20
+from mpu6050 import mpu6050
 
 def var_setup():
-    var_list = (('button',), ('neopixel',), ('wifi',), ('ds18b20',), ('bmp280',), ('mpu6050',))
     conn = sqlite3.connect('eotg.db')
     c = conn.cursor()
     button_var_list = []
@@ -32,17 +31,8 @@ def var_setup():
     output_tuple = (button_var, neopixel_var, wifi_var)
     return output_tuple
 
-#def hw_setup(hw_addresses):
-    #import: RPi-GPIO, bmp280, ds18b20, mpu6050, 16x2 lcd libraries
-    #setup relay GPIO in correct modes
-    #setup BMP280, MPU6050 I2C devices (based on saved I2C addresses from variable_setup)
-    #setup DS18B20 sensors (identify all, save some variables?)
-    #return num_ds18b20,
-
-button_var, neopixel_var, wifi_var = var_setup()
-print('Button Variables: ')
-print(button_var)
-print('Neopixel Variables: ')
-print(neopixel_var)
-print('Wifi Variables: ')
-print(wifi_var)
+def hw_setup():
+    ds = DS18B20()
+    mpu = mpu6050()
+    num_ds = ds.device_count()
+    return ds, mpu, num_ds
