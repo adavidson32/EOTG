@@ -1,7 +1,11 @@
-import sqlite3
-
+#Import necessary libraries
 #---------------------------------------------------------------------
+import sqlite3
+#---------------------------------------------------------------------
+
+
 #Define variable list
+#---------------------------------------------------------------------
 var_list = [
         ('update', 'update_freq', 5.0),
         ('button', 'pin', 21),
@@ -18,12 +22,17 @@ var_list = [
 #Import variable list
 conn = sqlite3.connect('eotg.db')
 c = conn.cursor()
-c.execute('''CREATE TABLE setup_variables
-             (category text, variable text, value REAL)''')
-c.executemany('INSERT INTO setup_variables VALUES (?, ?, ?)', var_list)
-conn.commit()
+try:
+    c.execute('''CREATE TABLE setup_variables
+                (category text, variable text, value REAL)''')
+    c.executemany('INSERT INTO setup_variables VALUES (?, ?, ?)', var_list)
+    conn.commit()
+    print('variables saved/updated sucessfully')
+except OperationalError:
+    print('Variable Table Already Exists')
 conn.close()
-print('variables saved/updated sucessfully')
+#---------------------------------------------------------------------
+
 
 #---------------------------------------------------------------------
 #Define wifi list
@@ -36,12 +45,17 @@ wifi_list = [
 #Save wifi list
 conn = sqlite3.connect('eotg.db')
 c = conn.cursor()
-c.execute('''CREATE TABLE wifi_variables
+try:
+    c.execute('''CREATE TABLE wifi_variables
               (priority INTEGER, ssid TEXT, password TEXT)''')
-c.executemany('INSERT INTO wifi_variables VALUES (?, ?, ?)', wifi_list)
-conn.commit()
+    c.executemany('INSERT INTO wifi_variables VALUES (?, ?, ?)', wifi_list)
+    conn.commit()
+    print('wifi data saved/updated sucessfully')
+except OperationalError:
+    print('Wifi Table Already Exists')
 conn.close()
-print('wifi data saved/updated sucessfully')
+#---------------------------------------------------------------------
+
 
 #---------------------------------------------------------------------
 #print all contents of each to test:
@@ -50,8 +64,10 @@ c = conn.cursor()
 print('')
 print('Variable Setup printout: ')
 for row in c.execute('SELECT * FROM setup_variables'):
-    print('Cat: {}, Var: {}, Value: {}'.format(row[0], row[1], row[2]))
+    print('Category: {}, Variable: {}, Value: {}'.format(row[0], row[1], row[2]))
 print('')
 print('WiFi Setup printout: ')
 for row in c.execute('SELECT * FROM wifi_variables'):
-    print('Priority: {}, Var: {}, Value: {}'.format(row[0], row[1], row[2]))
+    print('Priority: {}, SSID: {}, Password: {}'.format(row[0], row[1], row[2]))
+conn.close()
+#---------------------------------------------------------------------
