@@ -7,7 +7,9 @@ def var_setup():
     var_list = (('button',), ('neopixel',), ('wifi',), ('ds18b20',), ('bmp280',), ('mpu6050',))
     conn = sqlite3.connect('eotg.db')
     c = conn.cursor()
-    button_var_list = neopixel_var_list = wifi_var_list = []
+    button_var_list = []
+    neopixel_var_list = []
+    wifi_var_list = []
     for row in c.execute('SELECT * FROM setup_variables WHERE category=?', ('button',)):
         var_tuple = (row[1], row[2])
         button_var_list.append(var_tuple)
