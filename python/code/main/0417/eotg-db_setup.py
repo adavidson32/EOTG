@@ -122,10 +122,10 @@ def upd_wifi_settings():
 #---------------------------------------------------------------------
 print('Which settings would you like to reset to default?')
 to_update = input('ex: button, device, wifi, ds18b20, all, etc. : ')
-if to_update == button:
+if to_update == 'button':
     upd_button_settings()
-elif to_update == device:
+elif to_update == 'device':
     upd_device_settings()
-elif to_update == wifi:
+elif to_update == 'wifi':
     up_wifi_settings()
 #---------------------------------------------------------------------
