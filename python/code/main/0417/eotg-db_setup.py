@@ -30,6 +30,7 @@ try:
     print('variables saved/updated sucessfully')
 except sqlite3.OperationalError:
     print('Variable Table Already Exists')
+    #Change so values will be updated or deleted then updated...
 conn.close()
 #---------------------------------------------------------------------
 
@@ -53,6 +54,7 @@ try:
     print('wifi data saved/updated sucessfully')
 except sqlite3.OperationalError:
     print('Wifi Table Already Exists')
+    #Change so values will be updated or deleted then updated...
 conn.close()
 #---------------------------------------------------------------------
 
