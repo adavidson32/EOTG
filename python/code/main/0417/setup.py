@@ -31,7 +31,7 @@ def var_setup():
     output_tuple = (button_var, neopixel_var, wifi_var)
     return output_tuple
 
-def hw_setup():
+def sensor_setup():
     ds = DS18B20()
     mpu = mpu6050(0x76)
     num_ds = ds.device_count()
