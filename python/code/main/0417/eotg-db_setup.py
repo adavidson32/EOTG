@@ -1,7 +1,7 @@
 #Import necessary libraries
 #---------------------------------------------------------------------
 import sqlite3, time, math
-import gmacser.getMAC, gmacser.getserial
+from gmacser import getMAC, getserial
 #---------------------------------------------------------------------
 
 #Define variable list
