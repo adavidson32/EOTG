@@ -33,6 +33,6 @@ def var_setup():
 
 def hw_setup():
     ds = DS18B20()
-    mpu = mpu6050()
+    mpu = mpu6050(0x76)
     num_ds = ds.device_count()
     return ds, mpu, num_ds
