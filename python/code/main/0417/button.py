@@ -13,7 +13,7 @@ def settings_read():
 def store_press(press_type):
     conn = sqlite3.connect()
     c = conn.cursor()
-    time_epoch = (math.floor(time.time()),)
+    time_epoch = (time.time(),)
     press_type_t = (press_type,)
     c.execute('INSERT INTO button_events VALUES (?, ?)' (press_type_t, time_epoch))
     conn.commit()

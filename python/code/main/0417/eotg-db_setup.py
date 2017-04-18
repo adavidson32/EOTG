@@ -1,6 +1,7 @@
 #Import necessary libraries
 #---------------------------------------------------------------------
 import sqlite3, time, math
+from time import strftime, localtime, time
 from gmacser import getMAC, getserial
 #---------------------------------------------------------------------
 
@@ -21,6 +22,11 @@ button_settings = [
             ('t_hold_max', 4.0),
             ('t_timeout', 10.0),
             ('t_samplerate', 0.01)
+            ]
+button_events = [
+            ('1x', time.time()-100),
+            ('2x', time.time()-1000),
+            ('hold', time.time()-2000)
             ]
 neopixel_settings = [
             ('pin', 18),
@@ -75,10 +81,8 @@ def upd_button_settings():
         c.executemany('INSERT INTO button_settings VALUES (?, ?)', button_settings)
         conn.commit()
         print('button settings table restored to default:')
-    print('Device Settings:')
+    print('Button Settings:')
     for row in c.execute('SELECT * FROM button_settings'):
-        a = '                '
-        a[:-1] = row[0]
         print('Setting: {}, Value: {}'.format(row[0], row[1]))
     print('')
     conn.close()
@@ -123,6 +127,27 @@ def upd_wifi_settings():
         print('(#{}) SSID: {}, Password: {}, Sec. Type: {}, Last RSSI: {}'.format(row[0], row[1], row[2], row[3], row[5]))
     print('')
     conn.close()
+
+def upd_button_events():
+    conn = sqlite3.connect('eotg.db')
+    c = conn.cursor()
+    try:
+        c.execute('''CREATE TABLE button_events
+                (press_type text, event_time REAL)''')
+        c.executemany('INSERT INTO button_settings VALUES (?, ?)', button_events)
+        conn.commit()
+        print('button settings table created sucessfully:')
+    except sqlite3.OperationalError:
+        c.execute('DELETE * FROM button_events')
+        c.executemany('INSERT INTO button_events VALUES (?, ?)', button_events)
+        conn.commit()
+        print('button events table restored to default:')
+    print('Button Events:')
+    for row in c.execute('SELECT * FROM button_events'):
+        print('Press Type: {}, Time Detected: {}'.format(row[0], time.strftime('%X', time.localtime(row[1]))))
+    print('')
+    conn.close()
+
 #---------------------------------------------------------------------
 
 
