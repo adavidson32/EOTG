@@ -16,8 +16,11 @@ def read_settings():
     print('')
     print('Sensor Return')
     print('Number DS18B20: {}'.format(num_ds))
-    print('ds1 temp: {:.1f}'.format(ds.getC(0)))
-    print("x: {0['x']}, x: {0['y']}, x: {0['z']}".format(mpu.get_accel_data()))
-
+    for i in range(num_ds):
+        print('ds{0} temp: {1:.1f}'.format(i, ds.tempC(i)))
+    mpu_data = mpu.get_all_data()
+    print("ax: {0[0]['x']}, ay: {0[0]['y']}, az: {0[0]['z']}".format(mpu_data))
+    print("gx: {0[1]['x']}, gy: {0[1]['y']}, gz: {0[1]['z']}".format(mpu_data))
+    print('mpu temp: {0[2]:.1f}'.format(mpu_data))
 read_settings()
 print('done with simple main.py....')
