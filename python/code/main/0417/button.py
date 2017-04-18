@@ -6,11 +6,11 @@ def settings_read():
     c = conn.cursor()
     button_settings_list = []
     for row in c.execute('SELECT * FROM button_settings'):
-        button_tuple = (row[1], row[2])
+        button_tuple = (row[0], row[1])
         button_settings_list.append(button_tuple)
     return dict(button_settings_list)
 
-def buttonEventHandler(button_pin):
+def button_interupt_handler(button_pin):
     print('button_press detected, printing button setting info...')
     bsettings = settings_read()
     button_pin = bsettings['pin']
@@ -27,5 +27,4 @@ print(button_pin)
 print(type(button_pin))
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(int(button_pin),GPIO.IN,pull_up_down=GPIO.PUD_UP)
-GPIO.add_event_detect(int(button_pin),GPIO.RISING)
-GPIO.add_event_callback(int(button_pin),buttonEventHandler,100)
+GPIO.add_event_detect(int(button_pin),GPIO.RISING, callback=button_interupt_handler, bouncetime=100)
