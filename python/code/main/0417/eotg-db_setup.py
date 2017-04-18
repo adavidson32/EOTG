@@ -16,12 +16,12 @@ device_settings = [
 button_settings = [
             ('pin', 21),
             ('t_1x_min', 0.1),
-            ('t_1x_max', 1.2),
+            ('t_1x_max', 1.0),
+            ('t_btw_min', 0.1)
             ('t_btw_max', 1.0),
             ('t_hold_min', 2.0),
-            ('t_hold_max', 4.0),
             ('t_timeout', 10.0),
-            ('t_samplerate', 0.01)
+            ('freq_updatecheck', 60)
             ]
 button_events = [
             ('1x', now-100),
