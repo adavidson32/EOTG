@@ -22,7 +22,7 @@ def button_interupt_handler(button_pin):
         GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
         return 'too_long'
     else:
-        if (t_1x > 2):
+        if (t_1x > 1.5):
             print('hold detected')
             GPIO.remove_event_detect(button_pin)
             GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
