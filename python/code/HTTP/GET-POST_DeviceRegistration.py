@@ -2,10 +2,12 @@ import requests
 import urllib.parse
 import urllib.request
 import json
+import wsConstants
 
-url_deviceRegistration = "http://espressotg.info/eotg/api/devices/registerDevice"
-
+url_deviceRegistration = "http://espressotg.info/eotg/api" + wsConstants.REGISTER_DEVICE
+print('dev reg url = ' + url_deviceRegistration)
 #-----------------------------------------------------------------------------------
+# Get MAC from any interface
 def getMAC(interface):
   try:
     str = open('/sys/class/net/' + interface + '/address').read()
@@ -13,6 +15,7 @@ def getMAC(interface):
     str = "00:00:00:00:00:00"
   return str[0:17]
 
+# Get Pi serial number from cpuinfo file
 def getserial():
   # Extract serial from cpuinfo file
   cpuserial = "0000000000000000"
