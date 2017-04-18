@@ -14,6 +14,8 @@ def store_press(press_type):
     conn = sqlite3.connect('eotg.db')
     c = conn.cursor()
     insert_str = [(press_type, time.time())]
+    print(len(insert_str))
+    print(insert_str)
     c.execute('INSERT INTO button_events VALUES (?, ?)', insert_str)
     conn.commit()
     conn.close()
