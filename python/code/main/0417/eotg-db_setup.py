@@ -161,6 +161,6 @@ elif to_update == 'device':
     upd_device_settings()
 elif to_update == 'wifi':
     upd_wifi_settings()
-elif to_update == 'button_events'
+elif to_update == 'button_events':
     upd_button_events()
 #---------------------------------------------------------------------
