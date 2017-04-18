@@ -26,11 +26,11 @@ def button_interupt_handler(button_pin):
         elif (t_1x > 1):
             return 'nothing'
         else:
-            ret = GPIO.wait_for_edge(bottom_pin, GPIO.RISING, timeout=1000)
+            ret = GPIO.wait_for_edge(botton_pin, GPIO.RISING, timeout=1000)
             if ret is None:
                 return '1x_press'
             else:
-                ret = GPIO.wait_for_edge(bottom_pin, GPIO.FALLING, timeout=1000)
+                ret = GPIO.wait_for_edge(botton_pin, GPIO.FALLING, timeout=1000)
                 if ret is None:
                     return 'nothing'
                 else:
