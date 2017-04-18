@@ -40,6 +40,6 @@ def var_setup():
 
 def sensor_setup():
     ds = DS18B20()
-    mpu = mpu6050(0x76)
+    mpu = mpu6050(0x68)
     num_ds = ds.device_count()
     return ds, mpu, num_ds
