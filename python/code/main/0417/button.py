@@ -10,7 +10,7 @@ def settings_read():
         button_settings_list.append(button_tuple)
     return dict(button_settings_list)
 
-def button_interupt_handler():
+def button_interupt_handler(button_pin):
     print('button_press detected, printing button setting info...')
     bsettings = settings_read()
     button_pin = bsettings['pin']
@@ -23,6 +23,8 @@ def button_interupt_handler():
 
 bsettings = settings_read()
 button_pin = int(bsettings['pin'])
+print(button_pin)
+print(type(button_pin))
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
