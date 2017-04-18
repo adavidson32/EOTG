@@ -1,5 +1,5 @@
 import time, os, sys
-from setup import var_setup, sensor_setup
+from setup import variable_setup, sensor_setup
 
 def read_settings():
     ret_var = variable_setup()
