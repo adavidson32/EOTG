@@ -14,7 +14,7 @@ def var_setup():
     ds18b20_settings = []
     mpu6050_settings = []
     bmp280_settings = []
-    wifi_list = []
+    wifi_list = ()
     for row in c.execute('SELECT * FROM device_settings'):
         device_settings.append((row[0], row[1]))
     for row in c.execute('SELECT * FROM button_settings'):
@@ -25,14 +25,14 @@ def var_setup():
         priority = ('priority', row[0])
         ssid = ('ssid', row[1])
         password = ('password', row[2])
-        wifi_list.append((priority, ssid, password))
-        #wifi_settings.append(ssid)
-        #wifi_settings.append(password)
+        wifi_sett = dict([priority, ssid, password])
+        wifi_list += ' '
+        wifi_list[-1] = wifi_sett
     button_settings = dict(button_settings)
     button_events = dict(button_events)
     device_settings = dict(device_settings)
     print(wifi_list)
-    wifi_settings = dict(wifi_list)
+    wifi_settings = wifi_list
     #connect to sqlite database (ex. eotg.db)
     #retrieve all values from setting_variables table in eotg.db
     #return tuple of all variable dictionairies ex: ({'t_hold': 1.5, ...}, {'neopixel_pin': 18, ...})
