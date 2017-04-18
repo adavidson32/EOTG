@@ -11,6 +11,7 @@ def settings_read():
     return dict(button_settings_list)
 
 def button_interupt_handler(button_pin):
+    GPIO.remove_event_detect(button_pin)
     t_1x_start = time.time()
     ret = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=5000)
     t_1x_end = time.time()
@@ -34,7 +35,7 @@ def button_interupt_handler(button_pin):
                     return 'nothing'
                 else:
                     return '2x_press'
-
+    GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
 bsettings = settings_read()
 button_pin = int(bsettings['pin'])
 GPIO.setmode(GPIO.BCM)
