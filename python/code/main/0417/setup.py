@@ -26,8 +26,7 @@ def var_setup():
         ssid = ('ssid', row[1])
         password = ('password', row[2])
         wifi_sett = dict([priority, ssid, password])
-        wifi_list += ' '
-        wifi_list[-1] = wifi_sett
+        wifi_list += (wifi_sett,)
     button_settings = dict(button_settings)
     button_events = dict(button_events)
     device_settings = dict(device_settings)
