@@ -144,7 +144,7 @@ def upd_button_events():
         print('button events table restored to default:')
     print('Button Events:')
     for row in c.execute('SELECT * FROM button_events'):
-        print('Press Type: {}, Time Detected: {}'.format(row[0], time.strftime('%X', time.localtime(row[1]))))
+        print('Press Type: {}, Time Detected: {}'.format(row[0], strftime('%X', localtime(row[1]))))
     print('')
     conn.close()
 
