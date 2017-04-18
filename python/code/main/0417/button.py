@@ -30,3 +30,4 @@ i = 1
 while True:
     time.sleep(1)
     print('i = {}'.format(i))
+    i += 1
