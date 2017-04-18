@@ -22,7 +22,7 @@ def store_press(press_type):
 def button_interupt_handler(button_pin):
     GPIO.remove_event_detect(button_pin)
     t_1x_start = time.time()
-    ret = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=int(1000*bsettings['t_timeout'])
+    ret = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=int(1000*bsettings['t_timeout']))
     t_1x_end = time.time()
     t_1x = t_1x_end - t_1x_start
     if ret is None:
