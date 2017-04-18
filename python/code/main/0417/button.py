@@ -22,9 +22,11 @@ def button_interupt_handler(button_pin):
     print(type(button_pin))
 
 bsettings = settings_read()
-button_pin = bsettings['pin']
-print(button_pin)
-print(type(button_pin))
+button_pin = int(bsettings['pin'])
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(int(button_pin),GPIO.IN,pull_up_down=GPIO.PUD_UP)
 GPIO.add_event_detect(int(button_pin),GPIO.RISING, callback=button_interupt_handler, bouncetime=100)
+i = 1
+while True:
+    time.sleep(1)
+    print('i = {}'.format(i))
