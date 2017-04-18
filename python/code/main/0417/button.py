@@ -16,7 +16,7 @@ def store_press(press_type):
     insert_str = [(press_type, time.time())]
     print(len(insert_str))
     print(insert_str)
-    c.execute('INSERT INTO button_events VALUES (?, ?)', insert_str)
+    c.executemany('INSERT INTO button_events VALUES (?, ?)', insert_str)
     conn.commit()
     conn.close()
     print('Added to eotg.db(button_events):  Detected {:<5}  {:.2f}'.format(press_type, time.time()))
