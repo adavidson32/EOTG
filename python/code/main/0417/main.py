@@ -19,8 +19,8 @@ def read_settings():
     for i in range(num_ds):
         print('ds{0} temp: {1:.1f}'.format(i, ds.tempC(i)))
     mpu_data = mpu.get_all_data()
-    print('ax: {0:.2%-f}, ay: {1:.2%-f}, az: {2:.2%-f}'.format(mpu_data[0]['x'], mpu_data[0]['y'], mpu_data[0]['z']))
-    print('gx: {0:.2%-f}, gy: {1:.2%-f}, gz: {2:.2%-f}'.format(mpu_data[1]['x'], mpu_data[1]['y'], mpu_data[1]['z']))
+    print('ax: {0:.2f}, ay: {1:.2f}, az: {2:.2f}'.format(mpu_data[0]['x'], mpu_data[0]['y'], mpu_data[0]['z']))
+    print('gx: {0:.2f}, gy: {1:.2f}, gz: {2:.2f}'.format(mpu_data[1]['x'], mpu_data[1]['y'], mpu_data[1]['z']))
     print('mpu temp: {0:.1f}'.format(mpu_data[2]))
 read_settings()
 print('done with simple main.py....')
