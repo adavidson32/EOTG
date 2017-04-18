@@ -31,6 +31,7 @@ def var_setup():
     button_settings = dict(button_settings)
     button_events = dict(button_events)
     device_settings = dict(device_settings)
+    print(wifi_list)
     wifi_settings = dict(wifi_list)
     #connect to sqlite database (ex. eotg.db)
     #retrieve all values from setting_variables table in eotg.db
