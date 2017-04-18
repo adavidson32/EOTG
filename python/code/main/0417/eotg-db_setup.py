@@ -20,7 +20,7 @@ button_settings = [
             ('t_btw_min', 0.1),
             ('t_btw_max', 1.0),
             ('t_hold_min', 2.0),
-            ('t_timeout', 10.0),
+            ('t_timeout', 4.0),
             ('freq_updatecheck', 60)
             ]
 button_events = [
