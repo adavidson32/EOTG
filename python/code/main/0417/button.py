@@ -18,35 +18,44 @@ def button_interupt_handler(button_pin):
     t_1x = t_1x_end - t_1x_start
     if ret is None:
         print('way too long, >5s')
+        GPIO.remove_event_detect(button_pin)
         GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
         return 'too_long'
     else:
         if (t_1x > 2):
             print('hold detected')
+            GPIO.remove_event_detect(button_pin)
             GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
             return 'hold'
         elif (t_1x < 0.1):
             print('too quick')
+            GPIO.remove_event_detect(button_pin)
             GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
             return 'nothing'
         elif (t_1x > 1):
             print('too long')
+            GPIO.remove_event_detect(button_pin)
             GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
             return 'nothing'
         else:
+            GPIO.remove_event_detect(button_pin)
             ret1 = GPIO.wait_for_edge(button_pin, GPIO.RISING, timeout=1000)
             if ret1 is None:
                 print('1x press detected')
+                GPIO.remove_event_detect(button_pin)
                 GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
                 return '1x_press'
-            else:
+            elif ((time.time() - t_1x_end) > 0.1):
+                GPIO.remove_event_detect(button_pin)
                 ret2 = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=1000)
                 if ret2 is None:
                     print('2nd press too long')
+                    GPIO.remove_event_detect(button_pin)
                     GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
                     return 'nothing'
                 else:
                     print('2x press detected')
+                    GPIO.remove_event_detect(button_pin)
                     GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
                     return '2x_press'
 
