@@ -134,7 +134,7 @@ def upd_button_events():
     try:
         c.execute('''CREATE TABLE button_events
                 (press_type text, event_time REAL)''')
-        c.executemany('INSERT INTO button_settings VALUES (?, ?)', button_events)
+        c.executemany('INSERT INTO button_events VALUES (?, ?)', button_events)
         conn.commit()
         print('button settings table created sucessfully:')
     except sqlite3.OperationalError:
