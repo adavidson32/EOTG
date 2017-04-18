@@ -48,7 +48,7 @@ def button_interupt_handler(button_pin):
             return
         else:
             GPIO.remove_event_detect(button_pin)
-            ret1 = GPIO.wait_for_edge(button_pin, GPIO.RISING, timeout=int(1000*bsettings['t_btw_max'])
+            ret1 = GPIO.wait_for_edge(button_pin, GPIO.RISING, timeout=int(1000*bsettings['t_btw_max']))
             if ret1 is None:
                 print('1x press detected')
                 GPIO.remove_event_detect(button_pin)
@@ -56,7 +56,7 @@ def button_interupt_handler(button_pin):
                 store_press('1x')
             elif ((time.time() - t_1x_end) > bsettings['t_btw_min']):
                 GPIO.remove_event_detect(button_pin)
-                ret2 = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=int(1000*bsettings['t_1x_max'])
+                ret2 = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=int(1000*bsettings['t_1x_max']))
                 if ret2 is None:
                     print('2nd press too long')
                     GPIO.remove_event_detect(button_pin)
