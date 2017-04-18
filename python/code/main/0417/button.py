@@ -14,17 +14,15 @@ def store_press(press_type):
     conn = sqlite3.connect('eotg.db')
     c = conn.cursor()
     insert_str = [(press_type, time.time())]
-    print(len(insert_str))
-    print(insert_str)
     c.executemany('INSERT INTO button_events VALUES (?, ?)', insert_str)
     conn.commit()
     conn.close()
-    print('Added to eotg.db(button_events):  Detected {:<5}  {:.2f}'.format(press_type, time.time()))
+    print('Added to eotg.db: '{:<5} detected @ {:.2f}'.format(press_type, time.time()))
 
 def button_interupt_handler(button_pin):
     GPIO.remove_event_detect(button_pin)
     t_1x_start = time.time()
-    ret = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=3000)
+    ret = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=bsettings['t_timeout'])
     t_1x_end = time.time()
     t_1x = t_1x_end - t_1x_start
     if ret is None:
@@ -33,32 +31,32 @@ def button_interupt_handler(button_pin):
         GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
         store_press('hold')
     else:
-        if (t_1x > 2):
+        if (t_1x > bsettings['t_hold_min']):
             print('hold detected')
             GPIO.remove_event_detect(button_pin)
             GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
             store_press('hold')
-        elif (t_1x < 0.1):
+        elif (t_1x < bsettings['t_1x_min']):
             print('too quick')
             GPIO.remove_event_detect(button_pin)
             GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
             return
-        elif (t_1x > 1):
+        elif (t_1x > bsettings['t_1x_max']):
             print('too long but not hold (1s < t < 2s)')
             GPIO.remove_event_detect(button_pin)
             GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
             return
         else:
             GPIO.remove_event_detect(button_pin)
-            ret1 = GPIO.wait_for_edge(button_pin, GPIO.RISING, timeout=1000)
+            ret1 = GPIO.wait_for_edge(button_pin, GPIO.RISING, timeout=bsettings['t_btw_max'])
             if ret1 is None:
                 print('1x press detected')
                 GPIO.remove_event_detect(button_pin)
                 GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
                 store_press('1x')
-            elif ((time.time() - t_1x_end) > 0.1):
+            elif ((time.time() - t_1x_end) > bsettings['t_btw_min']):
                 GPIO.remove_event_detect(button_pin)
-                ret2 = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=1000)
+                ret2 = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=bsettings['t_1x_max'])
                 if ret2 is None:
                     print('2nd press too long')
                     GPIO.remove_event_detect(button_pin)
@@ -77,4 +75,13 @@ GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
 
 while True:
-    time.sleep(1)
+    time.sleep(bsettings['freq_updatecheck'])
+    new_bsettings = settings_read()
+    if not(bsettings['pin'] == new_bsettings['pin']):
+        GPIO.remove_event_detect(button_pin)
+        bsettings = new_bsettings
+        button_pin = int(bsettings['pin'])
+        GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
+    if not(bsettings == new_bsettings):
+        bsettings = new_bsettings
