@@ -77,6 +77,8 @@ def upd_button_settings():
         print('button settings table restored to default:')
     print('Device Settings:')
     for row in c.execute('SELECT * FROM button_settings'):
+        a = '                '
+        a[:-1] = row[0]
         print('Setting: {}, Value: {}'.format(row[0], row[1]))
     print('')
     conn.close()
@@ -133,5 +135,5 @@ if to_update == 'button':
 elif to_update == 'device':
     upd_device_settings()
 elif to_update == 'wifi':
-    up_wifi_settings()
+    upd_wifi_settings()
 #---------------------------------------------------------------------
