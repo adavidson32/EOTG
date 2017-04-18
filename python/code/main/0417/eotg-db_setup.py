@@ -1,12 +1,13 @@
 #Import necessary libraries
 #---------------------------------------------------------------------
-import sqlite3, time, math
+import sqlite3, math
+from time import strftime, localtime, time
 from gmacser import getMAC, getserial
 #---------------------------------------------------------------------
 
-#Define variable list
+#Define default sqlite3 database tables
 #---------------------------------------------------------------------
-now = math.floor(time.time())
+now = math.floor(time())
 device_settings = [
             ('serial_num', getserial()),
             ('mac_addr', getMAC('wlan0')),
@@ -15,12 +16,17 @@ device_settings = [
 button_settings = [
             ('pin', 21),
             ('t_1x_min', 0.1),
-            ('t_1x_max', 1.2),
+            ('t_1x_max', 1.0),
+            ('t_btw_min', 0.1),
             ('t_btw_max', 1.0),
             ('t_hold_min', 2.0),
-            ('t_hold_max', 4.0),
-            ('t_timeout', 10.0),
-            ('t_samplerate', 0.01)
+            ('t_timeout', 4.0),
+            ('freq_updatecheck', 60)
+            ]
+button_events = [
+            ('1x', now-500),
+            ('2x', now-1000),
+            ('hold', now-2000)
             ]
 neopixel_settings = [
             ('pin', 18),
@@ -75,10 +81,8 @@ def upd_button_settings():
         c.executemany('INSERT INTO button_settings VALUES (?, ?)', button_settings)
         conn.commit()
         print('button settings table restored to default:')
-    print('Device Settings:')
+    print('Button Settings:')
     for row in c.execute('SELECT * FROM button_settings'):
-        a = '                '
-        a[:-1] = row[0]
         print('Setting: {}, Value: {}'.format(row[0], row[1]))
     print('')
     conn.close()
@@ -123,6 +127,27 @@ def upd_wifi_settings():
         print('(#{}) SSID: {}, Password: {}, Sec. Type: {}, Last RSSI: {}'.format(row[0], row[1], row[2], row[3], row[5]))
     print('')
     conn.close()
+
+def upd_button_events():
+    conn = sqlite3.connect('eotg.db')
+    c = conn.cursor()
+    try:
+        c.execute('''CREATE TABLE button_events
+                (press_type text, event_time REAL)''')
+        c.executemany('INSERT INTO button_events VALUES (?, ?)', button_events)
+        conn.commit()
+        print('button settings table created sucessfully:')
+    except sqlite3.OperationalError:
+        c.execute('DELETE * FROM button_events')
+        c.executemany('INSERT INTO button_events VALUES (?, ?)', button_events)
+        conn.commit()
+        print('button events table restored to default:')
+    print('Button Events:')
+    for row in c.execute('SELECT * FROM button_events'):
+        print('Press Type: {}, Time Detected: {}'.format(row[0], strftime('%X', localtime(row[1]))))
+    print('')
+    conn.close()
+
 #---------------------------------------------------------------------
 
 
@@ -135,5 +160,12 @@ if to_update == 'button':
 elif to_update == 'device':
     upd_device_settings()
 elif to_update == 'wifi':
+    upd_wifi_settings()
+elif to_update == 'button_events':
+    upd_button_events()
+elif to_update == 'all':
+    upd_button_settings()
+    upd_button_events()
+    upd_device_settings()
     upd_wifi_settings()
 #---------------------------------------------------------------------
