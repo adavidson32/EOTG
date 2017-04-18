@@ -34,13 +34,13 @@ def button_interupt_handler(button_pin):
             GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
             return 'nothing'
         else:
-            ret1 = GPIO.wait_for_edge(botton_pin, GPIO.RISING, timeout=1000)
+            ret1 = GPIO.wait_for_edge(button_pin, GPIO.RISING, timeout=1000)
             if ret1 is None:
                 print('1x press detected')
                 GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
                 return '1x_press'
             else:
-                ret2 = GPIO.wait_for_edge(botton_pin, GPIO.FALLING, timeout=1000)
+                ret2 = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=1000)
                 if ret2 is None:
                     print('2nd press too long')
                     GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
