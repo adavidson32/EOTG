@@ -5,11 +5,12 @@ def read_settings():
     ret_var = var_setup()
     print('')
     print('Variable Setup Return: ')
-    print(return_var)
+    print(ret_var)
 
     ret_sensor = sensor_setup()
     print('')
     print('Sensor Return')
-    print(sensor_hw)
+    print(ret_sensor)
 
 read_settings()
+print('done with simple main.py....')

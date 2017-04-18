@@ -83,5 +83,5 @@ while True:
         button_pin = int(bsettings['pin'])
         GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
-    if not(bsettings == new_bsettings):
+    elif not(bsettings == new_bsettings):
         bsettings = new_bsettings

@@ -5,7 +5,7 @@ from time import strftime, localtime, time
 from gmacser import getMAC, getserial
 #---------------------------------------------------------------------
 
-#Define variable list
+#Define default sqlite3 database tables
 #---------------------------------------------------------------------
 now = math.floor(time())
 device_settings = [
@@ -24,7 +24,7 @@ button_settings = [
             ('freq_updatecheck', 60)
             ]
 button_events = [
-            ('1x', now-100),
+            ('1x', now-500),
             ('2x', now-1000),
             ('hold', now-2000)
             ]
@@ -163,4 +163,9 @@ elif to_update == 'wifi':
     upd_wifi_settings()
 elif to_update == 'button_events':
     upd_button_events()
+elif to_update == 'all':
+    upd_button_settings()
+    upd_button_events()
+    upd_device_settings()
+    upd_wifi_settings()
 #---------------------------------------------------------------------

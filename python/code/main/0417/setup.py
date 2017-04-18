@@ -6,29 +6,36 @@ from mpu6050 import mpu6050
 def var_setup():
     conn = sqlite3.connect('eotg.db')
     c = conn.cursor()
-    button_var_list = []
-    neopixel_var_list = []
-    wifi_var_list = []
-    for row in c.execute('SELECT * FROM setup_variables WHERE category=?', ('button',)):
-        var_tuple = (row[1], row[2])
-        button_var_list.append(var_tuple)
-    for row in c.execute('SELECT * FROM setup_variables WHERE category=?', ('neopixel',)):
-        neopixel_tuple = (row[1], row[2])
-        neopixel_var_list.append(neopixel_tuple)
-    for row in c.execute('SELECT * FROM wifi_variables'):
+    device_settings = []
+    button_settings = []
+    button_events = []
+    neopixel_settings = []
+    update_settings = []
+    ds18b20_settings = []
+    mpu6050_settings = []
+    bmp280_settings = []
+    wifi_list = []
+    for row in c.execute('SELECT * FROM device_settings'):
+        device_settings.append((row[1], row[2]))
+    for row in c.execute('SELECT * FROM button_settings'):
+        button_settings.append((row[1], row[2]))
+    for row in c.execute('SELECT * FROM button_events'):
+        button_events.append((row[1], row[2]))
+    for row in c.execute('SELECT * FROM wifi_settings'):
         priority = ('priority', row[0])
         ssid = ('ssid', row[1])
         password = ('password', row[2])
-        wifi_var_list.append(priority)
-        wifi_var_list.append(ssid)
-        wifi_var_list.append(password)
-    button_var = dict(button_var_list)
-    neopixel_var = dict(neopixel_var_list)
-    wifi_var = dict(wifi_var_list)
+        wifi_settings.append(priority + ssid + password)
+        wifi_settings.append(ssid)
+        wifi_settings.append(password)
+    button_settings = dict(button_settings)
+    button_events = dict(button_events)
+    device_settings = dict(device_settings)
+    wifi_settings = dict(wifi_settings)
     #connect to sqlite database (ex. eotg.db)
     #retrieve all values from setting_variables table in eotg.db
     #return tuple of all variable dictionairies ex: ({'t_hold': 1.5, ...}, {'neopixel_pin': 18, ...})
-    output_tuple = (button_var, neopixel_var, wifi_var)
+    output_tuple = (device_settings, button_settings, button_events, wifi_settings)
     return output_tuple
 
 def sensor_setup():
