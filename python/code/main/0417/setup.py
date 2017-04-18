@@ -16,18 +16,21 @@ def var_setup():
     bmp280_settings = []
     wifi_list = []
     for row in c.execute('SELECT * FROM device_settings'):
-        device_settings.append((row[1], row[2]))
+        a_t = (row[1], row[2])
+        device_settings.append(a_t)
     for row in c.execute('SELECT * FROM button_settings'):
-        button_settings.append((row[1], row[2]))
+        b_t = (row[1], row[2])
+        button_settings.append(b_t)
     for row in c.execute('SELECT * FROM button_events'):
-        button_events.append((row[1], row[2]))
+        c_t = (row[1], row[2])
+        button_events.append(c_t)
     for row in c.execute('SELECT * FROM wifi_settings'):
         priority = ('priority', row[0])
         ssid = ('ssid', row[1])
         password = ('password', row[2])
-        wifi_settings.append(priority + ssid + password)
-        wifi_settings.append(ssid)
-        wifi_settings.append(password)
+        wifi_settings.append((priority, ssid, password))
+        #wifi_settings.append(ssid)
+        #wifi_settings.append(password)
     button_settings = dict(button_settings)
     button_events = dict(button_events)
     device_settings = dict(device_settings)
