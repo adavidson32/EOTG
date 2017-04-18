@@ -1,3 +1,6 @@
+# (c) EOTG, LLC 2017
+# Author: Nathan Muller
+
 # Base URL
 BASE_URL = 'http://espressotg.info/eotg/api'
 
