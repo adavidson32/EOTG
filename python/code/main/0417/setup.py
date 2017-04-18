@@ -3,7 +3,7 @@ import sqlite3
 from ds18b20 import DS18B20
 from mpu6050 import mpu6050
 
-def var_setup():
+def variable_setup():
     conn = sqlite3.connect('eotg.db')
     c = conn.cursor()
     device_settings = []

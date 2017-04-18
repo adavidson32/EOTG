@@ -2,7 +2,7 @@ import time, os, sys
 from setup import var_setup, sensor_setup
 
 def read_settings():
-    ret_var = var_setup()
+    ret_var = variable_setup()
     device_settings, button_settings, button_events, wifi_settings = ret_var
     print('')
     print('Variable Setup Return: ')
