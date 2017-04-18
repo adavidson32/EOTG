@@ -1,3 +1,6 @@
+# (c) EOTG, LLC 2017
+# Author: Nathan Muller
+
 import requests
 import urllib.parse
 import urllib.request
