@@ -12,10 +12,12 @@ def read_settings():
     print(wifi_settings)
 
     ret_sensor = sensor_setup()
+    ds, mpu, num_ds = ret_sensor
     print('')
     print('Sensor Return')
-    print(ds.getC(0))
-    print(mpu.get_accel_data())
+    print('Number DS18B20: {}'.format(num_ds))
+    print('ds1 temp: {:.1f}'.format(ds.getC(0)))
+    print("x: {0['x']}, x: {0['y']}, x: {0['z']}".format(mpu.get_accel_data()))
 
 read_settings()
 print('done with simple main.py....')
