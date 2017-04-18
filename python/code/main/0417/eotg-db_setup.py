@@ -1,13 +1,13 @@
 #Import necessary libraries
 #---------------------------------------------------------------------
-import sqlite3, time, math
+import sqlite3, math
 from time import strftime, localtime, time
 from gmacser import getMAC, getserial
 #---------------------------------------------------------------------
 
 #Define variable list
 #---------------------------------------------------------------------
-now = math.floor(time.time())
+now = math.floor(time())
 device_settings = [
             ('serial_num', getserial()),
             ('mac_addr', getMAC('wlan0')),
@@ -24,9 +24,9 @@ button_settings = [
             ('t_samplerate', 0.01)
             ]
 button_events = [
-            ('1x', time.time()-100),
-            ('2x', time.time()-1000),
-            ('hold', time.time()-2000)
+            ('1x', now-100),
+            ('2x', now-1000),
+            ('hold', now-2000)
             ]
 neopixel_settings = [
             ('pin', 18),
@@ -161,4 +161,6 @@ elif to_update == 'device':
     upd_device_settings()
 elif to_update == 'wifi':
     upd_wifi_settings()
+elif to_update == 'button_events'
+    upd_button_events()
 #---------------------------------------------------------------------
