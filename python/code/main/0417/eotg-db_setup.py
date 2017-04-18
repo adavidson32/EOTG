@@ -17,7 +17,7 @@ button_settings = [
             ('pin', 21),
             ('t_1x_min', 0.1),
             ('t_1x_max', 1.0),
-            ('t_btw_min', 0.1)
+            ('t_btw_min', 0.1),
             ('t_btw_max', 1.0),
             ('t_hold_min', 2.0),
             ('t_timeout', 10.0),
