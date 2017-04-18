@@ -13,13 +13,11 @@ def settings_read():
 def store_press(press_type):
     conn = sqlite3.connect('eotg.db')
     c = conn.cursor()
-    time_epoch = time.time()
-    time_epoch_t = (time_epoch,)
-    press_type_t = (press_type,)
-    c.execute('INSERT INTO button_events VALUES (?, ?)',(press_type_t, time_epoch_t))
+    insert_str = [(press_type, time.time())]
+    c.execute('INSERT INTO button_events VALUES (?, ?)', insert_str)
     conn.commit()
     conn.close()
-    print('Added to eotg.db(button_events):  Detected {:<5}  {:.2f}'.format(press_type, time_epoch))
+    print('Added to eotg.db(button_events):  Detected {:<5}  {:.2f}'.format(press_type, time.time()))
 
 def button_interupt_handler(button_pin):
     GPIO.remove_event_detect(button_pin)
