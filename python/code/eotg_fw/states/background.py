@@ -24,9 +24,9 @@ def background_loop(all_settings, t_last_button_check):
         t_last_button_check = time.time()
         if last_press[0] == 'hold':
             return 'hold_detected'
-        elif last_press[0] == '1x'
+        elif last_press[0] == '1x':
             return '1x_detected'
-        elif last_press[0] == '2x'
+        elif last_press[0] == '2x':
             return '2x_detected'
     time.sleep(1)
     background_loop(all_settings, t_last_button_check)
