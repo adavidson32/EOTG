@@ -1,35 +1,32 @@
-from ../neopixels import neopixels as np
 from time import time
+from state_alert import sqlite_update
+import sqlite3
 
+def background(all_settings):
+    print('New State: Background')
+    t_last_button_check = (time.time()-5,)
+    sqlite_update('device_info', 'current_state', 'background')
+    loop_exit = backgound_loop(all_settings, t_last_connect)
+    if loop_exit == 'hold_detected':
+        return 'waiting'
+    elif ((loop_exit == '1x_detected') or (loop_exit == '2x_detected')):
+        print('dislay battery....')
+        background(all_settings)
 
-def background():
-    background_init(input_variables)
-    loop_exit = backgound_loop(input_variables)
-    exit_var = exit_processing(loop_exit)
-    if exit_var == 'hold_detected':
-        run_waiting(exit_var)
-    elif ((exit_var == '1x_detected') or (exit_var == '2x_detected')):
-        display_battery()
-    else:
-        run_background
-
-
-def backgound_init(input_variables):
-    np_status = np.check_init()
-    if np_status
-
-def background_loop(input_variables):
-    t_timeout = input_variables[4]
-    t_loop_timeout = time() + t_timeout
-    while time() < t_loop_timeout:
-        button_status = check_button_events(t_last_check)
-
-
-def check_button_events(t_last_check):
-    #connect to eotg.db, find all
-
-
-def display_battery():
-    battery_level = ask_nano_batt()
-    np.display(battery_level)
-    return 'battery displayed'
+def background_loop(all_settings, t_last_button_check):
+    conn = sqlite3('../main/eotg.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM button_events WHERE detect_time>? ORDER BY detect_time DESC', t_last_button_check)
+    try:
+        last_press = c.fetchone()
+        conn.commit()
+        conn.close()
+        t_last_button_check = time.time()
+        if last_press[0] == 'hold':
+            return 'hold_detected'
+        elif last_press[0] == '1x'
+            return '1x_detected'
+        elif last_press[0] == '2x'
+            return '2x_detected'
+    time.sleep(1)
+    background_loop(all_settings, t_last_button_check)
