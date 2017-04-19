@@ -8,70 +8,41 @@ from gmacser import getMAC, getserial
 #Define default sqlite3 database tables
 #---------------------------------------------------------------------
 now = math.floor(time())
-device_settings = [
-            # (setting name) , (setting value)
-            ('serial_num', getserial()),
-            ('mac_addr', getMAC('wlan0')),
-            ('given_id_num', 'none'),
-            ('current_state', 'off')
-            ]
-button_settings = [
-            # (setting name) , (setting value)
-            ('pin', 21),
-            ('t_1x_min', 0.1),
-            ('t_1x_max', 1.0),
-            ('t_btw_min', 0.1),
-            ('t_btw_max', 1.0),
-            ('t_hold_min', 2.0),
-            ('t_timeout', 4.0),
-            ('freq_updatecheck', 60)
-            ]
-button_events = [
-            # (press type) , (time of event)
-            ('1x', now-500),
-            ('2x', now-1000),
-            ('hold', now-2000)
-            ]
-neopixel_settings = [
-            ('pin', 18),
-            ('brightness', 50)
-            ]
-update_settings = [
-            ('freq_background', 10),
-            ('freq_waiting', 3),
-            ('freq_brewing', 1),
-            ('t_last_update', now-600)
-            ]
-ds18b20_settings = [
-            # 'sensor #' , 'custom name' , 'ds18b20_64bit_ID#'
-            ('ds0', 'coffee-temp', '051686663cff'),
-            ('ds1', 'air-temp_1', '041686a581ff'),
-            ('ds2', 'empty', 'empty')
-            ]
-mpu6050_settings = [
-            ('i2c_addr', 76),
-            ('level_deg', 5),
-            ('sr_background', 10),
-            ('sr_waiting', 1),
-            ('sr_brewing', 0.5)
-            ]
-bmp280_settings = [
-            ('i2c_addr', 76),
-            ('level_deg', 5),
-            ('sr_background', 10),
-            ('sr_waiting', 1),
-            ('sr_brewing', 0.5)
-            ]
-relay_values = [
-            ('pump', 5, 'OFF'),
-            ('heater', 6, 'OFF')
-            ]
-wifi_list = [
-            #(network #) , (ssid) , (password), 'security type' , 'opt: username' , 'Last RSSI(dB)' , 'last connection time'
-            (1, 'notyowifi-2.4', 'test_password_1', 'WPA', 'none', 40, now-100),
-            (2, 'notyowifi-guest', 'test_password_2', 'WPA', 'none', 38, now-1000),
-            (3, 'empty', 'empty', 'empty', 'empty', -1, -1),
-            ]
+
+#Columns:    | given_id_num | current_state | battery_level | water_level | ac_state | preset_state | remote_brew_start |
+device_info = [    -1       , 'background'  ,    'med'      ,    'high'   ,    1     ,      -1      ,        0         )]
+
+#Columns:         | pin | t_1x_min | t_1x_max | t_btw_min | t_btw_max | t_holdout_min | t_timeout | freq_updatecheck |
+button_settings = [ 21  ,   0.1    ,   1.0    ,    0.1    ,    1.0    ,      2.0      ,    4.0    ,      60         )]
+
+#Columns:       | press_type | state_during | detect_time | response |
+button_events = [(   '1x'    , 'background' ,   now-10    ,  'none'  ),
+                 (  'hold'   ,  'waiting'   ,  now-500    , 'handled')]
+
+#Columns:           | pin | brightness |
+neopixel_settings = [( 18 ,    50     )]
+
+#Columns:         | freq_background | freq_waiting | freq_brewing | t_last_update |
+update_settings = [(      10        ,      3       ,      1       ,   now-1000   )]
+
+#Columns:          | sensor id# |  given_name  | unique_64b_id  |
+ds18b20_settings = [(   'ds0'   , 'coffee-temp', '051686663cff'),
+                    (   'ds1'   , 'air-temp_1' , '041686a581ff')]
+
+#Columns:          | i2c_addr | level_deg | sr_background | sr_waiting | sr_brewing |
+mpu6050_settings = [(   68    ,    5      ,      10       ,    1       ,     0.5   )]
+
+#Columns:         | i2c_addr | resolution | sr_background | sr_waiting | sr_brewing |
+bmp280_settings = [(   76    ,     1.0??  ,      10       ,    5       ,     0.5   )]
+
+#Columns:      |  device  | pin |  mode  | t_mode_set | current_status |
+relay_values = [(  'pump' ,  5  , 'off'  ,  now-1000  ,        0      ),
+                ( 'heater',  6  , 'off'  ,  now-1000  ,        0      )]
+
+#Columns:   | network_num |       ssid       |     password     | sec_type | username |     IP_addr    | last_RSSI | t_last_connect |
+wifi_list = [(     1      ,  'notyowifi-2.4' , 'test_password_1',   'WPA'  ,   'none' , '192.168.1.112',     40    ,    now-100    ),
+             (     2      , 'notyowifi-guest', 'test_password_2',   'WPA'  ,   'none' , '192.168.1.131',     38    ,    now-1000   )]
+
 #---------------------------------------------------------------------
 
 #---------------------------------------------------------------------
@@ -85,7 +56,7 @@ def upd_button_settings():
         conn.commit()
         print('button settings table created sucessfully:')
     except sqlite3.OperationalError:
-        c.execute('DELETE * FROM button_settings')
+        c.execute('DELETE FROM button_settings')
         c.executemany('INSERT INTO button_settings VALUES (?, ?)', button_settings)
         conn.commit()
         print('button settings table restored to default:')
@@ -106,7 +77,7 @@ def upd_relay_values():
         conn.commit()
         print('relayvalue table created sucessfully:')
     except sqlite3.OperationalError:
-        c.execute('DELETE * FROM relay_values')
+        c.execute('DELETE FROM relay_values')
         c.executemany('INSERT INTO relay_values VALUES (?, ?)', relay_values)
         conn.commit()
         print('relay value table restored to default:')
@@ -117,23 +88,23 @@ def upd_relay_values():
     print('')
     conn.close()
 
-def upd_device_settings():
+def upd_device_info():
     conn = sqlite3.connect('eotg.db')
     c = conn.cursor()
     try:
-        c.execute('''CREATE TABLE device_settings
+        c.execute('''CREATE TABLE device_info
                 (variable text, val text)''')
-        c.executemany('INSERT INTO device_settings VALUES (?, ?)', device_settings)
+        c.executemany('INSERT INTO device_info VALUES (?, ?)', device_info)
         conn.commit()
-        print('device settings table created sucessfully:')
+        print('device info table created sucessfully:')
     except sqlite3.OperationalError:
-        c.execute('DELETE * FROM device_settings')
-        c.executemany('INSERT INTO device_settings VALUES (?, ?)', device_settings)
+        c.execute('DELETE FROM device_info')
+        c.executemany('INSERT INTO device_info VALUES (?, ?)', device_info)
         conn.commit()
-        print('device settings table restored to default:')
+        print('device info table restored to default:')
     print('')
-    print('Device Settings:')
-    for row in c.execute('SELECT * FROM device_settings'):
+    print('Device Info:')
+    for row in c.execute('SELECT * FROM device_info'):
         print('{}:  {}'.format(row[0], row[1]))
     print('')
     conn.close()
@@ -149,7 +120,7 @@ def upd_wifi_settings():
         conn.commit()
         print('wifi settings table created sucessfully:')
     except sqlite3.OperationalError:
-        c.execute('DELETE * FROM wifi_settings')
+        c.execute('DELETE FROM wifi_settings')
         c.executemany('INSERT INTO wifi_settings VALUES (?, ?, ?, ?, ?, ?, ?)', wifi_list)
         conn.commit()
         print('wifi settings table restored to default:')
@@ -170,7 +141,7 @@ def upd_button_events():
         conn.commit()
         print('button settings table created sucessfully:')
     except sqlite3.OperationalError:
-        c.execute('DELETE * FROM button_events')
+        c.execute('DELETE FROM button_events')
         c.executemany('INSERT INTO button_events VALUES (?, ?)', button_events)
         conn.commit()
         print('button events table restored to default:')
