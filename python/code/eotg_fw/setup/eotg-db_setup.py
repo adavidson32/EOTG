@@ -39,7 +39,7 @@ ds18b20_values = [( now-30, 22.1, 23.4),
 mpu6050_settings = [(   68    ,    5      ,      10       ,    1       ,     0.5   )]
 
 #Columns:         | i2c_addr | resolution | sr_background | sr_waiting | sr_brewing |
-bmp280_settings = [(   76    ,     1.0??  ,      10       ,    5       ,     0.5   )]
+#bmp280_settings = [(   76    ,     1.0??  ,      10       ,    5       ,     0.5   )]
 
 #Columns:      |  device  | pin |  mode  | t_mode_set | current_status |
 relay_values = [(  'pump' ,  5  , 'off'  ,  now-1000  ,        0      ),
