@@ -37,7 +37,7 @@ def variable_setup():
     row_pump = d_pump.fetchone()
     d_heater = c.execute("SELECT * FROM relay_values WHERE device=?",('heater',))
     row_heater = d_heater.fetchone()
-    d_wifi = c.execute('SELECT * FROM wifi_list'))
+    d_wifi = c.execute('SELECT * FROM wifi_list')
     row_wifi = d_wifi.fetchone()
     conn.close()
 
