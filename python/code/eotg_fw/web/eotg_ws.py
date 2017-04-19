@@ -1,6 +1,6 @@
 import httpRequest
 import json
-import sqlite3 
+import sqlite3
 import wsConstants
 
 ws = wsConstants
@@ -28,7 +28,7 @@ def getBrewSettings():
         print(err)
 
 # Send the device's status to the web server
-def putDeviceStatus():
+'''def putDeviceStatus():
     try:
         # Get connection to database
         conn = sqlite3.connect('eotg.db')
@@ -39,10 +39,10 @@ def putDeviceStatus():
         c = conn.cursor()
         c.execute('select * from device_info limit 1')
         status = c.fetchone()
-        statusStr = '"newStatusItems":[{"statusType": "battery_level", "statusValue": ' + str(status['battery_level']) + 
-            '}, {"statusType": "water_level", "statusValue": ' + str(status['water_level']) + 
-            '}, {"statusType": "current_state", "statusValue": ' + str(status['current_state']) + 
-            '}, {"statusType": "ac_power_state", "statusValue": ' + str(status['ac_state']) 
+        statusStr = '"newStatusItems":[{"statusType": "battery_level", "statusValue": ' + str(status['battery_level']) +
+            '}, {"statusType": "water_level", "statusValue": ' + str(status['water_level']) +
+            '}, {"statusType": "current_state", "statusValue": ' + str(status['current_state']) +
+            '}, {"statusType": "ac_power_state", "statusValue": ' + str(status['ac_state'])
         requestParam = {'newStatusItems': statusStr}
         # Update the status items on the web server
         resp = httpRequest.makeRequest(ws.getWs('setDeviceStatus'), requestParam, [deviceId])
@@ -50,7 +50,7 @@ def putDeviceStatus():
     except Exception as err:
         print('Exception trying to get brew settings: ')
         print(err)
-
+'''
 # Check if the device should be in a brewing state
 def shouldBrew():
     try:
@@ -70,7 +70,7 @@ def shouldBrew():
         print(err)
 
 
-# Register our device.  
+# Register our device.
 # Params: The device's serial number and mac address.
 # RETURNS: the device's ID from the web server
 def registerDevice(deviceIdentifier, macAddr):
@@ -144,7 +144,7 @@ def getAllPresets():
                 newSettings = {}
 
             oldPresetName = presetName
-        
+
         insertPresets(newPresets, conn)
         conn.commit()
         conn.close()
@@ -207,5 +207,5 @@ def insertPresets(newPresets, conn):
         c = conn.cursor
         c.execute(queryStr)
         c.close()
-        
+
         i++
