@@ -15,6 +15,7 @@ for x,y in all_settings:
 
 sensors = sensor_setup(all_settings)
 ds, mpu, pump, heater = sensors
+current_state = 'background'
 
 while True:
     if current_state == 'background':
