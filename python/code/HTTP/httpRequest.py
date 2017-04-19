@@ -45,7 +45,7 @@ import wsConstants
 #     print(str(response))
 #       --> Console output: {"shouldBrew": 1}
 # --------------------------------------------------------------------
-def httpRequest(url, reqParams, urlParams):
+def makeRequest(url, reqParams, urlParams):
     print("Header to send to server: " + str(reqParams))
     # Build the url
     for param in urlParams:
