@@ -1,5 +1,5 @@
 import time, os, sys
-from ../setup import variable_setup, sensor_setup
+from '../setup' import variable_setup, sensor_setup
 
 all_settings = variable_setup()
 
