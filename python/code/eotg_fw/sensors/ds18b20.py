@@ -46,7 +46,7 @@ class DS18B20:
          # error
          return 999
 
-    def temp_all():
+    def temp_all(self):
         temps = ()
         for i in range(device_count):
             temps += (tempC(i),)
