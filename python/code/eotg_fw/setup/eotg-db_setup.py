@@ -208,7 +208,7 @@ def upd_wifi_list():
         print('wifi list table created sucessfully:')
     except sqlite3.OperationalError:
         c.execute('DELETE FROM wifi_list')
-        c.executemany('INSERT INTO wifi_list VALUES (?, ?, ?, ?, ?, ?, ?)', wifi_list)
+        c.executemany('INSERT INTO wifi_list VALUES (?, ?, ?, ?, ?, ?, ?, ?)', wifi_list)
         conn.commit()
         print('wifi list table restored to default:')
     print('')
