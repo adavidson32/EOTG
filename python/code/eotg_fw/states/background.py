@@ -6,7 +6,7 @@ def background(all_settings):
     print('New State: Background')
     t_last_button_check = (time()-5,)
     sqlite_update('device_info', 'current_state', 'background')
-    loop_exit = backgound_loop(all_settings, t_last_connect)
+    loop_exit = background_loop(all_settings, t_last_connect)
     if loop_exit == 'hold_detected':
         return 'waiting'
     elif ((loop_exit == '1x_detected') or (loop_exit == '2x_detected')):
