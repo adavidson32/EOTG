@@ -10,8 +10,6 @@ from waiting import waiting
 from brewing import brewing
 
 all_settings = variable_setup()
-for x,y in all_settings:
-    print('Key: {}, Value: {}'.format(x,y))
 
 sensors = sensor_setup(all_settings)
 ds, mpu, pump, heater = sensors
