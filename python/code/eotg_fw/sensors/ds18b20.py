@@ -46,6 +46,12 @@ class DS18B20:
          # error
          return 999
 
-   def device_count(self):
+    def temp_all():
+        temps = ()
+        for i in range(device_count):
+            temps += (tempC(i),)
+       return temps
+
+    def device_count(self):
       # call this to see how many sensors have been detected
-      return self._num_devices
+       return self._num_devices

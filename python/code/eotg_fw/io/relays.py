@@ -1,7 +1,7 @@
 import RPi.GPIO as io
 from time import sleep, localtime, strftime, time
 
-class relay2x:
+class relays:
     def __init__(self, pump_pin, heat_pin):
         io.setmode(GPIO.BCM)
         io.setup(pump_pin, GPIO.OUT, initial=GPIO.HIGH)
