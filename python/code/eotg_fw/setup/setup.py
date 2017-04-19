@@ -47,12 +47,10 @@ def variable_setup():
     ret_dss, ret_dsv, ret_mpu, ret_pump, ret_heater, ret_wifi = dict(zip(tu_dss, row_dss)),  dict(zip(tu_dsv, row_dsv)),  dict(zip(tu_mpu, row_mpu)),  dict(zip(tu_rly, row_pump)), dict(zip(tu_rly, row_heater)),  dict(zip(tu_wifi, row_wifi)),
 
     all_settings = {'device_info': ret_di, 'button_settings': ret_bs, 'button_events': ret_be, 'update_settings': ret_us, 'ds18b20_settings': ret_dss, 'ds18b20_values': ret_dsv, 'mpu6050_settings': ret_mpu, 'pump_settings': ret_pump, 'heater_settings': ret_heater, 'wifi_settings': ret_wifi}
-
     return all_settings
 
 def sensor_setup(all_settings):
     ds = DS18B20()
-    print(all_settings['mpu6050_settings']['i2c_addr'])
     if all_settings['mpu6050_settings']['i2c_addr'] == 68:
         mpu_addr = 0x68
     mpu = mpu6050(mpu_addr)
