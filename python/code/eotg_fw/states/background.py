@@ -1,5 +1,5 @@
 from time import time
-from state_alert import sqlite_update_di
+from state_alert import sqlite_update
 import sqlite3
 
 def background(all_settings):
