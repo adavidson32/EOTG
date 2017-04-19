@@ -30,5 +30,5 @@ def background_loop(all_settings, t_last_button_check):
             return '2x_detected', t_last_button_check
     except:
         t_last_button_check = time()
-        sleep(1)
+        time.sleep(1)
         background_loop(all_settings, t_last_button_check)
