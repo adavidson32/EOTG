@@ -1,6 +1,6 @@
 import sys
 sys.path.append('/home/pi/git/EOTG/python/code/eotg_fw/web')
-from eotg-ws import shouldBrew
+from eotg_ws import shouldBrew
 from time import time
 from state_alert import sqlite_update
 import sqlite3
