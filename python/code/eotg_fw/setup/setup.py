@@ -27,8 +27,8 @@ def variable_setup():
 
     conn.close()
 
-    ret_di, ret_bs, ret_be, ret_us = {(k,v) for (k,v) in zip(tu_di, row_di)},  {(k,v) for (k,v) in zip(tu_bs, row_bs)},  {(k,v) for (k,v) in zip(tu_be, row_be)},  {(k,v) for (k,v) in zip(tu_us, row_us)}
-    ret_dss, ret_dsv, ret_mpu, ret_pump, ret_heater, ret_wifi = {(k,v) for (k,v) in zip(tu_dss, row_dss[0])},  {(k,v) for (k,v) in zip(tu_dsv, row_dsv[0])},  {(k,v) for (k,v) in zip(tu_mpu, row_mpu)},  {(k,v) for (k,v) in zip(tu_rly, row_pump)}, {(k,v) for (k,v) in zip(tu_rly, row_heater)},  {(k,v) for (k,v) in zip(tu_wifi, row_wifi[0])},
+    ret_di, ret_bs, ret_be, ret_us = dict(zip(tu_di, row_di)),  dict(zip(tu_bs, row_bs)),  dict(zip(tu_be, row_be)),  dict(zip(tu_us, row_us))
+    ret_dss, ret_dsv, ret_mpu, ret_pump, ret_heater, ret_wifi = dict(zip(tu_dss, row_dss[0])),  dict(zip(tu_dsv, row_dsv[0])),  dict(zip(tu_mpu, row_mpu)),  dict(zip(tu_rly, row_pump)), dict(zip(tu_rly, row_heater)),  dict(zip(tu_wifi, row_wifi[0])),
 
     all_settings = {'device_info': ret_di, 'button_settings': ret_bs, 'button_events': ret_be, 'update_settings': ret_us, 'ds18b20_settings': ret_dss, 'ds18b20_values': ret_dsv, 'mpu6050_settings': ret_mpu, 'pump_settings': ret_pump, 'heater_settings': ret_heater, 'wifi_settings': ret_wifi}
 
