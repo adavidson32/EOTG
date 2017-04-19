@@ -6,6 +6,9 @@ sys.path.append('/home/pi/git/EOTG/python/code/eotg_fw/states')
 from setup import variable_setup, sensor_setup
 
 all_settings = variable_setup()
+for x,y in all_settings:
+    print('Key: {}, Value: {}'.format(x,y))
+
 
 ds, mpu, pump, heater = sensor_setup(all_settings)
 
