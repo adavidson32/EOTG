@@ -200,7 +200,7 @@ def upd_wifi_list():
     conn = sqlite3.connect('eotg.db')
     c = conn.cursor()
     try:
-        c.execute('''CREATE TABLE wifi_lists
+        c.execute('''CREATE TABLE wifi_list
                   (add_num INTEGER, ssid TEXT, password TEXT, sec_type TEXT,
                   opt_username TEXT, rssi INTEGER, t_last_connect INTEGER)''')
         c.executemany('INSERT INTO wifi_list VALUES (?, ?, ?, ?, ?, ?, ?)', wifi_list)
