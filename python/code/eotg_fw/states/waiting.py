@@ -1,5 +1,3 @@
-import sys
-sys.path.append('/home/pi/git/EOTG/python/code/HTTP/')
 import eotg-ws as ws
 from time import time
 from state_alert import sqlite_update
