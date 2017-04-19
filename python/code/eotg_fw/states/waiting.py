@@ -1,3 +1,5 @@
+sys.path.append('/home/pi/git/EOTG/python/code/HTTP/')
+import eotg-ws as ws
 from time import time
 from state_alert import sqlite_update
 import sqlite3
@@ -27,6 +29,11 @@ def waiting_loop(all_settings, t_last_button_check):
             return '1x_detected'
         elif last_press[0] == '2x':
             return '2x_detected'
+        else:
+            # If no buttons are pressed, get the status from the web
+            shouldBrew = ws.shouldBrew()
+            if shouldBrew == 1:
+                return 'remote_start_detected'
     except:
         time.sleep(1)
         waiting_loop(all_settings, t_last_button_check)
