@@ -41,6 +41,7 @@ def putDeviceStatus():
         status = c.fetchone()
         statusStr = '"newStatusItems":[{"statusType": "battery_level", "statusValue": ' + str(status['battery_level']) + 
             '}, {"statusType": "water_level", "statusValue": ' + str(status['water_level']) + 
+            '}, {"statusType": "current_state", "statusValue": ' + str(status['current_state']) + 
             '}, {"statusType": "ac_power_state", "statusValue": ' + str(status['ac_state']) 
         requestParam = {'newStatusItems': statusStr}
         # Update the status items on the web server
