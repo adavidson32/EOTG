@@ -23,12 +23,12 @@ def variable_setup():
     d_dss, d_dsv, d_mpu, d_pump, d_heater, d_wifi = c.execute('SELECT * FROM ds18b20_settings'), c.execute('SELECT * FROM ds18b20_values'), c.execute('SELECT * FROM mpu6050_settings'), c.execute('SELECT * FROM relay_values WHERE device=?',('pump',)), c.execute("SELECT * FROM relay_values WHERE device=?",('heater',)), c.execute('SELECT * FROM wifi_list')
 
     row_di, row_bs, row_be, row_us = d_di.fetchone(), d_bs.fetchone(), d_be.fetchone(), d_us.fetchone()
-    row_dss, row_dsv, row_mpu, row_pump, row_heater, row_wifi = d_dss.fetchall(), d_dsv.fetchall(), d_mpu.fetchone(), d_pump.fetchone(), d_heater.fetchone(), d_wifi.fetchall()
+    row_dss, row_dsv, row_mpu, row_pump, row_heater, row_wifi = d_dss.fetchone(), d_dsv.fetchone(), d_mpu.fetchone(), d_pump.fetchone(), d_heater.fetchone(), d_wifi.fetchone()
 
     conn.close()
 
     ret_di, ret_bs, ret_be, ret_us = dict(zip(tu_di, row_di)),  dict(zip(tu_bs, row_bs)),  dict(zip(tu_be, row_be)),  dict(zip(tu_us, row_us))
-    ret_dss, ret_dsv, ret_mpu, ret_pump, ret_heater, ret_wifi = dict(zip(tu_dss, row_dss[0])),  dict(zip(tu_dsv, row_dsv[0])),  dict(zip(tu_mpu, row_mpu)),  dict(zip(tu_rly, row_pump)), dict(zip(tu_rly, row_heater)),  dict(zip(tu_wifi, row_wifi[0])),
+    ret_dss, ret_dsv, ret_mpu, ret_pump, ret_heater, ret_wifi = dict(zip(tu_dss, row_dss)),  dict(zip(tu_dsv, row_dsv)),  dict(zip(tu_mpu, row_mpu)),  dict(zip(tu_rly, row_pump)), dict(zip(tu_rly, row_heater)),  dict(zip(tu_wifi, row_wifi)),
 
     all_settings = {'device_info': ret_di, 'button_settings': ret_bs, 'button_events': ret_be, 'update_settings': ret_us, 'ds18b20_settings': ret_dss, 'ds18b20_values': ret_dsv, 'mpu6050_settings': ret_mpu, 'pump_settings': ret_pump, 'heater_settings': ret_heater, 'wifi_settings': ret_wifi}
 
