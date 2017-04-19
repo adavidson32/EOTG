@@ -48,4 +48,5 @@ class HttpUpdateWorker(threading.Thread):
     
     # Exit the thread cleanly
     def stopThread():
+        setShouldStop(true)
         self.conn.close()
