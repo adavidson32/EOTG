@@ -1,5 +1,6 @@
 import time, os, sys
-from '../setup' import variable_setup, sensor_setup
+sys.path.append('~/git/EOTG/python/code/eotg_fw/setup')
+from setup import variable_setup, sensor_setup
 
 all_settings = variable_setup()
 
