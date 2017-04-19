@@ -19,7 +19,7 @@ def variable_setup():
     conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
 
-    d_di = (c.execute('SELECT * FROM device_info')
+    d_di = c.execute('SELECT * FROM device_info')
     row_di = d_di.fetchone()
     d_bs = c.execute('SELECT * FROM button_settings')
     row_bs = d_bs.fetchone()
