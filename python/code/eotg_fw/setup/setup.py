@@ -19,8 +19,8 @@ def variable_setup():
     conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
 
-    d_di, d_bs, d_be, d_us = c.execute('SELECT * FROM device_info'), c.execute('SELECT * FROM button_settings'), c.execute('SELECT * FROM button_events'), c.execute('SELECT * FROM update_settings')
-    d_dss, d_dsv, d_mpu, d_pump, d_heater, d_wifi = c.execute('SELECT * FROM ds18b20_settings'), c.execute('SELECT * FROM ds18b20_values'), c.execute('SELECT * FROM mpu6050_settings'), c.execute('SELECT * FROM relay_values WHERE device=?',('pump',)), c.execute("SELECT * FROM relay_values WHERE device=?",('heater',)), c.execute('SELECT * FROM wifi_list')
+    d_di, d_bs, d_be, d_us = (c.execute('SELECT * FROM device_info'), c.execute('SELECT * FROM button_settings'), c.execute('SELECT * FROM button_events'), c.execute('SELECT * FROM update_settings'))
+    d_dss, d_dsv, d_mpu, d_pump, d_heater, d_wifi = (c.execute('SELECT * FROM ds18b20_settings'), c.execute('SELECT * FROM ds18b20_values'), c.execute('SELECT * FROM mpu6050_settings'), c.execute('SELECT * FROM relay_values WHERE device=?',('pump',)), c.execute("SELECT * FROM relay_values WHERE device=?",('heater',)), c.execute('SELECT * FROM wifi_list'))
 
     row_di, row_bs, row_be, row_us = d_di.fetchone(), d_bs.fetchone(), d_be.fetchone(), d_us.fetchone()
     row_dss, row_dsv, row_mpu, row_pump, row_heater, row_wifi = d_dss.fetchone(), d_dsv.fetchone(), d_mpu.fetchone(), d_pump.fetchone(), d_heater.fetchone(), d_wifi.fetchone()
