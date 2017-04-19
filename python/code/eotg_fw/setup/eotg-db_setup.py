@@ -202,7 +202,7 @@ def upd_wifi_list():
     try:
         c.execute('''CREATE TABLE wifi_list
                   (add_num INTEGER, ssid TEXT, password TEXT, sec_type TEXT,
-                  opt_username TEXT, rssi INTEGER, t_last_connect INTEGER)''')
+                  opt_username TEXT, IP_addr TEXT, rssi INTEGER, t_last_connect INTEGER)''')
         c.executemany('INSERT INTO wifi_list VALUES (?, ?, ?, ?, ?, ?, ?)', wifi_list)
         conn.commit()
         print('wifi list table created sucessfully:')
