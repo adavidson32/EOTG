@@ -2,7 +2,7 @@ from ../neopixels import neopixels as np
 from time import time
 
 
-def run_background(input_variables):
+def background():
     background_init(input_variables)
     loop_exit = backgound_loop(input_variables)
     exit_var = exit_processing(loop_exit)
@@ -26,7 +26,7 @@ def background_loop(input_variables):
 
 
 def check_button_events(t_last_check):
-    #connect to eotg.db, find all 
+    #connect to eotg.db, find all
 
 
 def display_battery():
