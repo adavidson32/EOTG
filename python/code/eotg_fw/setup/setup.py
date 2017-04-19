@@ -16,7 +16,7 @@ def variable_setup():
     tu_rly = ('device', 'pin', 'mode', 't_mode_set', 'current_status')
     tu_wifi = ('network_num', 'ssid', 'password', 'sec_type', 'username', 'IP_addr', 'last_RSSI', 't_last_connect')
 
-    conn = sqlite3.connect('../eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
 
     d_di, d_bs, d_be, d_us = c.execute('SELECT * FROM device_info'), c.execute('SELECT * FROM button_settings'), c.execute('SELECT * FROM button_events'), c.execute('SELECT * FROM update_settings')

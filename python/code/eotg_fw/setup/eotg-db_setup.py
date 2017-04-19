@@ -53,7 +53,7 @@ wifi_list = [(     1      ,  'notyowifi-2.4' , 'test_password_1',   'WPA'  ,   '
 
 #---------------------------------------------------------------------
 def upd_device_info():
-    conn = sqlite3.connect('eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     try:
         c.execute('''CREATE TABLE device_info
@@ -71,7 +71,7 @@ def upd_device_info():
     conn.close()
 
 def upd_button_settings():
-    conn = sqlite3.connect('eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     try:
         c.execute('''CREATE TABLE button_settings
@@ -89,7 +89,7 @@ def upd_button_settings():
     conn.close()
 
 def upd_button_events():
-    conn = sqlite3.connect('eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     try:
         c.execute('''CREATE TABLE button_events
@@ -107,7 +107,7 @@ def upd_button_events():
     conn.close()
 
 def upd_update_settings():
-    conn = sqlite3.connect('eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     try:
         c.execute('''CREATE TABLE update_settings
@@ -125,7 +125,7 @@ def upd_update_settings():
     conn.close()
 
 def upd_ds18b20_settings():
-    conn = sqlite3.connect('eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     try:
         c.execute('''CREATE TABLE ds18b20_settings
@@ -143,7 +143,7 @@ def upd_ds18b20_settings():
     conn.close()
 
 def upd_ds18b20_values():
-    conn = sqlite3.connect('eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     try:
         c.execute('''CREATE TABLE ds18b20_values
@@ -161,7 +161,7 @@ def upd_ds18b20_values():
     conn.close()
 
 def upd_mpu6050_settings():
-    conn = sqlite3.connect('eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     try:
         c.execute('''CREATE TABLE mpu6050_settings
@@ -179,7 +179,7 @@ def upd_mpu6050_settings():
     conn.close()
 
 def upd_relays():
-    conn = sqlite3.connect('eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     try:
         c.execute('''CREATE TABLE relay_values
@@ -197,7 +197,7 @@ def upd_relays():
     conn.close()
 
 def upd_wifi_list():
-    conn = sqlite3.connect('eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     try:
         c.execute('''CREATE TABLE wifi_list
