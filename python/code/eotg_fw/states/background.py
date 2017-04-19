@@ -4,9 +4,9 @@ import sqlite3
 
 def background(all_settings):
     print('New State: Background')
-    t_last_button_check = (time()-5,)
+    t_last_button_check = (time()-1,)
     sqlite_update('device_info', 'current_state', 'background')
-    loop_exit = background_loop(all_settings, t_last_connect)
+    loop_exit, t_last_button_check = background_loop(all_settings, t_last_button_check)
     if loop_exit == 'hold_detected':
         return 'waiting'
     elif ((loop_exit == '1x_detected') or (loop_exit == '2x_detected')):
@@ -23,11 +23,12 @@ def background_loop(all_settings, t_last_button_check):
         conn.close()
         t_last_button_check = time()
         if last_press[0] == 'hold':
-            return 'hold_detected'
+            return 'hold_detected', t_last_button_check
         elif last_press[0] == '1x':
-            return '1x_detected'
+            return '1x_detected', t_last_button_check
         elif last_press[0] == '2x':
-            return '2x_detected'
+            return '2x_detected', t_last_button_check
     except:
+        t_last_button_check = time()
         time.sleep(1)
         background_loop(all_settings, t_last_button_check)
