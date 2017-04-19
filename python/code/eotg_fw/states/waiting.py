@@ -27,5 +27,6 @@ def waiting_loop(all_settings, t_last_button_check):
             return '1x_detected'
         elif last_press[0] == '2x':
             return '2x_detected'
-    time.sleep(1)
-    waiting_loop(all_settings, t_last_button_check)
+    except:
+        time.sleep(1)
+        waiting_loop(all_settings, t_last_button_check)
