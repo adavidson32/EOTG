@@ -1,10 +1,10 @@
-from time import time
+import time
 from state_alert import sqlite_update
 import sqlite3
 
 def background(all_settings):
     print('New State: Background')
-    t_last_button_check = (time()-1,)
+    t_last_button_check = (time.time()-1,)
     sqlite_update('device_info', 'current_state', 'background')
     loop_exit, t_last_button_check = background_loop(all_settings, t_last_button_check)
     if loop_exit == 'hold_detected':
@@ -21,7 +21,7 @@ def background_loop(all_settings, t_last_button_check):
         last_press = c.fetchone()
         conn.commit()
         conn.close()
-        t_last_button_check = time()
+        t_last_button_check = time.time()
         if last_press[0] == 'hold':
             return 'hold_detected', t_last_button_check
         elif last_press[0] == '1x':
@@ -29,6 +29,6 @@ def background_loop(all_settings, t_last_button_check):
         elif last_press[0] == '2x':
             return '2x_detected', t_last_button_check
     except:
-        t_last_button_check = time()
+        t_last_button_check = time.time()
         time.sleep(1)
         background_loop(all_settings, t_last_button_check)
