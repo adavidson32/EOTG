@@ -22,32 +22,25 @@ def variable_setup():
     d_di = (c.execute('SELECT * FROM device_info')
     row_di = d_di.fetchone()
     d_bs = c.execute('SELECT * FROM button_settings')
-    row_bs =
+    row_bs = d_bs.fetchone()
     d_be = c.execute('SELECT * FROM button_events')
-    row_be =
+    row_be = d_be.fetchone()
     d_us = c.execute('SELECT * FROM update_settings')
-    row_us =
+    row_us = d_us.fetchone()
     d_dss = c.execute('SELECT * FROM ds18b20_settings')
-    row_dss =
+    row_dss = d_dss.fetchone()
     d_dsv = c.execute('SELECT * FROM ds18b20_values')
-    row_dsv =
+    row_dsv = d_dsv.fetchone()
     d_mpu = c.execute('SELECT * FROM mpu6050_settings')
-    row_mpu =
+    row_mpu = d_mpu.fetchone()
     d_pump = c.execute('SELECT * FROM relay_values WHERE device=?',('pump',))
-    row_pump =
-    d_heater =
-    row_heater =
-    d_wifi =
-    row_wifi =
-
-
-    d_bs, d_be, d_us , , ,
-    d_dss, d_dsv, d_mpu, d_pump, d_heater, d_wifi = , , , , c.execute("SELECT * FROM relay_values WHERE device=?",('heater',)), c.execute('SELECT * FROM wifi_list'))
-
-    row_di, row_bs, row_be, row_us = , d_bs.fetchone(), d_be.fetchone(), d_us.fetchone()
-    row_dss, row_dsv, row_mpu, row_pump, row_heater, row_wifi = d_dss.fetchone(), d_dsv.fetchone(), d_mpu.fetchone(), d_pump.fetchone(), d_heater.fetchone(), d_wifi.fetchone()
-
+    row_pump = d_pump.fetchone()
+    d_heater = c.execute("SELECT * FROM relay_values WHERE device=?",('heater',))
+    row_heater = d_heater.fetchone()
+    d_wifi = c.execute('SELECT * FROM wifi_list'))
+    row_wifi = d_wifi.fetchone()
     conn.close()
+
     print('tu_di: {}, type: {}, len: {}'.format(tu_di, type(tu_di), len(tu_di)))
     print('row_di: {}, type: {}, len: {}'.format(row_di, type(row_di), len(row_di)))
     ret_di, ret_bs, ret_be, ret_us = dict(zip(tu_di, row_di)),  dict(zip(tu_bs, row_bs)),  dict(zip(tu_be, row_be)),  dict(zip(tu_us, row_us))
