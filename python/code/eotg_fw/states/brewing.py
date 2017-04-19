@@ -1,5 +1,5 @@
 from time import time
-from state_alert import sqlite_update
+from state_alert import sqlite_update_di
 import sqlite3
 
 def brewing(all_settings, sensors):

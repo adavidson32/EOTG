@@ -2,7 +2,7 @@ import sys
 sys.path.append('/home/pi/git/EOTG/python/code/eotg_fw/web')
 from eotg_ws import shouldBrew
 from time import time
-from state_alert import sqlite_update
+from state_alert import sqlite_update_di
 import sqlite3
 
 def waiting(all_settings):
