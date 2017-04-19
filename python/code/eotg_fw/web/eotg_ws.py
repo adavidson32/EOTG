@@ -208,4 +208,4 @@ def insertPresets(newPresets, conn):
         c.execute(queryStr)
         c.close()
 
-        i++
+        i+=1
