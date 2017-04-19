@@ -52,7 +52,9 @@ def variable_setup():
 
 def sensor_setup(all_settings):
     ds = DS18B20()
-    mpu = mpu6050(all_settings['mpu6050_settings']['i2c_addr'])
+    if all_settings['mpu6050_settings']['i2c_addr'] == 76:
+        mpu_addr = 0x76
+    mpu = mpu6050(mpu_addr)
     pump = relays(all_settings['pump_settings']['pin'])
     heater = relays(all_settings['heater_settings']['pin'])
     return ds, mpu, pump, heater
