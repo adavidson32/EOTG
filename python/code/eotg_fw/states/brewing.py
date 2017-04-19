@@ -29,5 +29,5 @@ def brewing_loop(all_settings, t_last_button_check):
         elif last_press[0] == '2x':
             return '2x_detected'
     except:
-        time.sleep(0.5)
+        sleep(0.5)
         brewing_loop(all_settings, t_last_button_check)

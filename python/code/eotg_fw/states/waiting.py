@@ -36,5 +36,5 @@ def waiting_loop(all_settings, t_last_button_check):
             if shouldBrew == 1:
                 return 'remote_start_detected'
     except:
-        time.sleep(1)
+        sleep(1)
         waiting_loop(all_settings, t_last_button_check)
