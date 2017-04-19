@@ -3,7 +3,7 @@ from time import sleep, localtime, strftime, time
 
 class relays:
     def __init__(self, pin):
-        io.setmode(GPIO.BCM)
+        io.setmode(io.BCM)
         io.setup(pin, io.OUT, initial=io.HIGH)
 
     def on(self):
