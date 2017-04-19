@@ -1,8 +1,9 @@
 import sqlite3
 
-def sqlite_update_di(table, setting, new_value):
+def sqlite_update(table, setting, new_value):
     conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
-    c.execute('UPDATE device_info SET ?=?', (setting, new_value))
+    sqlCommand = 'UPDATE {} SET {} = {}'.format(table, setting, new_value)
+    c.execute(sqlCommand)
     conn.commit()
     conn.close()
