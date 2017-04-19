@@ -4,7 +4,7 @@ import sqlite3
 
 def background(all_settings):
     print('New State: Background')
-    t_last_button_check = (time.time()-5,)
+    t_last_button_check = (time()-5,)
     sqlite_update('device_info', 'current_state', 'background')
     loop_exit = backgound_loop(all_settings, t_last_connect)
     if loop_exit == 'hold_detected':
@@ -21,7 +21,7 @@ def background_loop(all_settings, t_last_button_check):
         last_press = c.fetchone()
         conn.commit()
         conn.close()
-        t_last_button_check = time.time()
+        t_last_button_check = time()
         if last_press[0] == 'hold':
             return 'hold_detected'
         elif last_press[0] == '1x':
