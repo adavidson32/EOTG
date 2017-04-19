@@ -1,4 +1,5 @@
 import eotg-ws as ws
+import httpUpdateWorker
 import time
 
 class BrewUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
