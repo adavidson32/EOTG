@@ -30,7 +30,7 @@ while True:
         elif waiting_return == 'brewing':
             current_state = 'brewing'
     if current_state == 'brewing':
-        brewing_retun = brewing()
+        brewing_retun = brewing(all_states, sensors)
         if brewing_retun == 'waiting':
             current_state = 'waiting'
         elif brewing_return == 'background':
