@@ -62,7 +62,7 @@ def shouldBrew():
         conn = sqlite3.connect('eotg.db')
         t = (shouldBrew, )
         cursor = conn.cursor()
-        cursor.execute('update device_info set remote_brew_state = ?', t)
+        cursor.execute('update device_info set remote_brew_start = ?', t)
         conn.commit()
         conn.close()
     except Exception as err:
