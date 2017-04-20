@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time, sqlite3, math
 
 def settings_read():
-    conn = sqlite3.connect('eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     button_settings_list = []
     for row in c.execute('SELECT * FROM button_settings'):
