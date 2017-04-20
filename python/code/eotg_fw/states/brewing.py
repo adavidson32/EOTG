@@ -1,13 +1,14 @@
-from time import time
+import time
 from state_alert import sqlite_update
 import sqlite3
 
 def brewing(all_settings, sensors):
     print('New State: Brewing')
     pump, heater = (sensors[2], sensors[3])
-    t_last_button_check = (time()-1,)
+    t_last_button_check = time.time()-1.0
     sqlite_update('device_info', 'current_state', 'brewing')
-    loop_exit = brewing_loop(all_settings, t_last_connect)
+    brewing_loop_return = (loop_exit, t_last_button_check)
+    loop_exit, t_last_button_check = brewing_loop_return
     if ((loop_exit == 'hold_detected') or (loop_exit == '2x_detected')):
         return 'waiting'
     elif loop_exit == time:
@@ -16,18 +17,20 @@ def brewing(all_settings, sensors):
 def brewing_loop(all_settings, t_last_button_check):
     conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
-    c.execute('SELECT * FROM button_events WHERE detect_time>? ORDER BY detect_time DESC', t_last_button_check)
-    try:
-        last_press = c.fetchone()
-        conn.commit()
-        conn.close()
-        t_last_button_check = time()
-        if last_press[0] == 'hold':
-            return 'hold_detected'
-        elif last_press[0] == '1x':
-            return '1x_detected'
-        elif last_press[0] == '2x':
-            return '2x_detected'
-    except:
-        sleep(0.5)
-        brewing_loop(all_settings, t_last_button_check)
+    c.execute("SELECT * FROM button_events WHERE detect_time>?", (t_last_button_check,))
+    last_press = c.fetchone()
+    conn.commit()
+    conn.close()
+    t_last_button_check = time.time()
+    detect_t = ('TOTAL CRAP', )
+    if last_press is None:
+        time.sleep(0.5)
+        return brewing_loop(all_settings, t_last_button_check)
+    elif last_press[0] == 'hold':
+        detect_t = ('hold_detected', t_last_button_check)
+    elif last_press[0] == '1x':
+        detect_t = ('1x', t_last_button_check)
+    elif last_press[0] == '2x':
+        detect_t = ('2x', t_last_button_check)
+    if not(last_press is None):
+        return detect_t
