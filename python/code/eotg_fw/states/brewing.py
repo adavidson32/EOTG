@@ -1,4 +1,4 @@
-from time
+import time
 from state_alert import sqlite_update
 import sqlite3
 
