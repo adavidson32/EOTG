@@ -31,7 +31,7 @@ while True:
         elif waiting_return == 'brewing':
             current_state = 'brewing'
     elif current_state == 'brewing':
-        brewing_return = brewing(all_states, sensors)
+        brewing_return = brewing(all_settings, sensors)
         time.sleep(1)
         if brewing_retun == 'waiting':
             current_state = 'waiting'
