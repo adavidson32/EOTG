@@ -74,7 +74,7 @@ def shouldBrew():
 def brewStarted():
     try:
         # Tell the server we have started brewing and don't need to have brew state high anymore.
-        resp = httpRequest.makeRequest(ws.getWs('setBrewEnable'), {'nate': 'Muller'}}, ['0'])
+        resp = httpRequest.makeRequest(ws.getWs('setBrewEnable'), {'nate': 'Muller'}, ['0'])
         responseErr = json.loads(resp)['error']
         responseMsg = json.loads(resp)['message']
         if responseErr:
