@@ -8,7 +8,7 @@ ws = wsConstants
 def getBrewSettings():
     try:
         # Get connection to database
-        conn = sqlite3.connect('eotg.db')
+        conn = sqlite3.connect('../main/eotg.db')
         conn.row_factory = dict_factory
         # Get device id (As a string)
         deviceId = getDeviceId(conn)
@@ -31,7 +31,7 @@ def getBrewSettings():
 '''def putDeviceStatus():
     try:
         # Get connection to database
-        conn = sqlite3.connect('eotg.db')
+        conn = sqlite3.connect('../main/eotg.db')
         conn.row_factory = dict_factory
         # Get device id (As a string)
         deviceId = getDeviceId(conn)
@@ -56,10 +56,11 @@ def shouldBrew():
     try:
         # Get the the brew status from the web server
         resp = httpRequest.makeRequest(ws.getWs('shouldBrew'), None, [])
+        print('http response is' + str(resp))
         devSettings = json.loads(resp)
         shouldBrew = devSettings['shouldBrew']
         # Update the brew status in the local db
-        conn = sqlite3.connect('eotg.db')
+        conn = sqlite3.connect('../main/eotg.db')
         t = (shouldBrew, )
         cursor = conn.cursor()
         cursor.execute('update device_info set remote_brew_start = ?', t)
@@ -76,7 +77,7 @@ def shouldBrew():
 def registerDevice(deviceIdentifier, macAddr):
     try:
         # Get connection to database
-        conn = sqlite3.connect('eotg.db')
+        conn = sqlite3.connect('../main/eotg.db')
         # Build request param
         requestParam = {'deviceIdentifier': deviceIdentifier, 'macAddress': macAddr}
         # Get the device's ID back from the web server
@@ -98,7 +99,7 @@ def registerDevice(deviceIdentifier, macAddr):
 def getCurrentPreset():
     try:
         # Get connection to database
-        conn = sqlite3.connect('eotg.db')
+        conn = sqlite3.connect('../main/eotg.db')
         # Get the device Id from the db
         deviceId = getDeviceId(conn)
         # Get the device's status
@@ -118,7 +119,7 @@ def getCurrentPreset():
 def getAllPresets():
     try:
         # Get connection to database
-        conn = sqlite3.connect('eotg.db')
+        conn = sqlite3.connect('../main/eotg.db')
         conn.row_factory = dict_factory
         # Get the device Id from the db
         deviceId = getDeviceId(conn)
