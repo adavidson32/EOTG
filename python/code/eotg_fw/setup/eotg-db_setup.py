@@ -9,7 +9,7 @@ from gmacser import getMAC, getserial
 #---------------------------------------------------------------------
 now = math.floor(time())
 
-#Columns:    | given_id_num | current_state | battery_level | water_level | ac_state | preset_state | remote_brew_start |
+#Columns:    | given_id_num | current_state  | battery_level | water_level | ac_state | preset_state | remote_brew_start |
 device_info = [(    -1       , 'background'  ,    'med'      ,    'high'   ,    1     ,      -1      ,        0         )]
 
 #Columns:    | brew_setting_type_id | brew_setting_value | t_last_update |
