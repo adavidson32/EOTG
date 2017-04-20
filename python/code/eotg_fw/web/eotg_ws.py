@@ -48,7 +48,7 @@ def getBrewSettings():
         resp = httpRequest.makeRequest(ws.getWs('setDeviceStatus'), requestParam, [deviceId])
         conn.close()
     except Exception as err:
-        print('Exception trying to get brew settings: ')
+        print('Exception trying to set brew settings: ')
         print(err)
 '''
 # Check if the device should be in a brewing state
@@ -67,9 +67,22 @@ def shouldBrew():
         conn.close()
         return shouldBrew
     except Exception as err:
-        print('Exception trying to get brew settings: ')
+        print('Exception trying to check brew state: ')
         print(err)
 
+# Set the brew state to low after we start a brew
+def brewStarted():
+    try:
+        # Tell the server we have started brewing and don't need to have brew state high anymore.
+        resp = httpRequest.makeRequest(ws.getWs('setBrewEnable'), None, ['0'])
+        responseErr = json.loads(resp)['error']
+        responseMsg = json.loads(resp)['message']
+        if responseErr:
+            print(responseMsg)
+
+    except Exception as err:
+        print('Exception trying to tell server a brew started: ')
+        print(err)
 
 # Register our device.
 # Params: The device's serial number and mac address.
@@ -91,7 +104,7 @@ def registerDevice(deviceIdentifier, macAddr):
         conn.close()
         return deviceId[0]
     except Exception as err:
-        print('Exception trying to get brew settings: ')
+        print('Exception trying to register the device: ')
         print(err)
         return -1
 
@@ -112,7 +125,7 @@ def getCurrentPreset():
         conn.commit()
         conn.close()
     except Exception as err:
-        print('Exception trying to get brew settings: ')
+        print('Exception trying to get the current device state: ')
         print(err)
 
 # Get all device presets
@@ -150,7 +163,7 @@ def getAllPresets():
         conn.commit()
         conn.close()
     except Exception as err:
-        print('Exception trying to get brew settings: ')
+        print('Exception trying to get all device presets: ')
         print(err)
 
 #--------------------------------------------------------------------------------------------
