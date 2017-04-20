@@ -28,7 +28,6 @@ def background_loop(all_settings, t_last_button_check):
     if last_press is None:
          time.sleep(1)
          background_loop(all_settings, t_last_button_check)
-         conn.close()
     elif last_press[0] == 'hold':
         return 'hold_detected', t_last_button_check
     elif last_press[0] == '1x':
