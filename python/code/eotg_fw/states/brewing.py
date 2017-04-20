@@ -9,7 +9,7 @@ def brewing(all_settings, sensors):
     brewStarted()
     t_last_button_check = time.time()-1.0
     sqlite_update('device_info', 'current_state', 'brewing')
-    brewing_loop_return = brewing_loop(loop_exit, t_last_button_check)
+    brewing_loop_return = brewing_loop(all_settings, t_last_button_check)
     loop_exit, t_last_button_check = brewing_loop_return
     if ((loop_exit == 'hold_detected') or (loop_exit == '2x_detected')):
         return 'waiting'
