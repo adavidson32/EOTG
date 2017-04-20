@@ -16,11 +16,7 @@ def background(all_settings):
 def background_loop(all_settings, t_last_button_check):
     conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
-    t_lbc = (t_last_button_check, )
-    print(type(t_last_button_check))
-    print(t_lbc)
-    print(type(t_lbc))
-    c.execute("SELECT * FROM button_events WHERE detect_time > ?", t_lbc)
+    c.execute("SELECT * FROM button_events WHERE detect_time > ?", t_last_button_check)
     last_press = c.fetchone()
     conn.commit()
     conn.close()
