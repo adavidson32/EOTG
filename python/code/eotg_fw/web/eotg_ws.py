@@ -66,6 +66,7 @@ def shouldBrew():
         cursor.execute('update device_info set remote_brew_start = ?', t)
         conn.commit()
         conn.close()
+        return shouldBrew
     except Exception as err:
         print('Exception trying to get brew settings: ')
         print(err)
