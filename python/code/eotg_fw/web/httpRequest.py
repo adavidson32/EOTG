@@ -24,7 +24,7 @@ import wsConstants
 #
 # Useage Example 1:
 #     webServiceCall = wsConstants.getWs('registerDevice')
-#     requestParams = 
+#     requestParams =
 #       {'deviceIdentifier': '002442', 'macAddress': '00:00:00:FF:AA:AB:EF:47'}
 #     response = httpRequest(webServiceCall, requestParams, [])
 #     print(str(response))
@@ -33,11 +33,11 @@ import wsConstants
 # Useage Example 2:
 #     webServiceCall = wsConstants.getWs('setBrewSettings')
 #     # Notice how the json is encoded within the dictionary object.
-#     requestParams = 
+#     requestParams =
 #       {'settings': '{"settings":[{"id": 3, "value": "0:0530,1:0530,2:0600"},{"id": 1, "value": "185"}]}'}
 #     response = httpRequest(webServiceCall, requestParams, ['13'])
 #     print(str(response))
-#       --> Console output: {"error":false,"data":{"brewSettingsUpdateTs": 1492488058016}} 
+#       --> Console output: {"error":false,"data":{"brewSettingsUpdateTs": 1492488058016}}
 #
 # Useage Example 3:
 #     webServiceCall = wsConstants.getWs('shouldBrew')
@@ -46,11 +46,11 @@ import wsConstants
 #       --> Console output: {"shouldBrew": 1}
 # --------------------------------------------------------------------
 def makeRequest(url, reqParams, urlParams):
-    print("Header to send to server: " + str(reqParams))
+    #print("Header to send to server: " + str(reqParams))
     # Build the url
     for param in urlParams:
         url += '/' + param
-    
+
     # Set up the request headers
     if reqParams is not None:
         data = urllib.parse.urlencode(reqParams).encode()
@@ -62,4 +62,3 @@ def makeRequest(url, reqParams, urlParams):
     resp = response.read().decode()
     if resp is not None:
         return resp
-

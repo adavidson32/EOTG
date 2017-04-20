@@ -56,7 +56,7 @@ def shouldBrew():
     try:
         # Get the the brew status from the web server
         resp = httpRequest.makeRequest(ws.getWs('shouldBrew'), None, [])
-        print('http response is' + str(resp))
+        #print('http response is' + str(resp))
         devSettings = json.loads(resp)
         shouldBrew = devSettings['shouldBrew']
         # Update the brew status in the local db
