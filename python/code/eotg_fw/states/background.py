@@ -7,7 +7,7 @@ def background(all_settings):
     t_last_button_check = time.time()-1.0
     sqlite_update('device_info', 'current_state', 'background')
     background_loop_return = background_loop(all_settings, t_last_button_check)
-    print(type(background_loop_return))
+    print(str(background_loop_return))
     loop_exit, t_last_button_check = background_loop_return
     if loop_exit == 'hold_detected':
         return 'waiting'
