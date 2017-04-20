@@ -17,18 +17,18 @@ def background_loop(all_settings, t_last_button_check):
     conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     c.execute('SELECT * FROM button_events WHERE detect_time>? ORDER BY detect_time DESC', t_last_button_check)
-    try:
-        last_press = c.fetchone()
-        conn.commit()
-        conn.close()
-        t_last_button_check = time.time()
-        if last_press[0] == 'hold':
-            return 'hold_detected', t_last_button_check
-        elif last_press[0] == '1x':
-            return '1x_detected', t_last_button_check
-        elif last_press[0] == '2x':
-            return '2x_detected', t_last_button_check
-    except:
-        t_last_button_check = time.time()
-        time.sleep(1)
-        background_loop(all_settings, t_last_button_check)
+    last_press = c.fetchone()
+    conn.commit()
+    conn.close()
+    t_last_button_check = time.time()
+    if last_press is None:
+         t_last_button_check = time.time()
+         time.sleep(1)
+         background_loop(all_settings, t_last_button_check)
+         conn.close()
+    elif last_press[0] == 'hold':
+        return 'hold_detected', t_last_button_check
+    elif last_press[0] == '1x':
+        return '1x_detected', t_last_button_check
+    elif last_press[0] == '2x':
+        return '2x_detected', t_last_button_check
