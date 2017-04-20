@@ -31,4 +31,5 @@ def background_loop(all_settings, t_last_button_check):
         detect_t = ('1x_detected', t_last_button_check)
     elif last_press[0] == '2x':
         detect_t = ('2x_detected', t_last_button_check)
-    return detect_t
+    if not(last_press is None):
+        return detect_t
