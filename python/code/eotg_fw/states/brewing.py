@@ -1,10 +1,12 @@
 import time
 from state_alert import sqlite_update
+from eotg_ws import brewStarted
 import sqlite3
 
 def brewing(all_settings, sensors):
     print('New State: Brewing')
     pump, heater = (sensors[2], sensors[3])
+    brewStarted()
     t_last_button_check = time.time()-1.0
     sqlite_update('device_info', 'current_state', 'brewing')
     brewing_loop_return = (loop_exit, t_last_button_check)
