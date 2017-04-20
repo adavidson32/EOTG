@@ -6,7 +6,8 @@ def background(all_settings):
     print('New State: Background')
     t_last_button_check = time.time()-1.0
     sqlite_update('device_info', 'current_state', 'background')
-    loop_exit, t_last_button_check = background_loop(all_settings, t_last_button_check)
+    background_loop_return = background_loop(all_settings, t_last_button_check)
+    loop_exit, t_last_button_check = background_loop_return
     if loop_exit == 'hold_detected':
         return 'waiting'
     elif ((loop_exit == '1x_detected') or (loop_exit == '2x_detected')):
@@ -25,8 +26,9 @@ def background_loop(all_settings, t_last_button_check):
          time.sleep(1)
          background_loop(all_settings, t_last_button_check)
     elif last_press[0] == 'hold':
-        return 'hold_detected', t_last_button_check
+        detect_t = ('hold_detected', t_last_button_check)
     elif last_press[0] == '1x':
-        return '1x_detected', t_last_button_check
+        detect_t = ('1x_detected', t_last_button_check)
     elif last_press[0] == '2x':
-        return '2x_detected', t_last_button_check
+        detect_t = ('2x_detected', t_last_button_check)
+    return detect_t

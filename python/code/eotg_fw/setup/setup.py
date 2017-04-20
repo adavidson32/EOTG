@@ -41,8 +41,6 @@ def variable_setup():
     row_wifi = d_wifi.fetchone()
     conn.close()
 
-    print('tu_di: {}, type: {}, len: {}'.format(tu_di, type(tu_di), len(tu_di)))
-    print('row_di: {}, type: {}, len: {}'.format(row_di, type(row_di), len(row_di)))
     ret_di, ret_bs, ret_be, ret_us = dict(zip(tu_di, row_di)),  dict(zip(tu_bs, row_bs)),  dict(zip(tu_be, row_be)),  dict(zip(tu_us, row_us))
     ret_dss, ret_dsv, ret_mpu, ret_pump, ret_heater, ret_wifi = dict(zip(tu_dss, row_dss)),  dict(zip(tu_dsv, row_dsv)),  dict(zip(tu_mpu, row_mpu)),  dict(zip(tu_rly, row_pump)), dict(zip(tu_rly, row_heater)),  dict(zip(tu_wifi, row_wifi)),
 
