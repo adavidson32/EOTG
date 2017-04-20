@@ -4,17 +4,17 @@ import time, sqlite3, math
 def settings_read():
     conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
-    button_settings_list = []
-    for row in c.execute('SELECT * FROM button_settings'):
-        button_tuple = (row[0], row[1])
-        button_settings_list.append(button_tuple)
-    return dict(button_settings_list)
+    tu_bs = ('pin', 't_1x_min', 't_1x_max', 't_btw_min', 't_btw_max', 't_hold_min', 't_timeout', 'freq_updatecheck')
+    d_bs = c.execute('SELECT * FROM button_settings')
+    row_bs = d_bs.fetchone()
+    button_settings = dict(zip(tu_bs, row_bs))
+    return button_settings
 
 def store_press(press_type):
-    conn = sqlite3.connect('eotg.db')
+    conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
-    insert_str = [(press_type, time.time())]
-    c.executemany('INSERT INTO button_events VALUES (?, ?)', insert_str)
+    insert_str = [(press_type, 'background', time.time(), 'none')]
+    c.executemany('INSERT INTO button_events VALUES (?, ?, ?, ?)', insert_str)
     conn.commit()
     conn.close()
     print('Added to eotg.db:  {:>4} detected at {:<.2f}'.format(press_type, time.time()))
