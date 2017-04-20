@@ -29,8 +29,8 @@ def waiting_loop(all_settings, t_last_button_check):
     if last_press is None:
          time.sleep(1)
          # If no buttons are pressed, get the status from the web
-         shouldBrew = shouldBrew()
-         if shouldBrew == 1:
+         brewing_state = shouldBrew()
+         if brewing_state == 1:
              return ('remote_start_detected', 10.0)
          else:
              return waiting_loop(all_settings, t_last_button_check)
