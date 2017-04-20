@@ -23,6 +23,7 @@ def background_loop(all_settings, t_last_button_check):
     conn.commit()
     conn.close()
     t_last_button_check = time.time()
+    detect_t = ('TOTAL CRAP', )
     if last_press is None:
          time.sleep(1)
          background_loop(all_settings, t_last_button_check)
@@ -33,4 +34,5 @@ def background_loop(all_settings, t_last_button_check):
     elif last_press[0] == '2x':
         detect_t = ('2x_detected', t_last_button_check)
     if not(last_press is None):
+        print(str(detect_t))
         return detect_t
