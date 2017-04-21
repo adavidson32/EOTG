@@ -7,8 +7,8 @@ def brewing(all_settings, sensors):
     print('New State: Brewing')
     pump, heater = (sensors[2], sensors[3])
     brewStarted()
-    pump.on()
-    heater.on()
+    pump.on(all_settings['pump_settings']['pin'])
+    heater.on(all_settings['heater_settings']['pin'])
     t_brew_start = time.time()
     t_brew_end = t_brew_start + 30.0
     t_last_button_check = time.time()-1.0
@@ -16,12 +16,12 @@ def brewing(all_settings, sensors):
     brewing_loop_return = brewing_loop(all_settings, t_last_button_check)
     loop_exit, t_last_button_check = brewing_loop_return
     if ((loop_exit == 'hold_detected') or (loop_exit == '2x_detected')):
-        pump.off()
-        heater.off()
+        pump.off(all_settings['pump_settings']['pin'])
+        heater.off(all_settings['heater_settings']['pin'])
         return 'waiting'
     elif loop_exit == 'timeout':
-        pump.off()
-        heater.off()
+        pump.off(all_settings['pump_settings']['pin'])
+        heater.off(all_settings['heater_settings']['pin'])
         return 'waiting'
 
 def brewing_loop(all_settings, t_last_button_check):
