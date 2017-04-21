@@ -41,6 +41,9 @@ mpu6050_settings = [(   68    ,    5      ,      10       ,    1       ,     0.5
 #Columns:         | i2c_addr | resolution | sr_background | sr_waiting | sr_brewing |
 #bmp280_settings = [(   76    ,     1.0??  ,      10       ,    5       ,     0.5   )]
 
+#Columns:
+profile_list = [(1, 'custom_1', 203, 40, 'yellow-green-purple')]
+
 #Columns:      |  device  | pin |  mode  | t_mode_set | current_status |
 relay_values = [(  'pump' ,  5  , 'off'  ,  now-1000  ,        0      ),
                 ( 'heater',  6  , 'off'  ,  now-1000  ,        0      )]

@@ -37,6 +37,8 @@ def waiting_loop(all_settings, t_last_button_check):
     if last_press[0] == 'hold':
         detect_t = ('hold_detected', t_last_button_check)
     elif last_press[0] == '1x':
+        print('next state selected...')
+        print('switching device to next state.....')
         detect_t = ('1x_detected', t_last_button_check)
     elif last_press[0] == '2x':
         detect_t = ('2x_detected', t_last_button_check)

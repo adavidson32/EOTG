@@ -7,13 +7,21 @@ def brewing(all_settings, sensors):
     print('New State: Brewing')
     pump, heater = (sensors[2], sensors[3])
     brewStarted()
+    pump.on()
+    heater.on()
+    t_brew_start = time.time()
+    t_brew_end = t_brew_start + 30.0
     t_last_button_check = time.time()-1.0
     sqlite_update('device_info', 'current_state', 'brewing')
     brewing_loop_return = brewing_loop(all_settings, t_last_button_check)
     loop_exit, t_last_button_check = brewing_loop_return
     if ((loop_exit == 'hold_detected') or (loop_exit == '2x_detected')):
+        pump.off()
+        heater.off()
         return 'waiting'
-    elif loop_exit == time:
+    elif loop_exit == 'timeout':
+        pump.off()
+        heater.off()
         return 'waiting'
 
 def brewing_loop(all_settings, t_last_button_check):
@@ -27,7 +35,10 @@ def brewing_loop(all_settings, t_last_button_check):
     detect_t = ('TOTAL CRAP', )
     if last_press is None:
         time.sleep(0.5)
-        return brewing_loop(all_settings, t_last_button_check)
+        if time.time() > t_brew_end:
+            return 'timeout'
+        else:
+            return brewing_loop(all_settings, t_last_button_check)
     elif last_press[0] == 'hold':
         detect_t = ('hold_detected', t_last_button_check)
     elif last_press[0] == '1x':
