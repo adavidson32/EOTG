@@ -42,8 +42,8 @@ def brewing_loop(all_settings, t_last_button_check, t_brew_end):
     elif last_press[0] == 'hold':
         detect_t = ('hold_detected', t_last_button_check)
     elif last_press[0] == '1x':
-        detect_t = ('1x', t_last_button_check)
+        detect_t = ('1x_detected', t_last_button_check)
     elif last_press[0] == '2x':
-        detect_t = ('2x', t_last_button_check)
+        detect_t = ('2x_detected', t_last_button_check)
     if not(last_press is None):
         return detect_t
