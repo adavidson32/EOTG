@@ -4,7 +4,7 @@ import sqlite3
 
 def background(all_settings):
     print('New State: Background')
-    t_last_button_check = time.time()-1.0
+    t_last_button_check = time.time()-0.3
     sqlite_update('device_info', 'current_state', 'background')
     background_loop_return = background_loop(all_settings, t_last_button_check)
     loop_exit, t_last_button_check = background_loop_return

@@ -11,7 +11,7 @@ def brewing(all_settings, sensors):
     heater.on(all_settings['heater_settings']['pin'])
     t_brew_start = time.time()
     t_brew_end = t_brew_start + 30.0
-    t_last_button_check = time.time()-1.0
+    t_last_button_check = time.time()-0.3
     sqlite_update('device_info', 'current_state', 'brewing')
     brewing_loop_return = brewing_loop(all_settings, t_last_button_check, t_brew_end)
     loop_exit, t_last_button_check = brewing_loop_return
