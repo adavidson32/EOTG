@@ -5,7 +5,6 @@ class relays:
     def __init__(self, pin):
         io.setmode(io.BCM)
         io.setup(pin, io.OUT, initial=io.HIGH)
-        io.output(pin, io.LOW)
 
     def on(self, pin):
         io.output(pin, io.LOW)
