@@ -8,7 +8,7 @@ from setup import variable_setup, sensor_setup
 from background import background
 from waiting import waiting
 from brewing import brewing
-from check_orientation import check_orientation
+import check_orientation
 
 all_settings = variable_setup()
 
@@ -23,7 +23,7 @@ while True:
         if background_return == 'waiting':
             current_state = 'waiting'
         elif background_return == 'brewing':
-            mpu_test = check_orientation(mpu)
+            mpu_test = check_orientation.check_orientation(mpu)
             if mpu_test == 'level':
                 current_state = 'brewing'
             else:
@@ -34,7 +34,7 @@ while True:
         if waiting_return == 'background':
             current_state = 'background'
         elif waiting_return == 'brewing':
-            mpu_test = check_orientation(mpu)
+            mpu_test = check_orientation.check_orientation(mpu)
             if mpu_test == 'level':
                 current_state = 'brewing'
             else:
