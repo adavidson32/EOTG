@@ -36,7 +36,7 @@ def brewing_loop(all_settings, t_last_button_check, t_brew_end):
     if last_press is None:
         time.sleep(0.5)
         if time.time() > t_brew_end:
-            return 'timeout'
+            return ('timeout', t_last_button_check)
         else:
             return brewing_loop(all_settings, t_last_button_check, t_brew_end)
     elif last_press[0] == 'hold':
