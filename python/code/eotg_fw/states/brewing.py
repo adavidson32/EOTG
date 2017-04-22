@@ -37,7 +37,7 @@ def brewing_loop(all_settings, pump, t_last_button_check, pump_on_time, pump_off
     t_last_button_check = time.time()
     detect_t = ('TOTAL CRAP', )
     if last_press is None:
-        time.sleep(0.3)
+        time.sleep(0.1)
         if fmod((time.time()-t_brew_start), (pump_on_time + pump_off_time)) > pump_on_time:
             pump.off(all_settings['pump_settings']['pin'])
         elif fmod((time.time()-t_brew_start), (pump_on_time + pump_off_time)) < pump_on_time:
