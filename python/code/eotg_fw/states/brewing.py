@@ -2,6 +2,7 @@ import time
 from state_alert import sqlite_update
 from eotg_ws import brewStarted
 import sqlite3
+from math import fmod
 
 def brewing(all_settings, sensors):
     print('New State: Brewing')
@@ -38,9 +39,9 @@ def brewing_loop(all_settings, t_last_button_check, t_brew_end):
     detect_t = ('TOTAL CRAP', )
     if last_press is None:
         time.sleep(0.3)
-        if mod((time.time()-t_brew_start), pump_cycle_time) > pump_on_time:
+        if fmod((time.time()-t_brew_start), pump_cycle_time) > pump_on_time:
             pump.off(all_settings['pump_settings']['pin'])
-        elif mod((time.time()-t_brew_start), pump_cycle_time) < pump_on_time:
+        elif fmod((time.time()-t_brew_start), pump_cycle_time) < pump_on_time:
             pump.on(all_settings['pump_settings']['pin'])
         if time.time() > t_brew_end:
             return ('timeout', t_last_button_check)
