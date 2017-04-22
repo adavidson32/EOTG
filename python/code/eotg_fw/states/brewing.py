@@ -9,6 +9,9 @@ def brewing(all_settings, sensors):
     brewStarted()
     pump.on(all_settings['pump_settings']['pin'])
     heater.on(all_settings['heater_settings']['pin'])
+    pump_on_time = 1.0
+    pump_off_time = 5.0
+    pump_cycle_time = pump_on_time + pump_off_time
     t_brew_start = time.time()
     t_brew_end = t_brew_start + 30.0
     t_last_button_check = time.time()-0.3
@@ -34,7 +37,11 @@ def brewing_loop(all_settings, t_last_button_check, t_brew_end):
     t_last_button_check = time.time()
     detect_t = ('TOTAL CRAP', )
     if last_press is None:
-        time.sleep(0.5)
+        time.sleep(0.3)
+        if mod((time.time()-t_brew_start), pump_cycle_time) > pump_on_time:
+            pump.off(all_settings['pump_settings']['pin'])
+        elif mod((time.time()-t_brew_start), pump_cycle_time) < pump_on_time:
+            pump.on(all_settings['pump_settings']['pin'])
         if time.time() > t_brew_end:
             return ('timeout', t_last_button_check)
         else:

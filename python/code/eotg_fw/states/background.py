@@ -24,7 +24,7 @@ def background_loop(all_settings, t_last_button_check):
     t_last_button_check = time.time()
     detect_t = ('TOTAL CRAP', )
     if last_press is None:
-         time.sleep(1)
+         time.sleep(0.5)
          return background_loop(all_settings, t_last_button_check)
     elif last_press[0] == 'hold':
         detect_t = ('hold_detected', t_last_button_check)

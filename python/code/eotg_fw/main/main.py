@@ -8,7 +8,7 @@ from setup import variable_setup, sensor_setup
 from background import background
 from waiting import waiting
 from brewing import brewing
-import check_orientation
+from check_orientation import check_orientation
 
 all_settings = variable_setup()
 

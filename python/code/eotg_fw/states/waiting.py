@@ -27,7 +27,7 @@ def waiting_loop(all_settings, t_last_button_check):
     t_last_button_check = time.time()
     detect_t = ('TOTAL CRAP', )
     if last_press is None:
-         time.sleep(1)
+         time.sleep(0.3)
          # If no buttons are pressed, get the status from the web
          brewing_state = shouldBrew()
          if brewing_state == '1':
