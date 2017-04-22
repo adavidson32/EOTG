@@ -18,6 +18,7 @@ def brewing(all_settings, sensors):
     sqlite_update('device_info', 'current_state', 'brewing')
     brewing_loop_return = brewing_loop(all_settings, pump, t_last_button_check, pump_on_time, pump_off_time, t_brew_start, t_brew_end)
     loop_exit, t_last_button_check = brewing_loop_return
+    print(loop_exit)
     if ((loop_exit == 'hold_detected') or (loop_exit == '2x_detected')):
         pump.off(all_settings['pump_settings']['pin'])
         heater.off(all_settings['heater_settings']['pin'])
