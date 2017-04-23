@@ -43,12 +43,16 @@ mpu6050_settings = [(   68    ,    5      ,      10       ,    1       ,     0.5
 #Columns:         | i2c_addr | resolution | sr_background | sr_waiting | sr_brewing |
 #bmp280_settings = [(   76    ,     1.0??  ,      10       ,    5       ,     0.5   )]
 
-#Columns:
-profile_list = [(1, 'custom_1', 203, 40, 'yellow-green-purple')]
+#Columns:      | prof_num |  prof_name  | temp | volume |   color_pattern   |
+profile_list = [(    1    , 'custom_1'  ,  203 ,   40   , 'y-gn-prp-blu-gn'),
+                (   -1    ,  'manual'   ,  196 ,   52   , 'rd-y-gn-blu-pnk')]
 
-#Columns:      |  device  | pin |  mode  | t_mode_set | current_status |
-relay_values = [(  'pump' ,  5  , 'off'  ,  now-1000  ,        0      ),
-                ( 'heater',  6  , 'off'  ,  now-1000  ,        0      )]
+#Columns:      |  device  | pin |  mode  | pwm_freq | pwm_dutycyc |
+relay_values = [(  'pump' ,  5  , 'off'  ,  0.1666  ,    16      ),
+                ( 'heater',  6  , 'off'  ,   -1     ,    -1      )]
+
+#Colums:           | ac_check_pin | batt_check_pin |
+ac_batt_settings = [(      16     ,      20       )]
 
 #Columns:   | network_num |       ssid       |     password     | sec_type | username |     IP_addr    | last_RSSI | t_last_connect |
 wifi_list = [(     1      ,  'notyowifi-2.4' , 'test_password_1',   'WPA'  ,   'none' , '192.168.1.112',     40    ,    now-100    ),
@@ -183,12 +187,30 @@ def upd_mpu6050_settings():
         print(row)
     conn.close()
 
+def upd_profiles():
+    conn = sqlite3.connect('../main/eotg.db')
+    c = conn.cursor()
+    try:
+        c.execute('''CREATE TABLE profile_list
+                (prof_num INTEGER, prof_name TEXT, temp INTEGER, volume INTEGER, color_pattern TEXT)''')
+        c.executemany('INSERT INTO profile_list VALUES (?, ?, ?, ?, ?)', profile_list)
+        conn.commit()
+        print('profile table created sucessfully:')
+    except sqlite3.OperationalError:
+        c.execute('DELETE FROM profile_list')
+        c.executemany('INSERT INTO profile_list VALUES (?, ?, ?, ?, ?)', profile_list)
+        conn.commit()
+        print('profile table restored to default:')
+    for row in c.execute('SELECT * FROM profile_list'):
+        print(row)
+    conn.close()
+
 def upd_relays():
     conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     try:
         c.execute('''CREATE TABLE relay_values
-                (device TEXT, pin INTEGER, mode TEXT, t_mode_set INTEGER, current_status INTEGER)''')
+                (device TEXT, pin INTEGER, mode TEXT, pwm_freq REAL, pwm_dutycyc REAL)''')
         c.executemany('INSERT INTO relay_values VALUES (?, ?, ?, ?, ?)', relay_values)
         conn.commit()
         print('relayvalue table created sucessfully:')
@@ -198,6 +220,24 @@ def upd_relays():
         conn.commit()
         print('relay value table restored to default:')
     for row in c.execute('SELECT * FROM relay_values'):
+        print(row)
+    conn.close()
+
+def upd_ac_batt():
+    conn = sqlite3.connect('../main/eotg.db')
+    c = conn.cursor()
+    try:
+        c.execute('''CREATE TABLE ac_batt_settings
+                (ac_check_pin INTEGER, batt_check_pin INTEGER)''')
+        c.executemany('INSERT INTO ac_batt_settings VALUES (?, ?)', ac_batt_settings)
+        conn.commit()
+        print('ac_batt_settings table created sucessfully:')
+    except sqlite3.OperationalError:
+        c.execute('DELETE FROM ac_batt_settings')
+        c.executemany('INSERT INTO ac_batt_settings VALUES (?, ?)', ac_batt_settings)
+        conn.commit()
+        print('ac_batt_settings table restored to default:')
+    for row in c.execute('SELECT * FROM ac_batt_settings'):
         print(row)
     conn.close()
 
@@ -253,6 +293,8 @@ elif to_update == 'all':
     upd_ds18b20_settings()
     upd_ds18b20_values()
     upd_mpu6050_settings()
+    upd_profiles()
     upd_relays()
+    upd_ac_batt()
     upd_wifi_list()
 #---------------------------------------------------------------------

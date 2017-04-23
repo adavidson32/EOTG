@@ -1,13 +1,11 @@
 # states/background.py
 
 import time
-from state_alert import sqlite_update
 import sqlite3
 
 def background(all_settings):
     print('New State: Background')
     t_last_button_check = time.time()-0.5
-    sqlite_update('device_info', 'current_state', 'background')
     background_loop_return = background_loop(all_settings, t_last_button_check)
     loop_exit, t_last_button_check = background_loop_return
     if loop_exit == 'hold_detected':

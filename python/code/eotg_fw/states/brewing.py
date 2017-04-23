@@ -1,7 +1,6 @@
 # setup/brewing.py
 
 import time
-from state_alert import sqlite_update
 from eotg_ws import brewStarted
 import sqlite3
 from math import fmod
@@ -17,7 +16,6 @@ def brewing(all_settings, sensors):
     t_brew_start = time.time()
     t_brew_end = t_brew_start + 30.0
     t_last_button_check = time.time()-0.3
-    sqlite_update('device_info', 'current_state', 'brewing')
     brewing_loop_return = brewing_loop(all_settings, pump, t_last_button_check, pump_on_time, pump_off_time, t_brew_start, t_brew_end)
     loop_exit, t_last_button_check = brewing_loop_return
     print(loop_exit)

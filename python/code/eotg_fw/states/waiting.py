@@ -4,13 +4,11 @@ import sys
 sys.path.append('/home/pi/git/EOTG/python/code/eotg_fw/web')
 from eotg_ws import shouldBrew
 import time
-from state_alert import sqlite_update
 import sqlite3
 
 def waiting(all_settings):
     print('New State: Waiting')
     t_last_button_check = time.time()-0.3
-    sqlite_update('device_info', 'current_state', 'waiting')
     waiting_loop_return = waiting_loop(all_settings, t_last_button_check)
     loop_exit, t_last_button_check = waiting_loop_return
     if loop_exit == 'hold_detected':
