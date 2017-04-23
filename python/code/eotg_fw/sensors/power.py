@@ -1,4 +1,4 @@
-
+# sensors/power.py
 
 def ac_connected_check(ac_status_last):
     ac_status = read_powerboost_5Vin()

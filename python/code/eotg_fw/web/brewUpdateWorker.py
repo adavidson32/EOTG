@@ -1,3 +1,5 @@
+# web/brewUpdateWorker.py
+
 import eotg-ws as ws
 import httpUpdateWorker
 import time

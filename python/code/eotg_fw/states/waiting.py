@@ -1,3 +1,5 @@
+# states/waiting.py
+
 import sys
 sys.path.append('/home/pi/git/EOTG/python/code/eotg_fw/web')
 from eotg_ws import shouldBrew

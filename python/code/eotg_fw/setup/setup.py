@@ -1,3 +1,5 @@
+# setup/setup.py
+
 import os, glob, time, math
 import sqlite3
 from ds18b20 import DS18B20

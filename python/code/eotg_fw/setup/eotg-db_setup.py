@@ -1,3 +1,5 @@
+# setup/eotg-db_setup.py
+
 #Import necessary libraries
 #---------------------------------------------------------------------
 import sqlite3, math

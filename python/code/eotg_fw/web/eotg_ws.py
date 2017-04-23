@@ -1,3 +1,5 @@
+# web/eotg_ws.py
+
 import httpRequest
 import json
 import sqlite3
