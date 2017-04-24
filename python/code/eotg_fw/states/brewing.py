@@ -11,7 +11,7 @@ def brewing(all_settings, sensors):
     brewStarted()
     heater.on()
     t_brew_start = time.time()
-    t_brew_end = t_brew_start + 60.0
+    t_brew_end = t_brew_start + 81.0
     conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     while time.time() < (t_brew_start + 21.0):
