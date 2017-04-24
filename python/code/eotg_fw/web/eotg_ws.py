@@ -41,10 +41,7 @@ def putDeviceStatus():
         c = conn.cursor()
         c.execute('select * from device_info')
         status = c.fetchone()
-        statusStr = '''[{"statusType": "battery_level", "statusValue": ''' + str(status['battery_level']) +
-            '''}, {"statusType": "water_level", "statusValue": ''' + str(status['water_level']) +
-            '''}, {"statusType": "current_state", "statusValue": ''' + str(status['current_state']) +
-            '''}, {"statusType": "ac_power_state", "statusValue": ''' + str(status['ac_state']) + '}]'
+        statusStr = '''[{"statusType": "battery_level", "statusValue": ''' + str(status['battery_level']) + '''}, {"statusType": "water_level", "statusValue": ''' + str(status['water_level']) + '''}, {"statusType": "current_state", "statusValue": ''' + str(status['current_state']) + '''}, {"statusType": "ac_power_state", "statusValue": ''' + str(status['ac_state']) + '}]'
         requestParam = {'newStatusItems': statusStr}
         # Update the status items on the web server
         resp = httpRequest.makeRequest(ws.getWs('setDeviceStatus'), requestParam, [deviceId])
