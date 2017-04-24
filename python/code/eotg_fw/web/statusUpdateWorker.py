@@ -1,27 +1,32 @@
-import eotg-ws as ws
+import sys
+from eotg_ws import all
 import httpUpdateWorker
 import time
 
 class StatusUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
-
-    def run(self):
-        # Run the brew monitor
-        while(!self.stopped):
+    
+    def __init__(self):
+        httpUpdateWorker.HttpUpdateWorker.__init__(self)
+    
+    def runStatusMonitor(self):
+        while(self.stopped != True):
            try: 
                # Get the brew status from the web server and set the brew status in the database
-               ws.getCurrentPreset()
-               ws.getAllPresets()
-               ws.getBrewSettings()
-               ws.putDeviceStatus()
+               getCurrentPreset()
+               getAllPresets()
+               getBrewSettings()
+               putDeviceStatus()
                # Get how long we should sleep for, then sleep for that long.
-               brewCheckPeriod = self.getTiming()
+               brewCheckPeriod = super().getTiming()
+               print('sleeping for ' + str(brewCheckPeriod) + ' seconds...')
                if brewCheckPeriod > 0:
-                   time.sleep(brewCheckPeriod * 1000)
+                   time.sleep(brewCheckPeriod)
                else:
                    # Default to 10 seconds
-                   time.sleep(10000)
+                   time.sleep(10)
            except Exception as ex:
-               print('Exception updating status: + ' str(ex))
+               print('Exception updating status: ' + str(ex))
+               self.stop()
         
         self.stop()
 
