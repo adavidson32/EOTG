@@ -1,4 +1,4 @@
-import math
+import math, sqlite3
 import RPi.GPIO as io
 from state_alert import sqlite_update
 
