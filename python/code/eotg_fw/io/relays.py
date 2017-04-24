@@ -7,7 +7,7 @@ class relays:
         self.pin = dev_settings['pin']
         self.pwm_freq = dev_settings['pwm_freq']
         self.pwm_dutycyc = dev_settings['pwm_dutycyc']
-        io.setup(self.pin, io.OUT, initial=io.HIGH)
+        io.setup(self.pin, io.OUT)
 
     def on(self):
         io.output(self.pin, io.LOW)

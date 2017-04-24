@@ -61,5 +61,7 @@ def sensor_setup(all_settings):
         mpu_addr = 0x68
     mpu = mpu6050(mpu_addr)
     pump = relays(all_settings['pump_settings'])
+    pump.off()
     heater = relays(all_settings['heater_settings'])
+    heater.off()
     return ds, mpu, pump, heater
