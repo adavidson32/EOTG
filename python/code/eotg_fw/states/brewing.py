@@ -20,6 +20,7 @@ def brewing(all_settings, sensors):
     if (loop_exit == '2x_detected'):
         print('2x detected, cancelling brew, returning to waiting state')
         pump.pwm_stop()
+        pump.off()
         heater.off()
         return 'waiting'
     elif (loop_exit == 'hold_detected'):
@@ -30,6 +31,7 @@ def brewing(all_settings, sensors):
         #pump.off(all_settings['pump_settings']['pin'])
         #heater.off(all_settings['heater_settings']['pin'])
         pump.pwm_stop()
+        pump.off()
         heater.off()
         return 'waiting'
 

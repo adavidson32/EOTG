@@ -35,7 +35,6 @@ while True:
         sqlite_update('device_info', 'current_state', 'waiting')
         waiting_return = waiting(all_settings)
         time.sleep(0.5)
-        pump.off()
         print('waiting return = {}'.format(waiting_return))
         if waiting_return == 'background':
             current_state = 'background'
@@ -53,7 +52,5 @@ while True:
         time.sleep(0.5)
         if brewing_return == 'waiting':
             current_state = 'waiting'
-            pump.off()
         elif brewing_return == 'background':
             current_state = 'background'
-            pump.off()
