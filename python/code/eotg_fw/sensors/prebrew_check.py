@@ -12,7 +12,7 @@ class pb_check:
 
     def ac_check(self, ac_last):
         ac_state = io.input(self.ac_pin)
-        ac_ret = 'connected' if ac_status else 'disconnected'
+        ac_ret = 'connected' if ac_state else 'disconnected'
         print(ac_ret)
         if not(ac_state == ac_last):
             sqlite_update('device_info', 'ac_state', ac_state)
