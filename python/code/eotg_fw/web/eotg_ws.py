@@ -30,7 +30,7 @@ def getBrewSettings():
         print(err)
 
 # Send the device's status to the web server
-'''def putDeviceStatus():
+def putDeviceStatus():
     try:
         # Get connection to database
         conn = sqlite3.connect('../main/eotg.db')
@@ -39,7 +39,7 @@ def getBrewSettings():
         deviceId = getDeviceId(conn)
         # Get status items from the database
         c = conn.cursor()
-        c.execute('select * from device_info limit 1')
+        c.execute('select * from device_info')
         status = c.fetchone()
         statusStr = '"newStatusItems":[{"statusType": "battery_level", "statusValue": ' + str(status['battery_level']) +
             '}, {"statusType": "water_level", "statusValue": ' + str(status['water_level']) +
@@ -52,7 +52,7 @@ def getBrewSettings():
     except Exception as err:
         print('Exception trying to set brew settings: ')
         print(err)
-'''
+
 # Check if the device should be in a brewing state
 def shouldBrew():
     try:
