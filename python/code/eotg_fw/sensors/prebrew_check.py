@@ -53,6 +53,8 @@ class pb_check:
         current_ac = self.ac_check(ac_last)
         current_batt = self.battery_check(batt_last)
         current_orientation = self.check_orientation(mpu)
+        current_ac = 'connected'
+        current_batt = 'HIGH'
         if ((current_ac == 'connected') and (current_orientation == 'level')):
             return 'good'
         else:
