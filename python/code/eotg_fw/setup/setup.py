@@ -16,7 +16,7 @@ def variable_setup():
     tu_dsv = ('t_time', 't0', 't1')
     tu_mpu = ('i2c_addr', 'level_deg', 'sr_background', 'sr_waiting', 'sr_brewing')
     tu_prof = ('prof_num', 'prof_name', 'temp', 'volume', 'color_pattern')
-    tu_rly = ('device', 'pin', 'mode', 't_mode_set', 'current_status')
+    tu_rly = ('device', 'pin', 'mode', 'pwm_freq', 'pwm_dutycyc')
     tu_ac_batt = ('ac_check_pin', 'batt_check_pin')
     tu_wifi = ('network_num', 'ssid', 'password', 'sec_type', 'username', 'IP_addr', 'last_RSSI', 't_last_connect')
 
