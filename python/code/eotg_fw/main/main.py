@@ -19,7 +19,7 @@ pbc = pb_check(sensors)
 current_state = 'background'
 
 while True:
-    if current_state == 'background'
+    if current_state == 'background':
         sqlite_update('device_info', 'current_state', 'background')
         background_return = background(all_settings)
         if background_return == 'waiting':
