@@ -5,8 +5,8 @@ class relays:
     def __init__(self, dev_settings):
         io.setmode(io.BCM)
         self.pin = dev_settings['pin']
-        self.pump_freq = dev_settings['pwm_freq']
-        self.pump_dutycyc = dev_settings['pwm_dutycyc']
+        self.pwm_freq = dev_settings['pwm_freq']
+        self.pwm_dutycyc = dev_settings['pwm_dutycyc']
         io.setup(self.pin, io.OUT, initial=io.HIGH)
 
     def on(self):
@@ -16,7 +16,7 @@ class relays:
         io.output(self.pin, io.HIGH)
 
     def pwm_start(self):
-        pwm_var = io.PWM(self.pin, self.pump_freq)
+        pwm_var = io.PWM(self.pin, self.pwm_freq)
         self.pwm = pwm_var
         pwm_var.start(self.pwm_dutycyc)
 
