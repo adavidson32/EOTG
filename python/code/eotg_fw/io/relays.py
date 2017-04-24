@@ -2,12 +2,12 @@ import RPi.GPIO as io
 from time import sleep, localtime, strftime, time
 
 class relays:
-    def __init__(self, pump_settings):
+    def __init__(self, dev_settings):
         io.setmode(io.BCM)
         io.setup(pin, io.OUT, initial=io.HIGH)
-        self.pin = pump_settings['pin']
-        self.pump_freq = pump_settings['pwm_freq']
-        self.pump_dutycyc = pump_settings['pwm_dutycyc']
+        self.pin = dev_settings['pin']
+        self.pump_freq = dev_settings['pwm_freq']
+        self.pump_dutycyc = dev_settings['pwm_dutycyc']
 
     def on(self):
         io.output(self.pin, io.LOW)
