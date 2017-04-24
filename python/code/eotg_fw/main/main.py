@@ -22,6 +22,7 @@ while True:
     if current_state == 'background':
         sqlite_update('device_info', 'current_state', 'background')
         background_return = background(all_settings)
+        time.sleep(0.5)
         if background_return == 'waiting':
             current_state = 'waiting'
         elif background_return == 'brewing':
@@ -33,6 +34,7 @@ while True:
     elif current_state == 'waiting':
         sqlite_update('device_info', 'current_state', 'waiting')
         waiting_return = waiting(all_settings)
+        time.sleep(0.5)
         if waiting_return == 'background':
             current_state = 'background'
         elif waiting_return == 'brewing':
@@ -44,6 +46,7 @@ while True:
     elif current_state == 'brewing':
         sqlite_update('device_info', 'current_state', 'brewing')
         brewing_return = brewing(all_settings, sensors)
+        time.sleep(0.5)
         if brewing_return == 'waiting':
             current_state = 'waiting'
         elif brewing_return == 'background':
