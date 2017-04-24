@@ -10,18 +10,18 @@ class relays:
         io.setup(self.pin, io.OUT)
         io.output(self.pin, io.HIGH)
 
-    def on(self):
+    def on():
         io.output(self.pin, io.LOW)
 
-    def off(self):
+    def off():
         io.output(self.pin, io.HIGH)
 
-    def pwm_start(self):
+    def pwm_start():
         pwm_var = io.PWM(self.pin, self.pwm_freq)
         self.pwm = pwm_var
         pwm_var.start(self.pwm_dutycyc)
 
-    def pwm_stop(self):
+    def pwm_stop():
         pwm_var = self.pwm
         pwm_var.stop()
         io.output(self.pin, io.HIGH)
