@@ -12,16 +12,18 @@ def brewing(all_settings, sensors):
     pump.pwm_start()
     heater.on()
     t_brew_start = time.time()
+    t_brew_end = t_brew_start + 60.0
     conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
     while time.time() < (t_brew_start + 21.0):
         c.execute("SELECT * FROM button_events WHERE detect_time>?", (t_brew_start,))
         last_press = c.fetchone()
-        if last_press[0] == '2x':
-            return 'waiting'
+        if last_press is None:
+            time.sleep(0.1)
+        elif last_press[0] == '2x':
+            return 'waiting
     conn.commit()
     conn.close()
-    t_brew_end = t_brew_start + 60.0
     t_last_button_check = time.time()-0.3
     brewing_loop_return = brewing_loop(all_settings, t_last_button_check, t_brew_end)
     loop_exit, t_last_button_check = brewing_loop_return
