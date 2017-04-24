@@ -48,7 +48,7 @@ profile_list = [(    1    , 'custom_1'  ,  203 ,   40   , 'y-gn-prp-blu-gn'),
                 (   -1    ,  'manual'   ,  196 ,   52   , 'rd-y-gn-blu-pnk')]
 
 #Columns:      |  device  | pin |  mode  | pwm_freq | pwm_dutycyc |
-relay_values = [(  'pump' ,  5  , 'off'  ,  0.1666  ,    16      ),
+relay_values = [(  'pump' ,  5  , 'off'  ,  0.1666  ,    83      ),
                 ( 'heater',  6  , 'off'  ,   -1     ,    -1      )]
 
 #Colums:           | ac_check_pin | batt_check_pin |
