@@ -50,7 +50,7 @@ def variable_setup():
     conn.close()
 
     ret_di, ret_bs, ret_be, ret_us = dict(zip(tu_di, row_di)),  dict(zip(tu_bs, row_bs)),  dict(zip(tu_be, row_be)),  dict(zip(tu_us, row_us))
-    ret_dss, ret_dsv, ret_mpu, ret_profile1, ret_pump, ret_heater, ret_ac_batt, ret_wifi = dict(zip(tu_dss, row_dss)),  dict(zip(tu_dsv, row_dsv)),  dict(zip(tu_mpu, row_mpu)), dict(zip(tu_prof, rows_profile1)) dict(zip(tu_rly, row_pump)), dict(zip(tu_rly, row_heater)), dict(zip(tu_ac_batt, row_ac_batt)) dict(zip(tu_wifi, row_wifi)),
+    ret_dss, ret_dsv, ret_mpu, ret_profile1, ret_pump, ret_heater, ret_ac_batt, ret_wifi = dict(zip(tu_dss, row_dss)),  dict(zip(tu_dsv, row_dsv)),  dict(zip(tu_mpu, row_mpu)), dict(zip(tu_prof, rows_profile1)), dict(zip(tu_rly, row_pump)), dict(zip(tu_rly, row_heater)), dict(zip(tu_ac_batt, row_ac_batt)), dict(zip(tu_wifi, row_wifi))
 
     all_settings = {'device_info': ret_di, 'button_settings': ret_bs, 'button_events': ret_be, 'update_settings': ret_us, 'ds18b20_settings': ret_dss, 'ds18b20_values': ret_dsv, 'mpu6050_settings': ret_mpu, 'profile1':, ret_profile1, 'pump_settings': ret_pump, 'heater_settings': ret_heater, 'ac_batt_settings': ret_ac_batt, 'wifi_settings': ret_wifi}
     return all_settings
