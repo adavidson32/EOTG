@@ -16,6 +16,8 @@ def waiting(all_settings):
     elif ((loop_exit == '2x_detected') or (loop_exit == 'remote_start_detected')):
         #add to-do to re-set remote_start_detected to 0
         return 'brewing'
+    else:
+        return 'waiting'
 
 def waiting_loop(all_settings, t_last_button_check):
     conn = sqlite3.connect('../main/eotg.db')
@@ -39,7 +41,7 @@ def waiting_loop(all_settings, t_last_button_check):
     elif last_press[0] == '1x':
         print('next profile selected...')
         print('switching device to next profile.....')
-        detect_t = ('1x_detected', t_last_button_check)
+        return waiting_loop(all_settings, t_last_button_check)
     elif last_press[0] == '2x':
         detect_t = ('2x_detected', t_last_button_check)
     if not(last_press is None):
