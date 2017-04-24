@@ -15,7 +15,7 @@ all_settings = variable_setup()
 
 sensors = sensor_setup(all_settings)
 ds, mpu, pump, heater = sensors
-pbc = pb_check(sensors)
+pbc = pb_check(all_settings['ac_batt_settings'])
 current_state = 'background'
 
 while True:
