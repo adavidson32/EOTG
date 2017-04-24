@@ -5,7 +5,9 @@ from state_alert import sqlite_update
 class pb_check:
     def __init__(self, ac_batt_settings):
         self.ac_pin = ac_batt_settings['ac_check_pin']
+        print('ac pin: {}'.format(self.ac_pin))
         self.batt_pin = ac_batt_settings['batt_check_pin']
+        print('batt pin: {}'.format(self.batt_pin))
         io.setmode(io.BCM)
         io.setup(self.ac_pin, io.IN, pull_up_down=io.PUD_DOWN)
         io.setup(self.batt_pin, io.IN, pull_up_down=io.PUD_DOWN)
@@ -13,7 +15,7 @@ class pb_check:
     def ac_check(self, ac_last):
         ac_state = io.input(self.ac_pin)
         ac_ret = 'connected' if ac_state else 'disconnected'
-        print(ac_ret)
+        print('ac_state: {}'.format(ac_state))
         if not(ac_state == ac_last):
             sqlite_update('device_info', 'ac_state', ac_state)
         return ac_ret
@@ -21,7 +23,7 @@ class pb_check:
     def battery_check(self, batt_last):
         batt_level = io.input(self.ac_pin)
         battery_level = 'HIGH' if batt_level else 'LOW'
-        print(battery_level)
+        print('batt_level: {}'.format(batt_level))
         if not(battery_level == batt_last):
             sqlite_update('device_info', 'battery_level', battery_level)
         return battery_level
