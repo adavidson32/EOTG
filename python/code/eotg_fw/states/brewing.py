@@ -21,7 +21,7 @@ def brewing(all_settings, sensors):
         if last_press is None:
             time.sleep(0.1)
         elif last_press[0] == '2x':
-            return 'waiting
+            return 'waiting'
     conn.commit()
     conn.close()
     t_last_button_check = time.time()-0.3
