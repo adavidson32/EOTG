@@ -4,10 +4,10 @@ from time import sleep, localtime, strftime, time
 class relays:
     def __init__(self, dev_settings):
         io.setmode(io.BCM)
-        io.setup(pin, io.OUT, initial=io.HIGH)
         self.pin = dev_settings['pin']
         self.pump_freq = dev_settings['pwm_freq']
         self.pump_dutycyc = dev_settings['pwm_dutycyc']
+        io.setup(self.pin, io.OUT, initial=io.HIGH)
 
     def on(self):
         io.output(self.pin, io.LOW)
