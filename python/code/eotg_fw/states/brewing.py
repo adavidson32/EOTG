@@ -9,7 +9,6 @@ def brewing(all_settings, sensors):
     print('New State: Brewing')
     pump, heater = (sensors[2], sensors[3])
     brewStarted()
-    pump.pwm_start()
     heater.on()
     t_brew_start = time.time()
     t_brew_end = t_brew_start + 60.0
@@ -24,6 +23,7 @@ def brewing(all_settings, sensors):
             return 'waiting'
     conn.commit()
     conn.close()
+    pump.pwm_start()
     t_last_button_check = time.time()-0.3
     brewing_loop_return = brewing_loop(all_settings, t_last_button_check, t_brew_end)
     loop_exit, t_last_button_check = brewing_loop_return
