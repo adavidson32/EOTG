@@ -12,7 +12,7 @@ def brewing(all_settings, sensors):
     pump.pwm_start()
     heater.on()
     t_brew_start = time.time()
-    t_brew_end = t_brew_start + 30.0
+    t_brew_end = t_brew_start + 60.0
     t_last_button_check = time.time()-0.3
     brewing_loop_return = brewing_loop(all_settings, t_last_button_check, t_brew_end)
     loop_exit, t_last_button_check = brewing_loop_return
