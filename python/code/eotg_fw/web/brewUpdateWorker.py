@@ -21,9 +21,8 @@ class BrewUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
                else:
                    # Default to 10 seconds
                    time.sleep(10)
-        except Exception as ex:
-            print('Error getting brew enable: ' + str(ex))
-			self.stop()
-        
-        self.stop()
+            except Exception as ex:
+                print('Error getting brew enable: ' + str(ex))
+    			self.stop()
 
+        self.stop()

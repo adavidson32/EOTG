@@ -5,6 +5,12 @@ import sqlite3
 from ds18b20 import DS18B20
 from mpu6050 import mpu6050
 from relays import relays
+import statusUpdateWorker
+from threading import Thread
+
+suw = statusUpdateWorker.StatusUpdateWorker()
+t_suw = Thread(target=suw.runStatusMonitor(), args=())
+t_suw.start()
 
 def variable_setup():
 
