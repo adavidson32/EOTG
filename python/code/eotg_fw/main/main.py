@@ -36,7 +36,7 @@ while True:
         waiting_return = waiting(all_settings)
         time.sleep(0.5)
         pump.off()
-        print('waiting return = {}'.format(waiting_return))        if waiting_return == 'background':
+        print('waiting return = {}'.format(waiting_return))
         if waiting_return == 'background':
             current_state = 'background'
         elif waiting_return == 'brewing':
