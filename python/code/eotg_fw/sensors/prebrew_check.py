@@ -48,9 +48,9 @@ class pb_check:
         row_di = d_di.fetchone()
         ac_last, batt_last = row_di[4], row_di[2]
         conn.close()
-        current_ac = ac_check(ac_last)
-        current_batt = battery_check(batt_last)
-        current_orientation = check_orientation(mpu)
+        current_ac = self.ac_check(ac_last)
+        current_batt = self.battery_check(batt_last)
+        current_orientation = self.check_orientation(mpu)
         if ((current_ac == 'connected') and (current_orientation == 'level')):
             return 'good'
         else:
