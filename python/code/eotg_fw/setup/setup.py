@@ -19,6 +19,7 @@ def variable_setup():
     tu_dsv = ('t_time', 't0', 't1')
     tu_mpu = ('i2c_addr', 'level_deg', 'sr_background', 'sr_waiting', 'sr_brewing')
     tu_prof = ('prof_num', 'prof_name', 'temp', 'volume', 'color_pattern')
+    tu_profiles = ('profile1', 'profile2', 'profile3', 'profile4', 'profile5', 'profile6', 'profile7', 'profile8', 'profile9', 'profilen1')
     tu_rly = ('device', 'pin', 'mode', 'pwm_freq', 'pwm_dutycyc')
     tu_ac_batt = ('ac_check_pin', 'batt_check_pin')
     tu_wifi = ('network_num', 'ssid', 'password', 'sec_type', 'username', 'IP_addr', 'last_RSSI', 't_last_connect')
@@ -40,8 +41,11 @@ def variable_setup():
     row_dsv = d_dsv.fetchone()
     d_mpu = c.execute('SELECT * FROM mpu6050_settings')
     row_mpu = d_mpu.fetchone()
-    d_prof = c.execute('SELECT * FROM profile_list')
-    rows_profile1 = d_prof.fetchone()
+    profiles = ('',)
+    for row in c.execute('SELECT * FROM profile_list'):
+        prof_dict = dict(zip(tu_prof, row))
+        profiles += prof_dict
+    profiles = profiles[1:]
     d_pump = c.execute('SELECT * FROM relay_values WHERE device=?',('pump',))
     row_pump = d_pump.fetchone()
     d_heater = c.execute("SELECT * FROM relay_values WHERE device=?",('heater',))
@@ -53,9 +57,9 @@ def variable_setup():
     conn.close()
 
     ret_di, ret_bs, ret_be, ret_us = dict(zip(tu_di, row_di)),  dict(zip(tu_bs, row_bs)),  dict(zip(tu_be, row_be)),  dict(zip(tu_us, row_us))
-    ret_dss, ret_dsv, ret_mpu, ret_profile1, ret_pump, ret_heater, ret_ac_batt, ret_wifi = dict(zip(tu_dss, row_dss)),  dict(zip(tu_dsv, row_dsv)),  dict(zip(tu_mpu, row_mpu)), dict(zip(tu_prof, rows_profile1)), dict(zip(tu_rly, row_pump)), dict(zip(tu_rly, row_heater)), dict(zip(tu_ac_batt, row_ac_batt)), dict(zip(tu_wifi, row_wifi))
+    ret_dss, ret_dsv, ret_mpu, ret_profiles, ret_pump, ret_heater, ret_ac_batt, ret_wifi = dict(zip(tu_dss, row_dss)),  dict(zip(tu_dsv, row_dsv)),  dict(zip(tu_mpu, row_mpu)), dict(zip(tu_profiles, profiles)), dict(zip(tu_rly, row_pump)), dict(zip(tu_rly, row_heater)), dict(zip(tu_ac_batt, row_ac_batt)), dict(zip(tu_wifi, row_wifi))
 
-    all_settings = {'device_info': ret_di, 'button_settings': ret_bs, 'button_events': ret_be, 'update_settings': ret_us, 'ds18b20_settings': ret_dss, 'ds18b20_values': ret_dsv, 'mpu6050_settings': ret_mpu, 'profile1': ret_profile1, 'pump_settings': ret_pump, 'heater_settings': ret_heater, 'ac_batt_settings': ret_ac_batt, 'wifi_settings': ret_wifi}
+    all_settings = {'device_info': ret_di, 'button_settings': ret_bs, 'button_events': ret_be, 'update_settings': ret_us, 'ds18b20_settings': ret_dss, 'ds18b20_values': ret_dsv, 'mpu6050_settings': ret_mpu, 'profiles': ret_profiles, 'pump_settings': ret_pump, 'heater_settings': ret_heater, 'ac_batt_settings': ret_ac_batt, 'wifi_settings': ret_wifi}
 
     suw = statusUpdateWorker.StatusUpdateWorker()
     buw = brewUpdateWorker.BrewUpdateWorker()
