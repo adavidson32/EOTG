@@ -123,7 +123,7 @@ def getCurrentPreset():
         statusJson = json.loads(resp)
         statusId = statusJson['brew_preset_id']
         cursor = conn.cursor()
-        cursor.execute('update device_info set preset_state = ?', statusId)
+        cursor.execute('update device_info set preset_state = ?', (statusId, ))
         conn.commit()
         conn.close()
         print('NPM NPM SUCCESSFULLY UPDATED PRESET STATE')
