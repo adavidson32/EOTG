@@ -152,7 +152,7 @@ class eotg_ws:
             print('NPM NPM 3')
             # Put the preset in the database
             print('NPM NPM ' + str(resp))
-            presets = json.loads(resp)['brew_presets']
+            presets = json.loads(resp)
             print('NPM NPM presets ' + str(presets))
             cursor = conn.cursor()
             cursor.execute('delete from preset_list')
