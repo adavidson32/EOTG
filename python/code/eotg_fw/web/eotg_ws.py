@@ -167,13 +167,7 @@ class eotg_ws:
                 isStr, colName = self.getSettingTypeName(preset['setting_type_id'])
                 print('NPM NPM 5.3')
                 if colName != '-1':
-                    sttg = preset['setting_value']
-                    if isStr == True:
-                        print(type(sttg))
-                        newStr = str(sttg)
-                        print(newStr)
-                        sttg = "'{}'".format(newStr)
-                    newSettings[self.getSettingTypeName(preset['setting_type_id'])] = sttg
+                    newSettings[self.getSettingTypeName(preset['setting_type_id'])] = preset['setting_value']
                 else:
                     continue
                 print('NPM NPM 5.4')
@@ -230,7 +224,7 @@ class eotg_ws:
     def getSettingTypeName(self, presetTypeId):
         colSettings = (False, '-1')
         if int(presetTypeId) == 1:
-            colSettings = (True, 'temp')
+            colSettings = (False, 'temp')
         elif int(presetTypeId) == 2:
              colSettings =  (False, 'volume')
         elif int(presetTypeId) == 6:
@@ -249,8 +243,13 @@ class eotg_ws:
                 queryStr += subkey + ','
             queryStr = queryStr[:-1]
             queryStr += ') values (' + str(i) + ',' + key + ','
+            j = 0
             for subkey in newPreset:
-                queryStr += newPreset[subkey] + ','
+                j += 1
+                sub = newPreset[subkey]
+                if j == 2:
+                    sub = "'{}'".fomat(sub)
+                queryStr += sub + ','
             queryStr = queryStr[:-1]
             queryStr += ');'
             print(queryStr)
