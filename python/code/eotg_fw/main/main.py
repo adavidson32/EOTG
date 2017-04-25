@@ -10,13 +10,14 @@ from waiting import waiting
 from brewing import brewing
 from prebrew_check import pb_check
 from state_alert import sqlite_update
+import statusUpdateWorker
+import brewUpdateWorker
+import button
+from threading import Thread
 
 print('running variable setup from setup.py.......')
-all_settings, threads = variable_setup()
-print('settings retrieved, threads setup in variable_setup')
-t_suw, t_buw, t_but = threads
-
-print('all threads started...')
+all_settings = variable_setup()
+print('settings retrieved')
 
 sensors = sensor_setup(all_settings)
 ds, mpu, pump, heater = sensors
@@ -24,9 +25,17 @@ pbc = pb_check(all_settings['ac_batt_settings'])
 current_state = 'background'
 print('right before thd start ' + current_state)
 
+suw = statusUpdateWorker.StatusUpdateWorker()
+buw = brewUpdateWorker.BrewUpdateWorker()
+but = button.button()
+print('thd ctors done')
+t_suw = Thread(target=suw.runStatusMonitor(), args=())
+t_buw = Thread(target=buw.runBrewMonitor(), args=())
+t_but = Thread(target=but.button_manager(), args=())
 t_suw.start()
 t_buw.start()
 t_but.start()
+print('all threads started...')
 
 print('starting main while loop')
 
