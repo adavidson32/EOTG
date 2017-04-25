@@ -33,6 +33,7 @@ class button:
         tu_bs = ('pin', 't_1x_min', 't_1x_max', 't_btw_min', 't_btw_max', 't_hold_min', 't_timeout', 'freq_updatecheck')
         d_bs = c.execute('SELECT * FROM button_settings')
         row_bs = d_bs.fetchone()
+        conn.close()
         button_settings = dict(zip(tu_bs, row_bs))
         return button_settings
 

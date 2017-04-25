@@ -16,7 +16,7 @@ class BrewUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
                 #print('Checking if we should brew.')
                 shouldBrew()
                 # Get how long we should sleep for, then sleep for that long.
-                brewCheckPeriod = 3 #super().getTiming()
+                brewCheckPeriod = super().getTiming()
                 if brewCheckPeriod > 0:
                     time.sleep(brewCheckPeriod)
                 else:
