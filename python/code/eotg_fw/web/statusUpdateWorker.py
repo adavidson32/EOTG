@@ -17,8 +17,7 @@ class StatusUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
                ws.getAllPresets()
                ws.putDeviceStatus()
                # Get how long we should sleep for, then sleep for that long.
-               brewCheckPeriod = super().getTiming()
-               print(brewCheckPeriod)
+               brewCheckPeriod = 10 #super().getTiming()
                #print('sleeping for ' + str(brewCheckPeriod) + ' seconds...')
                if brewCheckPeriod > 0:
                    time.sleep(brewCheckPeriod)
