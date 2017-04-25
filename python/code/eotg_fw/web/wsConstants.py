@@ -42,11 +42,11 @@ def getWs(serviceName):
     return {
         'brewSettingTypes': svcUrl + GET_BS_TYPES,
         'registerDevice': svcUrl + REGISTER_DEVICE,
-        'getBrewSettings': svcUrl + GET_BREW_SETTINGS, 
-        'setBrewSettings': svcUrl + SET_BREW_SETTINGS, 
+        'getBrewSettings': svcUrl + GET_BREW_SETTINGS,
+        'setBrewSettings': svcUrl + SET_BREW_SETTINGS,
         'setBrewEnable': svcUrl + SET_BREW_ENABLE,
         'shouldBrew': svcUrl + SHOULD_BREW,
-        'getPresets': svcUrl + GET_PRESETS,
+        'getDevicePresets': svcUrl + GET_PRESETS,
         'setDevicePreset': svcUrl + SET_DEVICE_PRESET,
         'getDeviceStatus': svcUrl + GET_DEVICE_STATUS,
         'setDeviceStatus': svcUrl + SET_DEVICE_STATUS
