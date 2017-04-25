@@ -26,6 +26,7 @@
 
  */
 #include <SoftwareSerial.h>
+char txt_rcv;
 
 SoftwareSerial mySerial(10, 11); // RX, TX
 
@@ -48,6 +49,7 @@ void loop() { // run over and over
     ; // wait for serial port to connect. Needed for native USB port only
   }
   if (mySerial.available()) {
-    Serial.println(mySerial.read());
+    txt_rcv = mySerial.read();
+    Serial.println(txt_rcv);
   }
 }
