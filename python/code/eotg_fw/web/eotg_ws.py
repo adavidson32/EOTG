@@ -91,7 +91,7 @@ class eotg_ws:
     # Register our device.
     # Params: The device's serial number and mac address.
     # RETURNS: the device's ID from the web server
-    def registerDevice(deviceIdentifier, macAddr, self):
+    def registerDevice(self, deviceIdentifier, macAddr):
         try:
             # Get connection to database
             conn = sqlite3.connect('../main/eotg.db')
