@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time, sqlite3, math
+import threading
 
 class button:
     def __init__(self):
