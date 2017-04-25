@@ -11,20 +11,20 @@ class button:
 
     def button_manager(self):
         while(self.stopped != True):
-           try:
-               time.sleep(self.bsettings['freq_updatecheck'])
-               new_bsettings = self.settings_read()
-               if not(self.bsettings['pin'] == new_bsettings['pin']):
-                   GPIO.remove_event_detect(self.button_pin)
-                   self.bsettings = new_bsettings
-                   self.button_pin = int(self.bsettings['pin'])
-                   GPIO.setup(self.button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-                   GPIO.add_event_detect(self.button_pin, GPIO.RISING, callback=self.button_interupt_handler)
-               elif not(self.bsettings == new_bsettings):
-                   self.bsettings = new_bsettings
-           except Exception as ex:
-               print('Exception while reading button: ' + str(ex))
-               self.stop()
+            try:
+                time.sleep(self.bsettings['freq_updatecheck'])
+                new_bsettings = self.settings_read()
+                if not(self.bsettings['pin'] == new_bsettings['pin']):
+                    GPIO.remove_event_detect(self.button_pin)
+                    self.bsettings = new_bsettings
+                    self.button_pin = int(self.bsettings['pin'])
+                    GPIO.setup(self.button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+                    GPIO.add_event_detect(self.button_pin, GPIO.RISING, callback=self.button_interupt_handler)
+                elif not(self.bsettings == new_bsettings):
+                    self.bsettings = new_bsettings
+            except Exception as ex:
+                print('Exception while reading button: ' + str(ex))
+                self.stop()
         self.stop()
 
     def settings_read(self):
