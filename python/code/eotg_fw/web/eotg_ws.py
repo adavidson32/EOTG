@@ -145,10 +145,10 @@ class eotg_ws:
             conn.row_factory = self.dict_factory
             print('NPM NPM 1')
             # Get the device Id from the db
-            deviceId = self.getDeviceId(conn)
-            print('NPM NPM 2')
+            devId = self.getDeviceId(conn)
+            print('NPM NPM 2 ' + str(devId))
             # Get the device's presets
-            resp = httpRequest.makeRequest(ws.getWs('getDevicePresets'), None, [deviceId])
+            resp = httpRequest.makeRequest(ws.getWs('getDevicePresets'), None, [devId])
             print('NPM NPM 3')
             # Put the preset in the database
             print('NPM NPM ' + str(resp))
@@ -188,24 +188,15 @@ class eotg_ws:
 
     # Get the device id from the database
     def getDeviceId(self, conn):
-        print('device id')
         if self.deviceId < 0:
             try:
-                print('NPM NPM 0')
                 c = conn.cursor()
-                print('NPM NPM 1')
                 # Get device id from db
                 c.execute('select given_id_num from device_info')
-                print('NPM NPM 2')
                 self.setDeviceId(c.fetchone()[0])
-                print('NPM NPM 3')
                 if self.deviceId is None or self.deviceId <= 0:
-                    print('NPM NPM 3.5')
                     self.setDeviceId(registerDevice(getserial(), getMAC('wlan0')))
-                    print('NPM NPM 3.75')
-                print('NPM NPM 4')
                 c.close()
-                print('NPM NPM 5')
             except Exception as err:
                 print('Exception trying to get device id: ')
                 print(str(err))
