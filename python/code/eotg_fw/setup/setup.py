@@ -67,9 +67,6 @@ def variable_setup():
     t_suw = Thread(target=suw.runStatusMonitor(), args=())
     t_buw = Thread(target=buw.runBrewMonitor(), args=())
     t_but = Thread(target=but.button_manager(), args=())
-    t_suw.start()
-    t_buw.start()
-    t_but.start()
     threads = (t_suw, t_buw, t_but)
 
     return all_settings, threads
