@@ -2,13 +2,14 @@ import sys
 from eotg_ws import eotg_ws
 import httpUpdateWorker
 import time
+import threading
 
 class StatusUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
 
     def __init__(self):
         httpUpdateWorker.HttpUpdateWorker.__init__(self)
 
-    def runStatusMonitor(self):
+    def runUpdate(self):
         while(self.stopped != True):
            try:
                print('NPM NPM 0')
@@ -37,3 +38,8 @@ class StatusUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
                print('Exception updating status: ' + str(ex))
                self.stop()
         self.stop()
+
+    def runStatusMonitor(self):
+        t1 = threading.Thread(target=self.runUpdate)
+        t1.start()
+        #t1.join()
