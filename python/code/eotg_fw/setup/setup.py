@@ -6,14 +6,14 @@ from ds18b20 import DS18B20
 from mpu6050 import mpu6050
 from relays import relays
 import statusUpdateWorker
-from brewUpdateWoker import BrewUpdateWorker
+import brewUpdateWoker
 from threading import Thread
 
 suw = statusUpdateWorker.StatusUpdateWorker()
 t_suw = Thread(target=suw.runStatusMonitor(), args=())
 t_suw.start()
 
-buw = BrewUpdateWoker()
+buw = brewUpdateWoker.BrewUpdateWoker()
 t_buw = Thread(target=buw.runBrewMonitor(), args=())
 t_buw.stat()
 
