@@ -6,7 +6,6 @@ class HttpUpdateWorker(object):
         self.conn = sqlite3.connect('eotg.db')
         self.stopped = False
         self.deviceState = ''
-        self.conn = None
         self.getDeviceState()
 
     def getDeviceState(self):
@@ -24,13 +23,13 @@ class HttpUpdateWorker(object):
             timingRow = c.execute(sqlStr).fetchone()
             if self.deviceState == 'background':
                 timing = timingRow['freq_background']
-            elif self.deviceState == 'brewing': 
+            elif self.deviceState == 'brewing':
                 timing = timingRow['freq_brewing']
-            elif self.deviceState == 'waiting': 
+            elif self.deviceState == 'waiting':
                 timing = timingRow['freq_waiting']
             #c.close()
             return timing
-            
+
         except Exception as ex:
             print('Exception occured getting timing setting in http worker thread: ' + str(ex))
             return -1
@@ -38,7 +37,7 @@ class HttpUpdateWorker(object):
     # Stop the thread at the next run
     def setShouldStop(self, stop):
         self.stopped = stop
-    
+
     # Exit the thread cleanly
     def stop(self):
         self.setShouldStop(True)
