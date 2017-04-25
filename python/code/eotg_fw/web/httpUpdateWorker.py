@@ -21,13 +21,12 @@ class HttpUpdateWorker(object):
             sqlStr = 'select * from update_settings limit 1'
             c = self.conn.cursor()
             timingRow = c.execute(sqlStr).fetchone()
-            print('NPM NPM TIMING ' + str(timingRow))
             if self.deviceState == 'background':
-                timing = timingRow['freq_background']
+                timing = timingRow[0]
             elif self.deviceState == 'brewing':
-                timing = timingRow['freq_brewing']
+                timing = timingRow[2]
             elif self.deviceState == 'waiting':
-                timing = timingRow['freq_waiting']
+                timing = timingRow[1]
             #c.close()
             return timing
 
