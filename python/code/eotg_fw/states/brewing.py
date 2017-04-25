@@ -26,7 +26,7 @@ def brewing(all_settings, sensors):
             return 'waiting'
     conn.close()
     pump.pwm_start()
-    t_last_button_check = time.time()-0.3
+    t_last_button_check = time.time()-0.5
     brewing_loop_return = brewing_loop(all_settings, t_last_button_check, t_brew_end)
     loop_exit, t_last_button_check = brewing_loop_return
     print(loop_exit)

@@ -23,6 +23,7 @@ def waiting(all_settings):
 def waiting_loop(all_settings, t_last_button_check):
     conn = sqlite3.connect('../main/eotg.db')
     c = conn.cursor()
+    print(t_last_button_check)
     c.execute("SELECT * FROM button_events WHERE detect_time>?", (t_last_button_check, ))
     last_press = c.fetchone()
     conn.close()
