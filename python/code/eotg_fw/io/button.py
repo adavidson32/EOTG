@@ -3,7 +3,7 @@ import time, sqlite3, math
 
 class button:
     def __init__(self):
-        self.bsettings = settings_read()
+        self.bsettings = self.settings_read()
         self.button_pin = int(self.bsettings['pin'])
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -13,7 +13,7 @@ class button:
         while(self.stopped != True):
            try:
                time.sleep(self.bsettings['freq_updatecheck'])
-               new_bsettings = settings_read()
+               new_bsettings = self.settings_read()
                if not(self.bsettings['pin'] == new_bsettings['pin']):
                    GPIO.remove_event_detect(self.button_pin)
                    self.bsettings = new_bsettings
