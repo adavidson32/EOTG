@@ -63,7 +63,7 @@ def variable_setup():
 
     suw = statusUpdateWorker.StatusUpdateWorker()
     buw = brewUpdateWorker.BrewUpdateWorker()
-    but = button.button()
+    but = button()
     t_suw = Thread(target=suw.runStatusMonitor(), args=())
     t_buw = Thread(target=buw.runBrewMonitor(), args=())
     t_but = Thread(target=but.button_manager(), args=())
