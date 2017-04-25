@@ -18,7 +18,7 @@ device_info = [(    -1       , 'background'  ,    'LOW'      ,    'HIGH'   ,    
 brew_settings = [(       0          ,          ''        ,      -1      )]
 
 #Columns:         | pin | t_1x_min | t_1x_max | t_btw_min | t_btw_max | t_holdout_min | t_timeout | freq_updatecheck |
-button_settings = [( 21  ,   0.1    ,   1.0    ,    0.1    ,    1.0    ,      2.0      ,    4.0    ,      60         )]
+button_settings = [( 21  ,   0.1    ,   1.0    ,    0.1    ,    1.0    ,      2.0      ,    4.0    ,      15         )]
 
 #Columns:       | press_type | state_during | detect_time | response |
 button_events = [(   '1x'    , 'background' ,   now-10    ,  'none'  ),
