@@ -27,5 +27,4 @@ class StatusUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
            except Exception as ex:
                print('Exception updating status: ' + str(ex))
                self.stop()
-
         self.stop()

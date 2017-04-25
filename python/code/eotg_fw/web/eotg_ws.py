@@ -14,10 +14,10 @@ class eotg_ws:
         self.deviceId = -1
 
     # Get the Brew Settings from the web server
-    def getBrewSettings(self, conn):
+    def getBrewSettings(self):
         try:
-            # Get device id (As a string)
-            deviceId = self.getDeviceId(conn)
+            conn = sqlite3.connect('../main/eotg.db')
+            deviceId = self.getDeviceId()
             resp = httpRequest.makeRequest(ws.getWs('getBrewSettings'), None, [deviceId])
             devSettings = json.loads(resp)
             brewSettings = devSettings['brewSettings']
@@ -152,17 +152,17 @@ class eotg_ws:
             for preset in presets:
                 presetName = preset['preset_name']
                 colName = self.getSettingTypeName(preset['setting_type_id'])
-                if colName != '-1':
+                if not(colName == '-1'):
                     newSettings[self.getSettingTypeName(preset['setting_type_id'])] = preset['setting_value']
                 else:
                     continue
-                if presetName != oldPresetName and oldPresetName != '':
+                if (not(presetName == oldPresetName) and not(oldPresetName == '')):
                     newPresets[oldPresetName] = newSettings
                     newSettings = {}
                 oldPresetName = presetName
 
-            self.getBrewSettings(conn)
-            self.insertPresets(newPresets, conn)
+            self.getBrewSettings()
+            self.insertPresets(newPresets)
             conn.commit()
             conn.close()
         except Exception as err:
@@ -176,20 +176,19 @@ class eotg_ws:
     #--------------------------------------------------------------------------------------------
 
     # Get the device id from the database
-    def getDeviceId(self, conn):
+    def getDeviceId(self):
         if self.deviceId < 0:
             try:
+                conn = sqlite3.connect('../main/eotg.db')
                 c = conn.cursor()
-                # Get device id from db
                 c.execute('select given_id_num from device_info')
                 self.setDeviceId(c.fetchone()[0])
                 if ((self.deviceId is None) or (self.deviceId <= 0)):
                     self.setDeviceId(self.registerDevice(getserial(), getMAC('wlan0')))
-                c.close()
+                conn.close()
             except Exception as err:
                 print('Exception trying to get device id: ')
                 print(str(err))
-
         return str(self.deviceId)
 
     # Turn db selct results into dictionaries
@@ -197,7 +196,6 @@ class eotg_ws:
         d = {}
         for idx, col in enumerate(cursor.description):
             d[col[0]] = row[idx]
-
         return d
 
     # Get the name of the setting based on the preset type id.  Hardcoded because fuck coding any more shit.
@@ -209,12 +207,12 @@ class eotg_ws:
              colSettings =  'volume'
         elif int(presetTypeId) == 6:
              colSettings = 'color_pattern'
-
         return colSettings
 
-    def insertPresets(self, newPresets, conn):
-        # TODO : check col names to make sure they're right
+    def insertPresets(self, newPresets):
+        #: check col names to make sure they're right
         #Columns:      | prof_num |  prof_name  | temp | volume |   color_pattern   |
+        conn = sqlite3.connect('../main/eotg.db')
         queryStr = 'insert into profile_list (prof_num, prof_name, '
         i = 1
         for key in newPresets:
@@ -230,8 +228,7 @@ class eotg_ws:
             print(queryStr)
             c = conn.cursor()
             c.execute(queryStr)
-            c.close()
-
+            conn.close()
             i+=1
 
     def setDeviceId(self, dId):
