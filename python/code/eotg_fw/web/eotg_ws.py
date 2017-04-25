@@ -187,7 +187,7 @@ class eotg_ws:
     #--------------------------------------------------------------------------------------------
 
     # Get the device id from the database
-    def self.getDeviceId(conn):
+    def getDeviceId(conn):
         print('device id')
         if self.deviceId < 0:
             try:
