@@ -42,9 +42,9 @@ def waiting_loop(all_settings, t_last_button_check):
         print('next profile selected...')
         print('switching device to next profile.....')
         new_profile = getProfile() + 1
-        if new_profile = 6:
+        if new_profile == 6:
             new_profile = -1
-        if new_profile = 0:
+        if new_profile == 0:
             new_profile = 1
         sqlite_update('device_info', 'preset_state', new_profile)
         return waiting_loop(all_settings, t_last_button_check)
