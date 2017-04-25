@@ -29,6 +29,7 @@ class eotg_ws:
             if len(updateItems) == 2:
                 c.execute("INSERT INTO profile_list values (-1, 'manual', ?, ?, '')", updateItems)
             conn.commit()
+            conn.close()
         except Exception as err:
             print('Exception trying to get brew settings: ')
             print(err)
@@ -146,6 +147,8 @@ class eotg_ws:
             presets = json.loads(resp)['brewPresets']
             cursor = conn.cursor()
             cursor.execute('delete from profile_list')
+            conn.commit()
+            conn.close()
             newPresets = {}
             oldPresetName = ''
             newSettings = {}
@@ -160,11 +163,8 @@ class eotg_ws:
                     newPresets[oldPresetName] = newSettings
                     newSettings = {}
                 oldPresetName = presetName
-
             self.getBrewSettings()
             self.insertPresets(newPresets)
-            conn.commit()
-            conn.close()
         except Exception as err:
             print('Exception trying to get all device presets: ')
             print(err)
@@ -183,9 +183,9 @@ class eotg_ws:
                 c = conn.cursor()
                 c.execute('select given_id_num from device_info')
                 self.setDeviceId(c.fetchone()[0])
+                conn.close()
                 if ((self.deviceId is None) or (self.deviceId <= 0)):
                     self.setDeviceId(self.registerDevice(getserial(), getMAC('wlan0')))
-                conn.close()
             except Exception as err:
                 print('Exception trying to get device id: ')
                 print(str(err))
@@ -212,7 +212,6 @@ class eotg_ws:
     def insertPresets(self, newPresets):
         #: check col names to make sure they're right
         #Columns:      | prof_num |  prof_name  | temp | volume |   color_pattern   |
-        conn = sqlite3.connect('../main/eotg.db')
         queryStr = 'insert into profile_list (prof_num, prof_name, '
         i = 1
         for key in newPresets:
@@ -226,8 +225,10 @@ class eotg_ws:
             queryStr = queryStr[:-1]
             queryStr += ');'
             print(queryStr)
+            conn = sqlite3.connect('../main/eotg.db')
             c = conn.cursor()
             c.execute(queryStr)
+            conn.commit
             conn.close()
             i+=1
 
