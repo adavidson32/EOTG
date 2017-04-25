@@ -12,7 +12,7 @@ from prebrew_check import pb_check
 from state_alert import sqlite_update
 import statusUpdateWorker
 import brewUpdateWorker
-import button
+#import button
 from threading import Thread
 
 print('running variable setup from setup.py.......')
