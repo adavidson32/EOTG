@@ -23,7 +23,7 @@ class eotg_ws:
             brewSettings = devSettings['brewSettings']
             updateItems = ('', )
             for setting in brewSettings:
-                if getSettingTypeName(setting['brew_setting_type_id']) != '-1'
+                if getSettingTypeName(setting['brew_setting_type_id']) != '-1':
                     updateItems = (setting['brew_setting_type_id'], setting['brew_setting_value'])
             c = conn.cursor()
             if len(updateItems) == 2:
