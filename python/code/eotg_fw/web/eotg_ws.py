@@ -184,14 +184,23 @@ def getAllPresets():
 # Get the device id from the database
 def getDeviceId(conn):
     deviceId = -1
+    print('device id')
     try:
+        print('NPM NPM 0')
         c = conn.cursor()
+        print('NPM NPM 1')
         # Get device id from db
         c.execute('select given_id_num from device_info')
+        print('NPM NPM 2')
         deviceId = c.fetchone()[0]
+        print('NPM NPM 3')
         if deviceId is None or deviceId <= 0:
+            print('NPM NPM 3.5')
             deviceId = registerDevice(getserial(), getMAC('wlan0'))
+            print('NPM NPM 3.75')
+        print('NPM NPM 4')
         c.close()
+        print('NPM NPM 5')
     except Exception as err:
         print('Exception trying to get device id: ')
         print(err)
