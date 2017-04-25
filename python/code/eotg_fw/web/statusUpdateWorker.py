@@ -13,9 +13,9 @@ class StatusUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
            try:
                ws = eotg_ws()
                # Get the brew status from the web server and set the brew status in the database
-               ws.getCurrentPreset()
-               ws.getAllPresets()
-               ws.putDeviceStatus()
+               #ws.getCurrentPreset()
+               #ws.getAllPresets()
+               #ws.putDeviceStatus()
                # Get how long we should sleep for, then sleep for that long.
                brewCheckPeriod = 10 #super().getTiming()
                #print('sleeping for ' + str(brewCheckPeriod) + ' seconds...')

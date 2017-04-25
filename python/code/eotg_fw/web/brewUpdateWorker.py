@@ -14,7 +14,7 @@ class BrewUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
             try:
                 # Get the brew status from the web server and set the brew status in the database
                 #print('Checking if we should brew.')
-                eotg_ws.shouldBrew()
+                #eotg_ws.shouldBrew()
                 # Get how long we should sleep for, then sleep for that long.
                 brewCheckPeriod = 10 #super().getTiming()
                 if brewCheckPeriod > 0:

@@ -12,7 +12,7 @@ class button:
     def button_manager(self):
         while(self.stopped != True):
             try:
-                time.sleep(self.bsettings['freq_updatecheck'])
+                #time.sleep(self.bsettings['freq_updatecheck'])
                 new_bsettings = self.settings_read()
                 if not(self.bsettings['pin'] == new_bsettings['pin']):
                     GPIO.remove_event_detect(self.button_pin)
