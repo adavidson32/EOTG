@@ -164,10 +164,13 @@ class eotg_ws:
                 print('NPM NPM 5.1')
                 presetName = preset['preset_name']
                 print('NPM NPM 5.2')
-                colName = self.getSettingTypeName(preset['setting_type_id'])
+                isStr, colName = self.getSettingTypeName(preset['setting_type_id'])
                 print('NPM NPM 5.3')
                 if colName != '-1':
-                    newSettings[self.getSettingTypeName(preset['setting_type_id'])] = preset['setting_value']
+                    sttg = preset['setting_value']
+                    if isStr == True:
+                        sttg = "'{}'".format(str(sttg))
+                    newSettings[self.getSettingTypeName(preset['setting_type_id'])] = sttg
                 else:
                     continue
                 print('NPM NPM 5.4')
@@ -222,15 +225,15 @@ class eotg_ws:
 
     # Get the name of the setting based on the preset type id.  Hardcoded because fuck coding any more shit.
     def getSettingTypeName(self, presetTypeId):
-        colName = '-1'
+        colSettings = (False, '-1')
         if int(presetTypeId) == 1:
-            colName = 'temp'
+            colSettings = (True, 'temp')
         elif int(presetTypeId) == 2:
-             colName =  'volume'
+             colSettings =  (False, 'volume')
         elif int(presetTypeId) == 6:
-             colName = 'color_pattern'
+             colSettings = (True, 'color_pattern')
 
-        return colName
+        return colSettings
 
     def insertPresets(self, newPresets, conn):
         # TODO : check col names to make sure they're right
