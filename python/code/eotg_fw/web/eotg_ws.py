@@ -118,6 +118,7 @@ def getCurrentPreset():
         resp = httpRequest.makeRequest(ws.getWs('getDeviceStatus'), requestParam, [deviceId])
         # Get the preset mode id from the web server results
         statusJson = json.loads(resp)
+        print(str(statusJson))
         statusId = statusJson['brew_preset_id']
         cursor = conn.cursor()
         cursor.execute('update device_info set preset_state = ?', statusId)
