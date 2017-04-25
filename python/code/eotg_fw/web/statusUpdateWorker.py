@@ -15,7 +15,6 @@ class StatusUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
                # Get the brew status from the web server and set the brew status in the database
                ws.getCurrentPreset()
                ws.getAllPresets()
-               ws.getBrewSettings()
                ws.putDeviceStatus()
                # Get how long we should sleep for, then sleep for that long.
                brewCheckPeriod = super().getTiming()
