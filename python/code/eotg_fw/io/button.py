@@ -81,7 +81,7 @@ class button:
                     GPIO.remove_event_detect(button_pin)
                     GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
                     self.store_press('1x')
-                elif ((time.time() - t_1x_end) > bsettings['t_btw_min']):
+                elif ((time.time() - t_1x_end) > self.bsettings['t_btw_min']):
                     GPIO.remove_event_detect(button_pin)
                     ret2 = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=int(1000*self.bsettings['t_1x_max']))
                     if ret2 is None:
