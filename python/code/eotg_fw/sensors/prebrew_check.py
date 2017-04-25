@@ -1,7 +1,7 @@
 import math, sqlite3
 import RPi.GPIO as io
 from state_alert import sqlite_update
-from eotg_ws import putDeviceStatus
+from eotg_ws import eotg_ws
 
 class pb_check:
     def __init__(self, ac_batt_settings):
@@ -19,7 +19,7 @@ class pb_check:
         print('ac_state: {}'.format(ac_state))
         if not(ac_state == ac_last):
             sqlite_update('device_info', 'ac_state', ac_state)
-            putDeviceStatus()
+            eotg_ws.putDeviceStatus()
         return ac_ret
 
     def battery_check(self, batt_last):
@@ -28,7 +28,7 @@ class pb_check:
         print('batt_level: {}'.format(batt_level))
         if not(battery_level == batt_last):
             sqlite_update('device_info', 'battery_level', battery_level)
-            putDeviceStatus()
+            eotg_ws.putDeviceStatus()
         return battery_level
 
     def check_orientation(self, mpu):
