@@ -121,13 +121,12 @@ def getCurrentPreset():
         resp = httpRequest.makeRequest(ws.getWs('getDeviceStatus'), None, [deviceId])
         # Get the preset mode id from the web server results
         statusJson = json.loads(resp)
-        print(str(statusJson))
-        statusId = statusJson[0]
-        print(str(statusId))
+        statusId = statusJson['brew_preset_id']
         cursor = conn.cursor()
         cursor.execute('update device_info set preset_state = ?', statusId)
         conn.commit()
         conn.close()
+        print('NPM NPM SUCCESSFULLY UPDATED PRESET STATE')
     except Exception as err:
         print('Exception trying to get the current device state: ')
         print(err)
@@ -182,7 +181,6 @@ def getDeviceId(conn):
     # Get device id from db
     c.execute('select given_id_num from device_info')
     deviceId = c.fetchone()[0]
-    print('NPM NPM ' + str(deviceId))
     if deviceId is None or deviceId <= 0:
         deviceId = registerDevice(getserial(), getMAC('wlan0'))
     c.close()
