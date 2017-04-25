@@ -22,6 +22,7 @@ class button:
                     GPIO.add_event_detect(self.button_pin, GPIO.RISING, callback=self.button_interupt_handler)
                 elif not(self.bsettings == new_bsettings):
                     self.bsettings = new_bsettings
+                print('button_manager try condition PASSED')
             except Exception as ex:
                 print('Exception while reading button: ' + str(ex))
                 self.stop()
