@@ -6,6 +6,7 @@ class button:
     def __init__(self):
         self.bsettings = self.settings_read()
         self.button_pin = int(self.bsettings['pin'])
+        self.stopped = False
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.add_event_detect(self.button_pin, GPIO.RISING, callback=self.button_interupt_handler)
