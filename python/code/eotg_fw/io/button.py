@@ -9,7 +9,7 @@ class button:
         GPIO.setup(self.button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.add_event_detect(self.button_pin, GPIO.RISING, callback=button_interupt_handler)
 
-    def button_manager():
+    def button_manager(self):
         while(self.stopped != True):
            try:
                time.sleep(self.bsettings['freq_updatecheck'])
@@ -27,7 +27,7 @@ class button:
                self.stop()
         self.stop()
 
-    def settings_read():
+    def settings_read(self):
         conn = sqlite3.connect('../main/eotg.db')
         c = conn.cursor()
         tu_bs = ('pin', 't_1x_min', 't_1x_max', 't_btw_min', 't_btw_max', 't_hold_min', 't_timeout', 'freq_updatecheck')
@@ -36,7 +36,7 @@ class button:
         button_settings = dict(zip(tu_bs, row_bs))
         return button_settings
 
-    def store_press(press_type):
+    def store_press(self, press_type):
         conn = sqlite3.connect('../main/eotg.db')
         c = conn.cursor()
         insert_str = [(press_type, 'background', time.time(), 'none')]
@@ -45,7 +45,7 @@ class button:
         conn.close()
         print('Added to eotg.db:  {:>4} detected at {:<.2f}'.format(press_type, time.time()))
 
-    def button_interupt_handler(button_pin):
+    def button_interupt_handler(self, button_pin):
         GPIO.remove_event_detect(button_pin)
         t_1x_start = time.time()
         ret = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=int(1000*bsettings['t_timeout']))
