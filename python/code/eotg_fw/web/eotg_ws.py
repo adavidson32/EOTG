@@ -164,7 +164,7 @@ class eotg_ws:
                 print('NPM NPM 5.1')
                 presetName = preset['preset_name']
                 print('NPM NPM 5.2')
-                isStr, colName = self.getSettingTypeName(preset['setting_type_id'])
+                colName = self.getSettingTypeName(preset['setting_type_id'])
                 print('NPM NPM 5.3')
                 if colName != '-1':
                     newSettings[self.getSettingTypeName(preset['setting_type_id'])] = preset['setting_value']
@@ -222,13 +222,13 @@ class eotg_ws:
 
     # Get the name of the setting based on the preset type id.  Hardcoded because fuck coding any more shit.
     def getSettingTypeName(self, presetTypeId):
-        colSettings = (False, '-1')
+        colSettings = '-1'
         if int(presetTypeId) == 1:
-            colSettings = (False, 'temp')
+            colSettings = 'temp'
         elif int(presetTypeId) == 2:
-             colSettings =  (False, 'volume')
+             colSettings =  'volume'
         elif int(presetTypeId) == 6:
-             colSettings = (True, 'color_pattern')
+             colSettings = 'color_pattern'
 
         return colSettings
 
@@ -242,16 +242,9 @@ class eotg_ws:
             for subkey in newPreset:
                 queryStr += subkey + ','
             queryStr = queryStr[:-1]
-            queryStr += ') values (' + str(i) + ',' + key + ','
-            j = 0
+            queryStr += ') values (' + str(i) + ",'" + key + "',"
             for subkey in newPreset:
-                j += 1
-                sub = str(newPreset[subkey])
-                print('NPM NPM TESTTTT ' + sub)
-                if j == 2:
-                    print('NPM NPM TRYING ' + sub)
-                    sub = "'{}'".fomat(sub)
-                queryStr += sub + ','
+                queryStr += newPreset[subkey] + ','
             queryStr = queryStr[:-1]
             queryStr += ');'
             print(queryStr)
