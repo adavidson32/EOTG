@@ -27,14 +27,13 @@ print('right before thd start ' + current_state)
 
 suw = statusUpdateWorker.StatusUpdateWorker()
 buw = brewUpdateWorker.BrewUpdateWorker()
-#but = button.button()
+but = button.button()
 print('thd objects done')
 suw.runStatusMonitor()
 buw.runBrewMonitor()
-#but.button_manager()
+but.button_manager()
 print('thd ctors done')
 print('all threads started...')
-
 print('starting main while loop')
 
 while True:

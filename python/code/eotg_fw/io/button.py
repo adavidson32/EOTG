@@ -9,7 +9,7 @@ class button:
         GPIO.setup(self.button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.add_event_detect(self.button_pin, GPIO.RISING, callback=self.button_interupt_handler)
 
-    def button_manager(self):
+    def runUpdate(self):
         while(self.stopped != True):
             try:
                 #time.sleep(self.bsettings['freq_updatecheck'])
@@ -27,6 +27,10 @@ class button:
                 print('Exception while reading button: ' + str(ex))
                 self.stop()
         self.stop()
+
+    def button_manager(self):
+        t1 = threading.Thread(target=self.runUpdate)
+        t1.start()
 
     def settings_read(self):
         conn = sqlite3.connect('../main/eotg.db')
