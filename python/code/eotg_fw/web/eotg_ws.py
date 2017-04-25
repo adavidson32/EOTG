@@ -14,25 +14,21 @@ class eotg_ws:
         self.deviceId = -1
 
     # Get the Brew Settings from the web server
-    def getBrewSettings(self):
+    def getBrewSettings(self, conn):
         try:
-            # Get connection to database
-            conn = sqlite3.connect('../main/eotg.db')
-            conn.row_factory = self.dict_factory
             # Get device id (As a string)
             deviceId = self.getDeviceId(conn)
             resp = httpRequest.makeRequest(ws.getWs('getBrewSettings'), None, [deviceId])
             devSettings = json.loads(resp)
             brewSettings = devSettings['brewSettings']
-            # Put settings in settings table
-            updates = []
+            updateItems = (, )
             for setting in brewSettings:
-                updateItems = (setting['brew_setting_value'], setting['brew_setting_type_id'])
-                updates.extend(updateItems)
+                if getSettingTypeName(setting['brew_setting_type_id']) != '-1'
+                    updateItems = (setting['brew_setting_type_id'], setting['brew_setting_value'])
             c = conn.cursor()
-            c.executemany('INSERT INTO brew_settings values (?,?,now())', updates)
+            if len(updateItems) == 2:
+                c.execute("INSERT INTO profile_list values (-1, 'manual', ?, ?, '')", updateItems)
             conn.commit()
-            conn.close()
         except Exception as err:
             print('Exception trying to get brew settings: ')
             print(err)
@@ -166,6 +162,7 @@ class eotg_ws:
                     newSettings = {}
                 oldPresetName = presetName
 
+            self.getBrewSettings(conn)
             self.insertPresets(newPresets, conn)
             conn.commit()
             conn.close()
