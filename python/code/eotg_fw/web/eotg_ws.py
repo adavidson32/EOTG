@@ -181,7 +181,7 @@ def getDeviceId(conn):
     # Get device id from db
     c.execute('select given_id_num from device_info')
     deviceId = c.fetchone()[0]
-    print('NPM NPM ' + deviceId)
+    print('NPM NPM ' + str(deviceId))
     if deviceId is None or deviceId <= 0:
         print('registerDevice')
         deviceId = registerDevice(getserial(), getMAC('wlan0'))
