@@ -169,7 +169,10 @@ class eotg_ws:
                 if colName != '-1':
                     sttg = preset['setting_value']
                     if isStr == True:
-                        sttg = "'{}'".format(str(sttg))
+                        print(type(sttg))
+                        newStr = str(sttg)
+                        print(newStr)
+                        sttg = "'{}'".format(newStr)
                     newSettings[self.getSettingTypeName(preset['setting_type_id'])] = sttg
                 else:
                     continue
