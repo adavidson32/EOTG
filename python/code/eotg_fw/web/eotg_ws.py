@@ -151,32 +151,40 @@ class eotg_ws:
             resp = httpRequest.makeRequest(ws.getWs('getDevicePresets'), None, [devId])
             print('NPM NPM 3')
             # Put the preset in the database
-            print('NPM NPM ' + str(resp))
-            presets = json.loads(resp)
-            print('NPM NPM PRESETS = ' + str(presets['brewPresets'][0]['preset_id']))
-            print('NPM NPM presets ' + str(presets))
+            presets = json.loads(resp)['brewPresets']
+            print('NPM NPM PRESETS = ' + str(presets[0]['preset_id']))
             cursor = conn.cursor()
+            print('NPM NPM 4')
             cursor.execute('delete from preset_list')
+            print('NPM NPM 5')
             newPresets = {}
             oldPresetName = ''
             newSettings = {}
             for preset in presets:
+                print('NPM NPM 5.1')
                 presetName = preset['preset_name']
+                print('NPM NPM 5.2')
                 colName = self.getSettingTypeName(preset['setting_type_id'])
+                print('NPM NPM 5.3')
                 if colName != '-1':
                     newSettings[self.getSettingTypeName(preset['setting_type_id'])] = preset['setting_value']
                 else:
                     continue
-
+                print('NPM NPM 5.4')
                 if presetName != oldPresetName and oldPresetName != '':
+                    print('NPM NPM 5.41')
                     new_presets[oldPresetName] = newSettings
+                    print('NPM NPM 5.42')
                     newSettings = {}
-
                 oldPresetName = presetName
+                print('NPM NPM 5.5')
 
+            print('NPM NPM 6')
             self.insertPresets(newPresets, conn)
+            print('NPM NPM 7')
             conn.commit()
             conn.close()
+            print('NPM NPM 8')
         except Exception as err:
             print('Exception trying to get all device presets: ')
             print(err)
