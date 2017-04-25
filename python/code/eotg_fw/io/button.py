@@ -56,13 +56,13 @@ class button:
             print('hold detected')
             GPIO.remove_event_detect(button_pin)
             GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
-            store_press('hold')
+            self.store_press('hold')
         else:
             if (t_1x > self.bsettings['t_hold_min']):
                 print('hold detected')
                 GPIO.remove_event_detect(button_pin)
                 GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
-                store_press('hold')
+                self.store_press('hold')
             elif (t_1x < self.bsettings['t_1x_min']):
                 print('too quick')
                 GPIO.remove_event_detect(button_pin)
@@ -80,7 +80,7 @@ class button:
                     print('1x press detected')
                     GPIO.remove_event_detect(button_pin)
                     GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
-                    store_press('1x')
+                    self.store_press('1x')
                 elif ((time.time() - t_1x_end) > bsettings['t_btw_min']):
                     GPIO.remove_event_detect(button_pin)
                     ret2 = GPIO.wait_for_edge(button_pin, GPIO.FALLING, timeout=int(1000*self.bsettings['t_1x_max']))
@@ -93,4 +93,4 @@ class button:
                         print('2x press detected')
                         GPIO.remove_event_detect(button_pin)
                         GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
-                        store_press('2x')
+                        self.store_press('2x')
