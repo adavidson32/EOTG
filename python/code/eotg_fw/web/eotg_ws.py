@@ -228,13 +228,14 @@ class eotg_ws:
         elif int(presetTypeId) == 2:
              colName =  'volume'
         elif int(presetTypeId) == 6:
-             colName = 'colors'
+             colName = 'color_pattern'
 
         return colName
 
     def insertPresets(self, newPresets, conn):
         # TODO : check col names to make sure they're right
-        queryStr = 'insert into preset_list (ID,name,'
+        #Columns:      | prof_num |  prof_name  | temp | volume |   color_pattern   |
+        queryStr = 'insert into pofile_list (prof_num, prof_name, '
         i = 1
         for key in newPresets:
             newPreset = newPresets[key]
