@@ -136,15 +136,14 @@ class eotg_ws:
     # Get all device presets
     def getAllPresets(self):
         try:
-            # Get connection to database
-            conn = sqlite3.connect('../main/eotg.db')
-            conn.row_factory = self.dict_factory
-            # Get the device Id from the db
             devId = self.getDeviceId()
             # Get the device's presets
             resp = httpRequest.makeRequest(ws.getWs('getDevicePresets'), None, [devId])
             # Put the preset in the database
             presets = json.loads(resp)['brewPresets']
+            # Get connection to database
+            conn = sqlite3.connect('../main/eotg.db')
+            conn.row_factory = self.dict_factory
             cursor = conn.cursor()
             cursor.execute('delete from profile_list')
             conn.commit()
@@ -159,7 +158,7 @@ class eotg_ws:
                     newSettings[self.getSettingTypeName(preset['setting_type_id'])] = preset['setting_value']
                 else:
                     continue
-                if (not(presetName == oldPresetName) and not(oldPresetName == '')):
+                if (presetName != oldPresetName and oldPresetName != ''):
                     newPresets[oldPresetName] = newSettings
                     newSettings = {}
                 oldPresetName = presetName
@@ -212,7 +211,6 @@ class eotg_ws:
     def insertPresets(self, newPresets):
         #: check col names to make sure they're right
         #Columns:      | prof_num |  prof_name  | temp | volume |   color_pattern   |
-        print(newPresets.items())
         queryStr = 'insert into profile_list (prof_num, prof_name, '
         i = 1
         for key in newPresets:
@@ -225,7 +223,7 @@ class eotg_ws:
                 queryStr += newPreset[subkey] + ','
             queryStr = queryStr[:-1]
             queryStr += ');'
-            #print(queryStr)
+            print(queryStr)
             conn = sqlite3.connect('../main/eotg.db')
             c = conn.cursor()
             c.execute(queryStr)

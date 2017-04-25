@@ -44,7 +44,10 @@ void setup() {
 }
 
 void loop() { // run over and over
+  while (!mySerial) {
+    ; // wait for serial port to connect. Needed for native USB port only
+  }
   if (mySerial.available()) {
-    Serial.write(mySerial.read());
+    Serial.println(mySerial.read());
   }
 }
