@@ -11,7 +11,7 @@ from brewing import brewing
 from prebrew_check import pb_check
 from state_alert import sqlite_update
 
-all_settings = variable_setup()
+all_settings, t_suw = variable_setup()
 
 sensors = sensor_setup(all_settings)
 ds, mpu, pump, heater = sensors

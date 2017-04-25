@@ -1,5 +1,5 @@
 import sys
-from eotg_ws import *
+from eotg_ws import eotg_ws
 import httpUpdateWorker
 import time
 
@@ -11,11 +11,12 @@ class StatusUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
     def runStatusMonitor(self):
         while(self.stopped != True):
            try:
+               ws = eotg_ws()
                # Get the brew status from the web server and set the brew status in the database
-               getCurrentPreset()
-               getAllPresets()
-               getBrewSettings()
-               putDeviceStatus()
+               ws.getCurrentPreset()
+               ws.getAllPresets()
+               ws.getBrewSettings()
+               ws.putDeviceStatus()
                # Get how long we should sleep for, then sleep for that long.
                brewCheckPeriod = super().getTiming()
                print('sleeping for ' + str(brewCheckPeriod) + ' seconds...')
