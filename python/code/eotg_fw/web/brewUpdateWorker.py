@@ -1,5 +1,5 @@
 import sys
-from eotg_ws import *
+from eotg_ws import eotg_ws
 import httpUpdateWorker
 import time
 
@@ -14,10 +14,9 @@ class BrewUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
             try:
                 # Get the brew status from the web server and set the brew status in the database
                 #print('Checking if we should brew.')
-                shouldBrew()
+                eotg_ws.shouldBrew()
                 # Get how long we should sleep for, then sleep for that long.
-                brewCheckPeriod = super().getTiming()
-                print(brewCheckPeriod)
+                brewCheckPeriod = 10 #super().getTiming()
                 if brewCheckPeriod > 0:
                     time.sleep(brewCheckPeriod)
                 else:
