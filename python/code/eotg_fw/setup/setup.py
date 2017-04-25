@@ -44,7 +44,7 @@ def variable_setup():
     profiles = ('',)
     for row in c.execute('SELECT * FROM profile_list'):
         prof_dict = dict(zip(tu_prof, row))
-        profiles += prof_dict
+        profiles += (prof_dict,)
     profiles = profiles[1:]
     d_pump = c.execute('SELECT * FROM relay_values WHERE device=?',('pump',))
     row_pump = d_pump.fetchone()
