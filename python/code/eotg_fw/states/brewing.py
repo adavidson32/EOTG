@@ -2,19 +2,21 @@
 
 import time
 from eotg_ws import brewStarted
-from 
+from getProfile import getProfile
 import sqlite3
-from math import fmod
 
 def brewing(all_settings, sensors):
     print('New State: Brewing')
-    pump, heater = (sensors[2], sensors[3])
     brewStarted()
+    pump, heater = (sensors[2], sensors[3])
+    current_profile = getProfile()
+    print('Brewing Profile Selected:')
+    print('#: {}, name: {}, temp: {}, volume: {}'.format(current_profile[0], current_profile[1], current_profile[2], current_profile[3]))
     heater.on()
     t_brew_start = time.time()
     t_brew_end = t_brew_start + 81.0
     conn = sqlite3.connect('../main/eotg.db')
-    c = conn.cursor()
+    c = conn.cursor() 
     while time.time() < (t_brew_start + 21.0):
         c.execute("SELECT * FROM button_events WHERE detect_time>?", (t_brew_start,))
         last_press = c.fetchone()
