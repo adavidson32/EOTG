@@ -12,15 +12,19 @@ from prebrew_check import pb_check
 from state_alert import sqlite_update
 
 all_settings, threads = variable_setup()
+print('settings retrieved, threads setup in variable_setup')
 t_suw, t_buw, t_but = threads
 t_suw.start()
 t_buw.start()
 t_but.start()
+print('all threads started...')
 
 sensors = sensor_setup(all_settings)
 ds, mpu, pump, heater = sensors
 pbc = pb_check(all_settings['ac_batt_settings'])
 current_state = 'background'
+
+print('starting main while loop')
 
 while True:
     if current_state == 'background':

@@ -44,7 +44,7 @@ class button:
         c.executemany('INSERT INTO button_events VALUES (?, ?, ?, ?)', insert_str)
         conn.commit()
         conn.close()
-        #print('Added to eotg.db:  {:>4} detected at {:<.2f}'.format(press_type, time.time()))
+        print('Added to eotg.db:  {:>4} detected at {:<.2f}'.format(press_type, time.time()))
 
     def button_interupt_handler(self, button_pin):
         GPIO.remove_event_detect(button_pin)
