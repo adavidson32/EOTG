@@ -180,10 +180,12 @@ def getDeviceId(conn):
     c = conn.cursor()
     # Get device id from db
     c.execute('select given_id_num from device_info')
-    deviceIdRow = c.fetchone()[0]
+    deviceId = c.fetchone()[0]
+    print('NPM NPM ' + deviceId)
     if deviceId is None or deviceId <= 0:
-        # TODO : get mac and serial
+        print('registerDevice')
         deviceId = registerDevice(getserial(), getMAC('wlan0'))
+        print(str(deviceId))
     c.close()
     return str(deviceId)
 
