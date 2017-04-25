@@ -32,7 +32,7 @@ def waiting_loop(all_settings, t_last_button_check):
     if last_press is None:
          time.sleep(0.3)
          # If no buttons are pressed, get the status from the web
-         brewing_state = eotg_ws.shouldBrew()
+         brewing_state = eotg_ws().shouldBrew()
          if brewing_state == '1':
              return ('remote_start_detected', 10.0)
          else:
