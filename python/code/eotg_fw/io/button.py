@@ -55,23 +55,23 @@ class button:
         if ret is None:
             print('hold detected')
             GPIO.remove_event_detect(button_pin)
-            GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
+            GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
             store_press('hold')
         else:
             if (t_1x > bsettings['t_hold_min']):
                 print('hold detected')
                 GPIO.remove_event_detect(button_pin)
-                GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
+                GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
                 store_press('hold')
             elif (t_1x < bsettings['t_1x_min']):
                 print('too quick')
                 GPIO.remove_event_detect(button_pin)
-                GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
+                GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
                 return
             elif (t_1x > bsettings['t_1x_max']):
                 print('too long but not hold (1s < t < 2s)')
                 GPIO.remove_event_detect(button_pin)
-                GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
+                GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
                 return
             else:
                 GPIO.remove_event_detect(button_pin)
@@ -79,7 +79,7 @@ class button:
                 if ret1 is None:
                     print('1x press detected')
                     GPIO.remove_event_detect(button_pin)
-                    GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
+                    GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
                     store_press('1x')
                 elif ((time.time() - t_1x_end) > bsettings['t_btw_min']):
                     GPIO.remove_event_detect(button_pin)
@@ -87,10 +87,10 @@ class button:
                     if ret2 is None:
                         print('2nd press too long')
                         GPIO.remove_event_detect(button_pin)
-                        GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
+                        GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
                         return
                     else:
                         print('2x press detected')
                         GPIO.remove_event_detect(button_pin)
-                        GPIO.add_event_detect(button_pin,GPIO.RISING,callback=button_interupt_handler)
+                        GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
                         store_press('2x')
