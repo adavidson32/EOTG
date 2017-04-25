@@ -58,17 +58,17 @@ class button:
             GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
             store_press('hold')
         else:
-            if (t_1x > bsettings['t_hold_min']):
+            if (t_1x > self.bsettings['t_hold_min']):
                 print('hold detected')
                 GPIO.remove_event_detect(button_pin)
                 GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
                 store_press('hold')
-            elif (t_1x < bsettings['t_1x_min']):
+            elif (t_1x < self.bsettings['t_1x_min']):
                 print('too quick')
                 GPIO.remove_event_detect(button_pin)
                 GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
                 return
-            elif (t_1x > bsettings['t_1x_max']):
+            elif (t_1x > self.bsettings['t_1x_max']):
                 print('too long but not hold (1s < t < 2s)')
                 GPIO.remove_event_detect(button_pin)
                 GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
