@@ -49,7 +49,7 @@ profile_list = [(    1    , 'custom_1'  ,  203 ,   40   , 'y-gn-prp-blu-gn'),
 
 #Columns:      |  device  | pin |  mode  | pwm_freq | pwm_dutycyc |
 relay_values = [(  'pump' ,  5  , 'off'  ,  0.1     ,    90      ),
-                ( 'heater',  6  , 'off'  ,   -1     ,    -1      )]
+                ( 'heater',  6  , 'off'  ,   0.1     ,    .0833      )]
 
 #Colums:           | ac_check_pin | batt_check_pin |
 ac_batt_settings = [(      16     ,      20       )]
