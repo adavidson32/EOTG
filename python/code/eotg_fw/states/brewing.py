@@ -16,7 +16,7 @@ def brewing(all_settings, sensors):
     t_brew_start = time.time()
     t_brew_end = t_brew_start + 81.0
     conn = sqlite3.connect('../main/eotg.db')
-    c = conn.cursor() 
+    c = conn.cursor()
     while time.time() < (t_brew_start + 21.0):
         c.execute("SELECT * FROM button_events WHERE detect_time>?", (t_brew_start,))
         last_press = c.fetchone()
@@ -24,7 +24,6 @@ def brewing(all_settings, sensors):
             time.sleep(0.1)
         elif last_press[0] == '2x':
             return 'waiting'
-    conn.commit()
     conn.close()
     pump.pwm_start()
     t_last_button_check = time.time()-0.3
@@ -34,7 +33,6 @@ def brewing(all_settings, sensors):
     if (loop_exit == '2x_detected'):
         print('2x detected, cancelling brew, returning to waiting state')
         pump.pwm_stop()
-        pump.off()
         heater.off()
         return 'waiting'
     elif (loop_exit == 'hold_detected'):
@@ -42,10 +40,7 @@ def brewing(all_settings, sensors):
     elif (loop_exit == '1x_detected'):
         print('1x detected, doing nothing')
     elif loop_exit == 'timeout':
-        #pump.off(all_settings['pump_settings']['pin'])
-        #heater.off(all_settings['heater_settings']['pin'])
         pump.pwm_stop()
-        pump.off()
         heater.off()
         return 'waiting'
 
@@ -54,7 +49,6 @@ def brewing_loop(all_settings, t_last_button_check, t_brew_end):
     c = conn.cursor()
     c.execute("SELECT * FROM button_events WHERE detect_time>?", (t_last_button_check,))
     last_press = c.fetchone()
-    conn.commit()
     conn.close()
     t_last_button_check = time.time()
     detect_t = ('TOTAL CRAP', )

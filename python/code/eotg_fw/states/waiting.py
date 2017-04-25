@@ -5,6 +5,7 @@ sys.path.append('/home/pi/git/EOTG/python/code/eotg_fw/web')
 from eotg_ws import shouldBrew
 import time
 import sqlite3
+from state_alert import sqlite_update
 
 def waiting(all_settings):
     print('New State: Waiting')
@@ -24,7 +25,6 @@ def waiting_loop(all_settings, t_last_button_check):
     c = conn.cursor()
     c.execute("SELECT * FROM button_events WHERE detect_time>?", (t_last_button_check, ))
     last_press = c.fetchone()
-    conn.commit()
     conn.close()
     t_last_button_check = time.time()
     detect_t = ('TOTAL CRAP', )
@@ -41,6 +41,12 @@ def waiting_loop(all_settings, t_last_button_check):
     elif last_press[0] == '1x':
         print('next profile selected...')
         print('switching device to next profile.....')
+        new_profile = getProfile() + 1
+        if new_profile = 6:
+            new_profile = -1
+        if new_profile = 0:
+            new_profile = 1
+        sqlite_update('device_info', 'preset_state', new_profile)
         return waiting_loop(all_settings, t_last_button_check)
     elif last_press[0] == '2x':
         detect_t = ('2x_detected', t_last_button_check)
