@@ -246,7 +246,7 @@ class eotg_ws:
             j = 0
             for subkey in newPreset:
                 j += 1
-                sub = newPreset[subkey]
+                sub = str(newPreset[subkey])
                 if j == 2:
                     sub = "'{}'".fomat(sub)
                 queryStr += sub + ','
