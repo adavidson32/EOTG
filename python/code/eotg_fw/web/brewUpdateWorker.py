@@ -13,7 +13,7 @@ class BrewUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
         while(self.stopped != True):
             try:
                 # Get the brew status from the web server and set the brew status in the database
-                print('Checking if we should brew.')
+                #print('Checking if we should brew.')
                 shouldBrew()
                 # Get how long we should sleep for, then sleep for that long.
                 brewCheckPeriod = 3 #super().getTiming()
