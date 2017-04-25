@@ -22,6 +22,7 @@ sensors = sensor_setup(all_settings)
 ds, mpu, pump, heater = sensors
 pbc = pb_check(all_settings['ac_batt_settings'])
 current_state = 'background'
+print(current_state)
 
 t_suw.start()
 t_buw.start()
