@@ -18,7 +18,7 @@ class eotg_ws:
         try:
             # Get connection to database
             conn = sqlite3.connect('../main/eotg.db')
-            conn.row_factory = dict_factory
+            conn.row_factory = self.dict_factory
             # Get device id (As a string)
             deviceId = self.getDeviceId(conn)
             resp = httpRequest.makeRequest(ws.getWs('getBrewSettings'), None, [deviceId])
@@ -41,7 +41,7 @@ class eotg_ws:
         try:
             # Get connection to database
             conn = sqlite3.connect('../main/eotg.db')
-            conn.row_factory = dict_factory
+            conn.row_factory = self.dict_factory
             # Get device id (As a string)
             deviceId = self.getDeviceId(conn)
             # Get status items from the database
@@ -142,7 +142,7 @@ class eotg_ws:
             print('NPM NPM -1')
             conn = sqlite3.connect('../main/eotg.db')
             print('NPM NPM 0')
-            conn.row_factory = dict_factory
+            conn.row_factory = self.dict_factory
             print('NPM NPM 1')
             # Get the device Id from the db
             deviceId = self.getDeviceId(conn)
@@ -161,9 +161,9 @@ class eotg_ws:
             newSettings = {}
             for preset in presets:
                 presetName = preset['preset_name']
-                colName = getSettingTypeName(preset['setting_type_id'])
+                colName = self.getSettingTypeName(preset['setting_type_id'])
                 if colName != '-1':
-                    newSettings[getSettingTypeName(preset['setting_type_id'])] = preset['setting_value']
+                    newSettings[self.getSettingTypeName(preset['setting_type_id'])] = preset['setting_value']
                 else:
                     continue
 
@@ -173,7 +173,7 @@ class eotg_ws:
 
                 oldPresetName = presetName
 
-            insertPresets(newPresets, conn)
+            self.insertPresets(newPresets, conn)
             conn.commit()
             conn.close()
         except Exception as err:
@@ -187,7 +187,7 @@ class eotg_ws:
     #--------------------------------------------------------------------------------------------
 
     # Get the device id from the database
-    def getDeviceId(conn):
+    def getDeviceId(self, conn):
         print('device id')
         if self.deviceId < 0:
             try:
@@ -213,7 +213,7 @@ class eotg_ws:
         return str(self.deviceId)
 
     # Turn db selct results into dictionaries
-    def dict_factory(cursor, row):
+    def dict_factory(self, cursor, row):
         d = {}
         for idx, col in enumerate(cursor.description):
             d[col[0]] = row[idx]
@@ -221,7 +221,7 @@ class eotg_ws:
         return d
 
     # Get the name of the setting based on the preset type id.  Hardcoded because fuck coding any more shit.
-    def getSettingTypeName(presetTypeId):
+    def getSettingTypeName(self, presetTypeId):
         colName = '-1'
         if int(presetTypeId) == 1:
             colName = 'temp'
@@ -232,7 +232,7 @@ class eotg_ws:
 
         return colName
 
-    def insertPresets(newPresets, conn):
+    def insertPresets(self, newPresets, conn):
         # TODO : check col names to make sure they're right
         queryStr = 'insert into preset_list (ID,name,'
         i = 1
@@ -253,5 +253,5 @@ class eotg_ws:
 
             i+=1
 
-    def setDeviceId(dId):
+    def setDeviceId(self, dId):
         self.deviceId = dId
