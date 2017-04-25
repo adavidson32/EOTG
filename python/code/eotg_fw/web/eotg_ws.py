@@ -126,7 +126,6 @@ def getCurrentPreset():
         cursor.execute('update device_info set preset_state = ?', (statusId, ))
         conn.commit()
         conn.close()
-        print('NPM NPM SUCCESSFULLY UPDATED PRESET STATE')
     except Exception as err:
         print('Exception trying to get the current device state: ')
         print(err)
@@ -140,9 +139,11 @@ def getAllPresets():
         # Get the device Id from the db
         deviceId = getDeviceId(conn)
         # Get the device's presets
-        resp = httpRequest.makeRequest(ws.getWs('getDevicePresets'), requestParam, [deviceId])
+        resp = httpRequest.makeRequest(ws.getWs('getDevicePresets'), None, [deviceId])
         # Put the preset in the database
+        print('NPM NPM ' + str(resp))
         presets = json.loads(resp)['brew_presets']
+        print('NPM NPM presets ' + str(presets))
         cursor = conn.cursor()
         cursor.execute('delete from preset_list')
         newPresets = {}
