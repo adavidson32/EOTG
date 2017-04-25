@@ -11,7 +11,7 @@ class BrewUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
     def runBrewMonitor(self):
         # Run the brew monitor
         while(self.stopped != True):
-           try:
+            try:
                # Get the brew status from the web server and set the brew status in the database
                print('Checking if we should brew.')
                shouldBrew()
