@@ -2,7 +2,7 @@
 
 import sys
 sys.path.append('/home/pi/git/EOTG/python/code/eotg_fw/web')
-from eotg_ws import shouldBrew
+from eotg_ws import eotg_ws
 import time
 import sqlite3
 from state_alert import sqlite_update
@@ -31,7 +31,7 @@ def waiting_loop(all_settings, t_last_button_check):
     if last_press is None:
          time.sleep(0.3)
          # If no buttons are pressed, get the status from the web
-         brewing_state = shouldBrew()
+         brewing_state = eotg_ws.shouldBrew()
          if brewing_state == '1':
              return ('remote_start_detected', 10.0)
          else:

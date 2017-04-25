@@ -1,13 +1,13 @@
 # setup/brewing.py
 
 import time
-from eotg_ws import brewStarted
+from eotg_ws import eotg_ws
 from getProfile import getProfile
 import sqlite3
 
 def brewing(all_settings, sensors):
     print('New State: Brewing')
-    brewStarted()
+    eotg_ws.brewStarted()
     pump, heater = (sensors[2], sensors[3])
     current_profile = getProfile()
     print('Brewing Profile Selected:')
