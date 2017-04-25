@@ -8,14 +8,18 @@ from relays import relays
 import statusUpdateWorker
 import brewUpdateWorker
 from threading import Thread
+from button import button
 
 suw = statusUpdateWorker.StatusUpdateWorker()
 t_suw = Thread(target=suw.runStatusMonitor(), args=())
 t_suw.start()
-
 buw = brewUpdateWorker.BrewUpdateWorker()
 t_buw = Thread(target=buw.runBrewMonitor(), args=())
 t_buw.start()
+but = button.button()
+t_but = Thread(target=but.button_manager(), args=())
+t_but.start()
+threads = (t_suw, t_buw, t_but)
 
 def variable_setup():
 
@@ -64,7 +68,7 @@ def variable_setup():
     ret_dss, ret_dsv, ret_mpu, ret_profile1, ret_pump, ret_heater, ret_ac_batt, ret_wifi = dict(zip(tu_dss, row_dss)),  dict(zip(tu_dsv, row_dsv)),  dict(zip(tu_mpu, row_mpu)), dict(zip(tu_prof, rows_profile1)), dict(zip(tu_rly, row_pump)), dict(zip(tu_rly, row_heater)), dict(zip(tu_ac_batt, row_ac_batt)), dict(zip(tu_wifi, row_wifi))
 
     all_settings = {'device_info': ret_di, 'button_settings': ret_bs, 'button_events': ret_be, 'update_settings': ret_us, 'ds18b20_settings': ret_dss, 'ds18b20_values': ret_dsv, 'mpu6050_settings': ret_mpu, 'profile1': ret_profile1, 'pump_settings': ret_pump, 'heater_settings': ret_heater, 'ac_batt_settings': ret_ac_batt, 'wifi_settings': ret_wifi}
-    return all_settings, t_suw
+    return all_settings, threads
 
 def sensor_setup(all_settings):
     ds = DS18B20()
