@@ -235,7 +235,7 @@ class eotg_ws:
     def insertPresets(self, newPresets, conn):
         # TODO : check col names to make sure they're right
         #Columns:      | prof_num |  prof_name  | temp | volume |   color_pattern   |
-        queryStr = 'insert into pofile_list (prof_num, prof_name, '
+        queryStr = 'insert into profile_list (prof_num, prof_name, '
         i = 1
         for key in newPresets:
             newPreset = newPresets[key]
