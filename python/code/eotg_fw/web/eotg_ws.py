@@ -179,7 +179,7 @@ def getDeviceId(conn):
     # Get device id from db
     c.execute('select given_id_num from device_info')
     deviceIdRow = c.fetchone()[0]
-    print('NPM NPM ' + str())
+    print('NPM NPM ' + str(deviceIdRow))
     if deviceId is None or deviceId <= 0:
         deviceId = registerDevice()
     c.close()
