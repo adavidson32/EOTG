@@ -83,7 +83,6 @@ class eotg_ws:
             responseMsg = json.loads(resp)['message']
             if responseErr:
                 print(responseMsg)
-
         except Exception as err:
             print('Exception trying to tell server a brew started: ')
             print(err)
@@ -93,8 +92,6 @@ class eotg_ws:
     # RETURNS: the device's ID from the web server
     def registerDevice(self, deviceIdentifier, macAddr):
         try:
-            # Get connection to database
-            conn = sqlite3.connect('../main/eotg.db')
             # Build request param
             requestParam = {'deviceIdentifier': deviceIdentifier, 'macAddress': macAddr}
             data = []
@@ -103,6 +100,8 @@ class eotg_ws:
             # Put the device id in the database
             devId = json.loads(resp)
             deviceId = (devId['deviceId'], )
+            # Get connection to database
+            conn = sqlite3.connect('../main/eotg.db')
             cursor = conn.cursor()
             cursor.execute('update device_info set given_id_num = ?', deviceId)
             conn.commit()
@@ -184,8 +183,8 @@ class eotg_ws:
                 # Get device id from db
                 c.execute('select given_id_num from device_info')
                 self.setDeviceId(c.fetchone()[0])
-                if self.deviceId is None or self.deviceId <= 0:
-                    self.setDeviceId(registerDevice(getserial(), getMAC('wlan0')))
+                if ((self.deviceId is None) or (self.deviceId <= 0)):
+                    self.setDeviceId(self.registerDevice(getserial(), getMAC('wlan0')))
                 c.close()
             except Exception as err:
                 print('Exception trying to get device id: ')
