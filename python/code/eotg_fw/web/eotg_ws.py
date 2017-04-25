@@ -178,7 +178,7 @@ def getDeviceId(conn):
     c = conn.cursor()
     # Get device id from db
     c.execute('select given_id_num from device_info')
-    deviceIdRow = c.fetchone()['given_id_num']
+    deviceIdRow = c.fetchone()[0]
     if deviceId is None or deviceId <= 0:
         deviceId = registerDevice()
     c.close()
