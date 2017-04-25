@@ -1,16 +1,16 @@
 import sys
-from eotg_ws import all
+from eotg_ws import *
 import httpUpdateWorker
 import time
 
 class StatusUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
-    
+
     def __init__(self):
         httpUpdateWorker.HttpUpdateWorker.__init__(self)
-    
+
     def runStatusMonitor(self):
         while(self.stopped != True):
-           try: 
+           try:
                # Get the brew status from the web server and set the brew status in the database
                getCurrentPreset()
                getAllPresets()
@@ -27,6 +27,5 @@ class StatusUpdateWorker(httpUpdateWorker.HttpUpdateWorker):
            except Exception as ex:
                print('Exception updating status: ' + str(ex))
                self.stop()
-        
-        self.stop()
 
+        self.stop()

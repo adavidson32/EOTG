@@ -1,5 +1,5 @@
 import sys
-from eotg_ws import all
+from eotg_ws import *
 import httpUpdateWorker
 import time
 
