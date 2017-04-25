@@ -212,6 +212,7 @@ class eotg_ws:
     def insertPresets(self, newPresets):
         #: check col names to make sure they're right
         #Columns:      | prof_num |  prof_name  | temp | volume |   color_pattern   |
+        print(newPresets.items())
         queryStr = 'insert into profile_list (prof_num, prof_name, '
         i = 1
         for key in newPresets:
@@ -224,7 +225,7 @@ class eotg_ws:
                 queryStr += newPreset[subkey] + ','
             queryStr = queryStr[:-1]
             queryStr += ');'
-            print(queryStr)
+            #print(queryStr)
             conn = sqlite3.connect('../main/eotg.db')
             c = conn.cursor()
             c.execute(queryStr)
