@@ -25,6 +25,7 @@ class button:
                 elif not(self.bsettings == new_bsettings):
                     self.bsettings = new_bsettings
                 print('button_manager try condition PASSED')
+                sleep(.2)
             except Exception as ex:
                 print('Exception while reading button: ' + str(ex))
                 self.stop()
