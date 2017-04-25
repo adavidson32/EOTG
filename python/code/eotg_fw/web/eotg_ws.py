@@ -203,7 +203,7 @@ def getDeviceId(conn):
         print('NPM NPM 5')
     except Exception as err:
         print('Exception trying to get device id: ')
-        print(err)
+        print(str(err))
     return str(deviceId)
 
 # Turn db selct results into dictionaries
