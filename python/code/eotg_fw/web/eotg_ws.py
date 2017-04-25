@@ -173,7 +173,7 @@ class eotg_ws:
                 print('NPM NPM 5.4')
                 if presetName != oldPresetName and oldPresetName != '':
                     print('NPM NPM 5.41')
-                    new_presets[oldPresetName] = newSettings
+                    newPresets[oldPresetName] = newSettings
                     print('NPM NPM 5.42')
                     newSettings = {}
                 oldPresetName = presetName
