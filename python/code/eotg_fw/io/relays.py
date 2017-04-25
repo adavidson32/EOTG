@@ -1,9 +1,9 @@
 import RPi.GPIO as io
-from time import sleep, localtime, strftime, time
 
 class relays:
     def __init__(self, dev_settings):
         io.setmode(io.BCM)
+        io.setwarnings(False)
         self.pin = dev_settings['pin']
         self.pwm_freq = dev_settings['pwm_freq']
         self.pwm_dutycyc = dev_settings['pwm_dutycyc']
