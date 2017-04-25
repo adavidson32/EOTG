@@ -99,7 +99,6 @@ def registerDevice(deviceIdentifier, macAddr):
         resp = httpRequest.makeRequest(ws.getWs('registerDevice'), requestParam, [])
         # Put the device id in the database
         devId = json.loads(resp)
-        print('REG DEV : ' + str(devId))
         deviceId = (devId['deviceId'], )
         cursor = conn.cursor()
         cursor.execute('update device_info set given_id_num = ?', deviceId)
@@ -119,7 +118,7 @@ def getCurrentPreset():
         # Get the device Id from the db
         deviceId = getDeviceId(conn)
         # Get the device's status
-        resp = httpRequest.makeRequest(ws.getWs('getDeviceStatus'), requestParam, [deviceId])
+        resp = httpRequest.makeRequest(ws.getWs('getDeviceStatus'), None, [deviceId])
         # Get the preset mode id from the web server results
         statusJson = json.loads(resp)
         print(str(statusJson))
@@ -185,9 +184,7 @@ def getDeviceId(conn):
     deviceId = c.fetchone()[0]
     print('NPM NPM ' + str(deviceId))
     if deviceId is None or deviceId <= 0:
-        print('registerDevice')
         deviceId = registerDevice(getserial(), getMAC('wlan0'))
-        print(str(deviceId))
     c.close()
     return str(deviceId)
 
