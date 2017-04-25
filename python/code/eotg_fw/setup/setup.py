@@ -74,7 +74,7 @@ def variable_setup():
     except Exception as e:
         print('e init-ing thds:')
         print(e)
-    threads = (, )
+    threads = ('',)
 
     return all_settings, threads
 
