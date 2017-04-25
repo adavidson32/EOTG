@@ -1,7 +1,7 @@
 # web/eotg_ws.py
 
 import sys
-import gmacser
+from gmacser import getserial, getMAC
 import httpRequest
 import json
 import sqlite3
