@@ -68,7 +68,7 @@ def variable_setup():
         print('thd ctors done')
         t_suw = Thread(target=suw.runStatusMonitor(), args=())
         t_buw = Thread(target=buw.runBrewMonitor(), args=())
-        t_but = Thread(target=but.button_manager(), args=())
+        #t_but = Thread(target=but.button_manager(), args=())
         threads = (t_suw, t_buw, t_but)
         print('initialize threads t_suw, t_buw, t_but and put them in a tuple')
     except Exception as e:
