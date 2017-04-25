@@ -20,7 +20,7 @@ class eotg_ws:
             conn = sqlite3.connect('../main/eotg.db')
             conn.row_factory = dict_factory
             # Get device id (As a string)
-            deviceId = getDeviceId(conn)
+            deviceId = self.getDeviceId(conn)
             resp = httpRequest.makeRequest(ws.getWs('getBrewSettings'), None, [deviceId])
             devSettings = json.loads(resp)
             brewSettings = devSettings['brewSettings']
@@ -43,7 +43,7 @@ class eotg_ws:
             conn = sqlite3.connect('../main/eotg.db')
             conn.row_factory = dict_factory
             # Get device id (As a string)
-            deviceId = getDeviceId(conn)
+            deviceId = self.getDeviceId(conn)
             # Get status items from the database
             c = conn.cursor()
             c.execute('select * from device_info')
@@ -121,7 +121,7 @@ class eotg_ws:
             # Get connection to database
             conn = sqlite3.connect('../main/eotg.db')
             # Get the device Id from the db
-            deviceId = getDeviceId(conn)
+            deviceId = self.getDeviceId(conn)
             # Get the device's status
             resp = httpRequest.makeRequest(ws.getWs('getDeviceStatus'), None, [deviceId])
             # Get the preset mode id from the web server results
@@ -145,7 +145,7 @@ class eotg_ws:
             conn.row_factory = dict_factory
             print('NPM NPM 1')
             # Get the device Id from the db
-            deviceId = getDeviceId(conn)
+            deviceId = self.getDeviceId(conn)
             print('NPM NPM 2')
             # Get the device's presets
             resp = httpRequest.makeRequest(ws.getWs('getDevicePresets'), None, [deviceId])
@@ -187,7 +187,7 @@ class eotg_ws:
     #--------------------------------------------------------------------------------------------
 
     # Get the device id from the database
-    def getDeviceId(conn):
+    def self.getDeviceId(conn):
         print('device id')
         if self.deviceId < 0:
             try:
