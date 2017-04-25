@@ -61,15 +61,20 @@ def variable_setup():
 
     all_settings = {'device_info': ret_di, 'button_settings': ret_bs, 'button_events': ret_be, 'update_settings': ret_us, 'ds18b20_settings': ret_dss, 'ds18b20_values': ret_dsv, 'mpu6050_settings': ret_mpu, 'profiles': ret_profiles, 'pump_settings': ret_pump, 'heater_settings': ret_heater, 'ac_batt_settings': ret_ac_batt, 'wifi_settings': ret_wifi}
     print('all settings retrieved')
-    suw = statusUpdateWorker.StatusUpdateWorker()
-    buw = brewUpdateWorker.BrewUpdateWorker()
-    but = button.button()
-    print('thd ctors done')
-    t_suw = Thread(target=suw.runStatusMonitor(), args=())
-    t_buw = Thread(target=buw.runBrewMonitor(), args=())
-    t_but = Thread(target=but.button_manager(), args=())
-    threads = (t_suw, t_buw, t_but)
-    print('initialize threads t_suw, t_buw, t_but and put them in a tuple')
+    try:
+        suw = statusUpdateWorker.StatusUpdateWorker()
+        buw = brewUpdateWorker.BrewUpdateWorker()
+        but = button.button()
+        print('thd ctors done')
+        t_suw = Thread(target=suw.runStatusMonitor(), args=())
+        t_buw = Thread(target=buw.runBrewMonitor(), args=())
+        t_but = Thread(target=but.button_manager(), args=())
+        threads = (t_suw, t_buw, t_but)
+        print('initialize threads t_suw, t_buw, t_but and put them in a tuple')
+    except Exception as e:
+        print('e init-ing thds:')
+        print(e)
+
 
     return all_settings, threads
 
