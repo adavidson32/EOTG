@@ -183,13 +183,18 @@ def getAllPresets():
 
 # Get the device id from the database
 def getDeviceId(conn):
-    c = conn.cursor()
-    # Get device id from db
-    c.execute('select given_id_num from device_info')
-    deviceId = c.fetchone()[0]
-    if deviceId is None or deviceId <= 0:
-        deviceId = registerDevice(getserial(), getMAC('wlan0'))
-    c.close()
+    deviceId = -1
+    try:
+        c = conn.cursor()
+        # Get device id from db
+        c.execute('select given_id_num from device_info')
+        deviceId = c.fetchone()[0]
+        if deviceId is None or deviceId <= 0:
+            deviceId = registerDevice(getserial(), getMAC('wlan0'))
+        c.close()
+    except Exception as err:
+        print('Exception trying to get device id: ')
+        print(err)
     return str(deviceId)
 
 # Turn db selct results into dictionaries
