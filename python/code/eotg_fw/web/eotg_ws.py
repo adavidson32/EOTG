@@ -21,7 +21,7 @@ class eotg_ws:
             resp = httpRequest.makeRequest(ws.getWs('getBrewSettings'), None, [deviceId])
             devSettings = json.loads(resp)
             brewSettings = devSettings['brewSettings']
-            updateItems = (, )
+            updateItems = ('', )
             for setting in brewSettings:
                 if getSettingTypeName(setting['brew_setting_type_id']) != '-1'
                     updateItems = (setting['brew_setting_type_id'], setting['brew_setting_value'])
