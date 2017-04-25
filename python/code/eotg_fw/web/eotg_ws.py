@@ -247,7 +247,9 @@ class eotg_ws:
             for subkey in newPreset:
                 j += 1
                 sub = str(newPreset[subkey])
+                print('NPM NPM TESTTTT ' + sub)
                 if j == 2:
+                    print('NPM NPM TRYING ' + sub)
                     sub = "'{}'".fomat(sub)
                 queryStr += sub + ','
             queryStr = queryStr[:-1]
