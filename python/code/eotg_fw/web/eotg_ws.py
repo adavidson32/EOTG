@@ -223,7 +223,6 @@ class eotg_ws:
                 queryStr += newPreset[subkey] + ','
             queryStr = queryStr[:-1]
             queryStr += ');'
-            print(queryStr)
             conn = sqlite3.connect('../main/eotg.db')
             c = conn.cursor()
             c.execute(queryStr)
