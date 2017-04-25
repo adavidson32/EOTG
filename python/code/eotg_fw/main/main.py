@@ -11,6 +11,7 @@ from brewing import brewing
 from prebrew_check import pb_check
 from state_alert import sqlite_update
 
+print('running variable setup from setup.py.......')
 all_settings, threads = variable_setup()
 print('settings retrieved, threads setup in variable_setup')
 t_suw, t_buw, t_but = threads
