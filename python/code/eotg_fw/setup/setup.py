@@ -60,7 +60,7 @@ def variable_setup():
     ret_dss, ret_dsv, ret_mpu, ret_profiles, ret_pump, ret_heater, ret_ac_batt, ret_wifi = dict(zip(tu_dss, row_dss)),  dict(zip(tu_dsv, row_dsv)),  dict(zip(tu_mpu, row_mpu)), dict(zip(tu_profiles, profiles)), dict(zip(tu_rly, row_pump)), dict(zip(tu_rly, row_heater)), dict(zip(tu_ac_batt, row_ac_batt)), dict(zip(tu_wifi, row_wifi))
 
     all_settings = {'device_info': ret_di, 'button_settings': ret_bs, 'button_events': ret_be, 'update_settings': ret_us, 'ds18b20_settings': ret_dss, 'ds18b20_values': ret_dsv, 'mpu6050_settings': ret_mpu, 'profiles': ret_profiles, 'pump_settings': ret_pump, 'heater_settings': ret_heater, 'ac_batt_settings': ret_ac_batt, 'wifi_settings': ret_wifi}
-    print('all settings retrieved, initialize threads t_suw, t_buw, but...')
+    print('all settings retrieved')
     suw = statusUpdateWorker.StatusUpdateWorker()
     buw = brewUpdateWorker.BrewUpdateWorker()
     but = button.button()
@@ -68,6 +68,7 @@ def variable_setup():
     t_buw = Thread(target=buw.runBrewMonitor(), args=())
     t_but = Thread(target=but.button_manager(), args=())
     threads = (t_suw, t_buw, t_but)
+    print('initialize threads t_suw, t_buw, t_but and put them in a tuple')
 
     return all_settings, threads
 
