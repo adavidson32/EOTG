@@ -7,8 +7,9 @@ class relays:
         self.pin = dev_settings['pin']
         self.pwm_freq = dev_settings['pwm_freq']
         self.pwm_dutycyc = dev_settings['pwm_dutycyc']
-        io.setup(self.pin, io.OUT)
-        io.output(self.pin, io.HIGH)
+        print('pin: {}, pwm_frequency: {}, pwm_duty_cycle: {}'.format(self.pin, self.pwm_freq, self.pwm_dutycyc))
+        io.setup(self.pin, io.OUT, initial=io.HIGH)
+        self.pwm = io.PWM(self.pin, self.pwm_freq)
 
     def on(self):
         io.output(self.pin, io.LOW)
@@ -17,11 +18,10 @@ class relays:
         io.output(self.pin, io.HIGH)
 
     def pwm_start(self):
-        pwm_var = io.PWM(self.pin, self.pwm_freq)
-        self.pwm = pwm_var
-        pwm_var.start(self.pwm_dutycyc)
+        self.pwm.start(self.pwm_dutycyc)
 
     def pwm_stop(self):
-        pwm_var = self.pwm
-        pwm_var.stop()
-        io.output(self.pin, io.HIGH)
+        self.pwm.stop()
+        
+    def cleanup(self):
+        io.cleanup()
