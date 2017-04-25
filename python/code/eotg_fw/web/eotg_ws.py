@@ -29,6 +29,7 @@ class eotg_ws:
             for setting in brewSettings:
                 updateItems = (setting['brew_setting_value'], setting['brew_setting_type_id'])
                 updates.extend(updateItems)
+            c = conn.cursor()
             c.executemany('INSERT INTO brew_settings values (?,?,now())', updates)
             conn.commit()
             conn.close()
@@ -52,6 +53,7 @@ class eotg_ws:
             requestParam = {'newStatusItems': statusStr}
             # Update the status items on the web server
             resp = httpRequest.makeRequest(ws.getWs('setDeviceStatus'), requestParam, [deviceId])
+            conn.commit()
             conn.close()
         except Exception as err:
             print('Exception trying to set brew settings: ')
@@ -139,52 +141,34 @@ class eotg_ws:
     def getAllPresets(self):
         try:
             # Get connection to database
-            print('NPM NPM -1')
             conn = sqlite3.connect('../main/eotg.db')
-            print('NPM NPM 0')
             conn.row_factory = self.dict_factory
-            print('NPM NPM 1')
             # Get the device Id from the db
             devId = self.getDeviceId(conn)
-            print('NPM NPM 2 ' + str(devId))
             # Get the device's presets
             resp = httpRequest.makeRequest(ws.getWs('getDevicePresets'), None, [devId])
-            print('NPM NPM 3')
             # Put the preset in the database
             presets = json.loads(resp)['brewPresets']
-            print('NPM NPM PRESETS = ' + str(presets[0]['preset_id']))
             cursor = conn.cursor()
-            print('NPM NPM 4')
             cursor.execute('delete from profile_list')
-            print('NPM NPM 5')
             newPresets = {}
             oldPresetName = ''
             newSettings = {}
             for preset in presets:
-                print('NPM NPM 5.1')
                 presetName = preset['preset_name']
-                print('NPM NPM 5.2')
                 colName = self.getSettingTypeName(preset['setting_type_id'])
-                print('NPM NPM 5.3')
                 if colName != '-1':
                     newSettings[self.getSettingTypeName(preset['setting_type_id'])] = preset['setting_value']
                 else:
                     continue
-                print('NPM NPM 5.4')
                 if presetName != oldPresetName and oldPresetName != '':
-                    print('NPM NPM 5.41')
                     newPresets[oldPresetName] = newSettings
-                    print('NPM NPM 5.42')
                     newSettings = {}
                 oldPresetName = presetName
-                print('NPM NPM 5.5')
 
-            print('NPM NPM 6')
             self.insertPresets(newPresets, conn)
-            print('NPM NPM 7')
             conn.commit()
             conn.close()
-            print('NPM NPM 8')
         except Exception as err:
             print('Exception trying to get all device presets: ')
             print(err)

@@ -20,7 +20,7 @@ class HttpUpdateWorker(object):
             timing = -1
             sqlStr = 'select * from update_settings limit 1'
             c = self.conn.cursor()
-            timingRow = c.execute(sqlStr).fetchone()
+            timingRow = c.execute(sqlStr).fetchone()[0]
             if self.deviceState == 'background':
                 timing = timingRow['freq_background']
             elif self.deviceState == 'brewing':
