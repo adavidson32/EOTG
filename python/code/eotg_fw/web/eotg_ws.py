@@ -151,9 +151,8 @@ class eotg_ws:
             resp = httpRequest.makeRequest(ws.getWs('getDevicePresets'), None, [devId])
             print('NPM NPM 3')
             # Put the preset in the database
-            print('NPM NPM ' + str(resp))
             presets = json.loads(resp)
-            print('NPM NPM presets ' + str(presets))
+            print('NPM NPM PRESET FIRST = ' + str(presets['brew_presets'][0]['preset_id']))
             cursor = conn.cursor()
             cursor.execute('delete from preset_list')
             newPresets = {}
