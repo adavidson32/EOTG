@@ -102,3 +102,6 @@ class button:
                         GPIO.remove_event_detect(button_pin)
                         GPIO.add_event_detect(button_pin,GPIO.RISING,callback=self.button_interupt_handler)
                         self.store_press('2x')
+
+        def stop(self):
+            self.stopped = True;
