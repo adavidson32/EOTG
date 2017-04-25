@@ -94,10 +94,12 @@ def registerDevice(deviceIdentifier, macAddr):
         conn = sqlite3.connect('../main/eotg.db')
         # Build request param
         requestParam = {'deviceIdentifier': deviceIdentifier, 'macAddress': macAddr}
+        data = []
         # Get the device's ID back from the web server
-        resp = httpRequest.makeRequest(ws.getWs('setDeviceStatus'), requestParam, [])
+        resp = httpRequest.makeRequest(ws.getWs('registerDevice'), requestParam, [])
         # Put the device id in the database
         devId = json.loads(resp)
+        print('REG DEV : ' + str(devId))
         deviceId = (devId['deviceId'], )
         cursor = conn.cursor()
         cursor.execute('update device_info set given_id_num = ?', deviceId)
