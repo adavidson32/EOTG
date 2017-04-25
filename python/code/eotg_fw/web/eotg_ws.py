@@ -14,7 +14,7 @@ class eotg_ws:
         self.deviceId = -1
 
     # Get the Brew Settings from the web server
-    def getBrewSettings():
+    def getBrewSettings(self):
         try:
             # Get connection to database
             conn = sqlite3.connect('../main/eotg.db')
@@ -37,7 +37,7 @@ class eotg_ws:
             print(err)
 
     # Send the device's status to the web server
-    def putDeviceStatus():
+    def putDeviceStatus(self):
         try:
             # Get connection to database
             conn = sqlite3.connect('../main/eotg.db')
@@ -58,7 +58,7 @@ class eotg_ws:
             print(err)
 
     # Check if the device should be in a brewing state
-    def shouldBrew():
+    def shouldBrew(self):
         try:
             # Get the the brew status from the web server
             resp = httpRequest.makeRequest(ws.getWs('shouldBrew'), None, [])
@@ -77,7 +77,7 @@ class eotg_ws:
             print(err)
 
     # Set the brew state to low after we start a brew
-    def brewStarted():
+    def brewStarted(self):
         try:
             # Tell the server we have started brewing and don't need to have brew state high anymore.
             resp = httpRequest.makeRequest(ws.getWs('setBrewEnable'), {'nate': 'Muller'}, ['0'])
@@ -93,7 +93,7 @@ class eotg_ws:
     # Register our device.
     # Params: The device's serial number and mac address.
     # RETURNS: the device's ID from the web server
-    def registerDevice(deviceIdentifier, macAddr):
+    def registerDevice(deviceIdentifier, macAddr, self):
         try:
             # Get connection to database
             conn = sqlite3.connect('../main/eotg.db')
@@ -116,7 +116,7 @@ class eotg_ws:
             return -1
 
     # Get the currently configured preset mode.  -1 => manual mode.
-    def getCurrentPreset():
+    def getCurrentPreset(self):
         try:
             # Get connection to database
             conn = sqlite3.connect('../main/eotg.db')
@@ -136,7 +136,7 @@ class eotg_ws:
             print(err)
 
     # Get all device presets
-    def getAllPresets():
+    def getAllPresets(self):
         try:
             # Get connection to database
             print('NPM NPM -1')
@@ -253,5 +253,5 @@ class eotg_ws:
 
             i+=1
 
-    def setDeviceId(dId)
+    def setDeviceId(dId):
         self.deviceId = dId
