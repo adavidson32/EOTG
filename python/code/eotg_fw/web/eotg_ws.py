@@ -248,7 +248,7 @@ class eotg_ws:
             queryStr = queryStr[:-1]
             queryStr += ');'
             print(queryStr)
-            c = conn.cursor
+            c = conn.cursor()
             c.execute(queryStr)
             c.close()
 
