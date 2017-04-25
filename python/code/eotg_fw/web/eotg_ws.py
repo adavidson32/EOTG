@@ -134,12 +134,17 @@ def getCurrentPreset():
 def getAllPresets():
     try:
         # Get connection to database
+        print('NPM NPM -1')
         conn = sqlite3.connect('../main/eotg.db')
+        print('NPM NPM 0')
         conn.row_factory = dict_factory
+        print('NPM NPM 1')
         # Get the device Id from the db
         deviceId = getDeviceId(conn)
+        print('NPM NPM 2')
         # Get the device's presets
         resp = httpRequest.makeRequest(ws.getWs('getDevicePresets'), None, [deviceId])
+        print('NPM NPM 3')
         # Put the preset in the database
         print('NPM NPM ' + str(resp))
         presets = json.loads(resp)['brew_presets']
