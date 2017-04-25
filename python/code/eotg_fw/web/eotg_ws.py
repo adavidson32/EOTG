@@ -155,7 +155,7 @@ class eotg_ws:
             print('NPM NPM PRESETS = ' + str(presets[0]['preset_id']))
             cursor = conn.cursor()
             print('NPM NPM 4')
-            cursor.execute('delete from preset_list')
+            cursor.execute('delete from profile_list')
             print('NPM NPM 5')
             newPresets = {}
             oldPresetName = ''
