@@ -7,7 +7,7 @@ class button:
         self.button_pin = int(self.bsettings['pin'])
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.add_event_detect(self.button_pin, GPIO.RISING, callback=button_interupt_handler)
+        GPIO.add_event_detect(self.button_pin, GPIO.RISING, callback=self.button_interupt_handler)
 
     def button_manager(self):
         while(self.stopped != True):
@@ -19,7 +19,7 @@ class button:
                    self.bsettings = new_bsettings
                    self.button_pin = int(self.bsettings['pin'])
                    GPIO.setup(self.button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-                   GPIO.add_event_detect(self.button_pin, GPIO.RISING, callback=button_interupt_handler)
+                   GPIO.add_event_detect(self.button_pin, GPIO.RISING, callback=self.button_interupt_handler)
                elif not(self.bsettings == new_bsettings):
                    self.bsettings = new_bsettings
            except Exception as ex:
